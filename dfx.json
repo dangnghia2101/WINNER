@@ -1,0 +1,28 @@
+{
+	"canisters": {
+		"superheroes": {
+			"main": "src/superheroes/Main.mo",
+			"type": "motoko"
+		},
+		"www": {
+			"frontend": {
+				"entrypoint": "src/www/index.html"
+			},
+			"source": ["src/www/components", "src/www/utilities", "dist/www/"],
+			"type": "assets"
+		}
+	},
+	"defaults": {
+		"build": {
+			"packtool": ""
+		}
+	},
+	"dfx": "0.11.1",
+	"networks": {
+		"local": {
+			"bind": "127.0.0.1:8000",
+			"type": "ephemeral"
+		}
+	},
+	"version": 1
+}
