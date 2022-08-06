@@ -1,10 +1,4 @@
-import React, { useState } from 'react';
-import { idlFactory } from '../../../declarations/superheroes.did.js';
-import {
-	Search,
-	AccountCircleOutlined,
-	AccountBalanceWalletOutlined,
-} from '@mui/icons-material';
+import React, { useEffect } from 'react';
 import {
 	Container,
 	Logo,
@@ -16,29 +10,17 @@ import {
 	OptionItem,
 	OptionWrapper,
 	Right,
-	SearchInput,
-	SearchWrapper,
 	WalletAddress,
-	Balance,
-	BalanceNumber,
-	IcpLogo,
 	ConnectBtnSt,
 } from './navbar-elements';
 import { Link } from 'react-router-dom';
 import { withContext } from '../../hooks';
-import {
-	ConnectButton,
-	ConnectDialog,
-	Connect2ICProvider,
-	useConnect,
-} from '@connect2ic/react';
+import { ConnectButton, ConnectDialog, useConnect } from '@connect2ic/react';
 
 function Navbar(props) {
-	const { principal, isConnected, disconnect } = useConnect();
+	const { principal, disconnect } = useConnect();
 
 	const { prinpId, setPrinpId, logout } = props;
-
-	const walletAddress = prinpId?.toString();
 
 	const onConnectWallet = async () => {
 		try {
@@ -61,6 +43,7 @@ function Navbar(props) {
 	const onDisconnect = () => {
 		disconnect();
 		logout();
+		window.location.reload();
 	};
 
 	const scrollToTop = () => {
@@ -81,7 +64,6 @@ function Navbar(props) {
 				<Name>NFPTU</Name>
 			</LogoWrapper>
 			<Right>
-
 				<OptionWrapper>
 					<Menu>
 						<Link to='/' style={{ color: 'black' }} onClick={scrollToTop}>
@@ -107,8 +89,7 @@ function Navbar(props) {
 							<>
 								<OptionItem onClick={onDisconnect}>
 									<WalletAddress>
-										{walletAddress.slice(0, 3)} ...{' '}
-										{walletAddress.slice(60, 63)}
+										{principal?.slice(0, 3)} ... {principal?.slice(60, 63)}
 									</WalletAddress>
 								</OptionItem>
 							</>

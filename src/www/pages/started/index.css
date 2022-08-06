@@ -1,0 +1,39 @@
+h1 {
+	font-size: 60px;
+	font-weight: 50, 0;
+	background-image: linear-gradient(
+		to right,
+		#ff3bff,
+		#ecbfbf,
+		#ff3bff,
+		#5c24ff,
+		#d94fd5
+	);
+	-webkit-background-clip: text;
+	-webkit-background-clip: text;
+	background-clip: text;
+	color: transparent;
+	font-family: monospace;
+	padding-top: 100px;
+	text-align: center;
+}
+
+button {
+	border: 5px solid;
+	border-image-slice: 1;
+	border-width: 2px;
+
+	background: none;
+	text-decoration: inherit;
+	font-family: system-ui;
+	font-size: 1rem;
+	padding: 1rem 2rem;
+
+	border-image-source: linear-gradient(to left, #743ad5, #d53a9d);
+
+	border-radius: 10px !important;
+	color: white;
+	margin: auto;
+
+	background-clip: padding-box;
+}

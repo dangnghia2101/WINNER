@@ -1,32 +1,55 @@
 import styled from "styled-components"
 
 export const Container = styled.div`
-    padding: 50px 50px 0px 50px;
+    padding: 0px 50px 0px 50px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: #000000
 `
+
+export const ContainerImage = styled.div`
+    padding: 50px 50px 5px 50px;
+    flex-directtion: column;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+
+`
+
 
 export const TopWrapper = styled.div`
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     width: 100%;
 `
 
 export const TopWrapperLeft = styled.div`
-    display: flex;
     align-items: center;
+    justify-content: center
 `
 
 export const Logo = styled.img`
-    width: 60px;
-    margin-right: 10px;
+    width: 90px;
+    height: 90px;
+    margin: 20px;
+    object-fit: cover;
+    text-align: center;
+    border-radius: 70px;
 `
 
 export const Name = styled.div`
-    font-size: 30px;
+    font-size: 25px;
     font-weight: bold;
+    text-align: center;
+    color: white
+
+`
+export const Text = styled.div`
+    font-size: 12px;
+    text-align: center;
+    color: white;
 `
 
 export const TopWrapperRight = styled.div`
@@ -76,8 +99,19 @@ export const BottomWrapperRightTop = styled.div`
 `
 
 export const LineFooter = styled.div`   
-    margin-top: 30px;
-    border-top: 10px solid #17ED97;
+    border-top: 10px solid;
+    border-image-slice: 1;
+
     width: 100%;
+    border-image-source: linear-gradient(
+		to right,
+		#ff3bff,
+		#ecbfbf,
+		#ff3bff,    
+		#5c24ff,
+		#d94fd5
+	);
+
+
 `
 

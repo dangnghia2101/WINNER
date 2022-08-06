@@ -8,16 +8,15 @@ export const Container = styled.div`
     position: sticky;
     z-index: 100;
     top: 0; // cứng ở 1 chỗ 
-    box-shadow: 0px 5px 8px -9px rgba(0, 0, 0, 0.75);
-    background-color: white;
+    box-shadow: 0px 5px 8px -9px #04C4D9;
+    background-color: black;
 `
 
 
 export const LogoWrapper = styled.div`
-    display: flex;
     align-items: center;
     margin-left: 30px;
-    flex: 1;
+    display: flex;
 `
 
 export const Logo = styled.img`
@@ -29,13 +28,13 @@ export const Name = styled.p`
     margin: 3px 0px 0px 10px;
     font-weight: bold;
     font-size: 23px;
+    color: white
 `
 
 export const Right = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    flex: 4;
     margin-right: 30px;
 `
 
@@ -63,12 +62,13 @@ export const OptionWrapper = styled.div`
 `
 
 export const WalletAddress = styled.div`
-    border: 3px solid black;
-    border-radius: 20px;
+    border: 3px solid white;
+    border-radius: 15px;
     padding: 2px 10px;
     font-size: 17px;
     margin-bottom: 8px;
     width: 110px;
+    color: white
 `
 
 export const Menu = styled.ul`
@@ -83,6 +83,7 @@ export const MenuItem = styled.li`
     font-size: 17px;
     margin-right: 35px;
     cursor: pointer;
+    color: white
 `
 
 export const Option = styled.div`
@@ -115,7 +116,10 @@ export const OptionItem = styled.div`
     .connect-button {
         padding: 7px 13px;
         font-size: 14px;
+        background-color: white;
+        color: black
     }
+
 `
 
 export const ConnectBtnSt = styled.div`
@@ -123,7 +127,10 @@ export const ConnectBtnSt = styled.div`
     .connect-button {
         padding: 7px 13px;
         font-size: 14px;
+        color: white;
     }
+    color: white
+
 `
 
 
