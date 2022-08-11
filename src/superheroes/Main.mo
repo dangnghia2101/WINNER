@@ -141,7 +141,7 @@ shared(msg) actor class NFTSale(
 
     public shared(msg) func add_user(walletAddress : Principal, username : Text, cccd : Text ) : async [UserInfo] {   
         users.put(walletAddress,{username = username ; cccd = cccd});
-        info.put(cccd, {walletAddress = walletAddress ; username = username});
+        info.put(cccd, {walletAddress = walletAddresds ; username = username});
     };
 
     public query func getValInfo() : async [Info] {
@@ -150,6 +150,11 @@ shared(msg) actor class NFTSale(
 
     public query func getValUsers() : async [UserInfo] {
         Iter.toArray(users.vals());
+    };
+
+      // Đang chỉ lấy thông tin Info gồm name và pricipal
+    public query func findUser(cccd : Text) : async ?Info {
+        info.get(cccd);
     };
 
     private func addTxRecord(
