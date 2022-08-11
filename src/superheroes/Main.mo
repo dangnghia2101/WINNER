@@ -139,10 +139,13 @@ shared(msg) actor class NFTSale(
     private stable var txIndex: Nat = 0;
     private stable var totalOrders_: Nat = 0;
 
+    // ##################
     public shared(msg) func add_user(walletAddress : Principal, username : Text, cccd : Text ) : async [UserInfo] {   
         users.put(walletAddress,{username = username ; cccd = cccd});
         info.put(cccd, {walletAddress = walletAddresds ; username = username});
     };
+
+
 
     public query func getValInfo() : async [Info] {
         Iter.toArray(info.vals());
@@ -152,10 +155,12 @@ shared(msg) actor class NFTSale(
         Iter.toArray(users.vals());
     };
 
-      // Đang chỉ lấy thông tin Info gồm name và pricipal
+    // Đang chỉ lấy thông tin Info gồm name và pricipal
     public query func findUser(cccd : Text) : async ?Info {
         info.get(cccd);
     };
+
+    //###################
 
     private func addTxRecord(
         caller: Principal, op: Operation, tokenIndex: ?Nat,
