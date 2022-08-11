@@ -145,16 +145,12 @@ shared(msg) actor class NFTSale(
         Iter.toArray(users.vals());
     };
 
-    public query func getValInfo() : async Text {
-        for (info: Info in info.vals()) {
-            return info.username;
-        };
+    public query func getValInfo() : async [Info] {
+        Iter.toArray(info.vals());
     };
 
-    public query func getValUsers() : async Text {
-        for (user : UserInfo in users.vals()) {
-            return user.username;
-        };
+    public query func getValUsers() : async [UserInfo] {
+        Iter.toArray(users.vals());
     };
 
     private func addTxRecord(
