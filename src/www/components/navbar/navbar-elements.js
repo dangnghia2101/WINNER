@@ -62,13 +62,21 @@ export const OptionWrapper = styled.div`
 `
 
 export const WalletAddress = styled.div`
-    border: 3px solid white;
     border-radius: 15px;
     padding: 2px 10px;
     font-size: 17px;
     margin-bottom: 8px;
     width: 110px;
-    color: white
+    color: white;
+    text-align: center;
+    background-image: linear-gradient(
+        to right,
+        #ff3bff 0%,
+        #ecbfbf 20%,
+        #ff3bff 50%,
+        #5c24ff 80%,
+        #d94fd5
+    );
 `
 
 export const Menu = styled.ul`
@@ -113,11 +121,19 @@ export const IcpLogo = styled.img`
 export const OptionItem = styled.div`
     margin-right: 35px;
     cursor: pointer;
+    
     .connect-button {
         padding: 7px 13px;
         font-size: 14px;
-        background-color: white;
-        color: black
+        background-image: linear-gradient(
+            to right,
+            #ff3bff 0%,
+            #ecbfbf 20%,
+            #ff3bff 50%,
+            #5c24ff 80%,
+            #d94fd5
+        );
+        color: white
     }
 
 `

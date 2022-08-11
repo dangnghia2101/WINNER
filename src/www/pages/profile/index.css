@@ -14,7 +14,7 @@ h1 {
 	background-clip: text;
 	color: transparent;
 	font-family: monospace;
-	padding-top: 100px;
+	padding-top: 20px;
 	text-align: center;
 }
 
@@ -38,14 +38,7 @@ button {
 	background-clip: padding-box;
 }
 
-.fontLucida {
-	font-family: 'Lucida Console', 'Courier New', monospace;
-}
-
-.fontLucidaNormal {
-	font-family: 'Lucida Console', 'Courier New';
-}
-
-.fontArial {
-	font-family: 'Trebuchet MS', sans-serif;
+.row1 {
+	display: flex;
+	flex-flow: row;
 }

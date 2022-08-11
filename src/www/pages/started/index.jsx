@@ -10,23 +10,25 @@ function Started() {
 			style={{
 				flex: 1,
 				width: '100%',
-				height: '100%',
 				backgroundColor: '#000000',
 				justifyContent: 'center',
 				alignItems: 'center',
 				position: 'relative',
 			}}>
-			<h1>A Degree for NFT</h1>
 			<div
+				className='fontArial'
 				style={{
+					fontWeight: 'bold',
+					fontSize: 45,
 					color: 'white',
 					textAlign: 'center',
-					fontSize: 35,
-					marginTop: -50,
+					paddingTop: 40,
 				}}>
-				A Degree for NFT
+				Degrees for NFT
 			</div>
+
 			<div
+				className='fontArial'
 				style={{
 					color: 'white',
 					textAlign: 'center',
@@ -36,9 +38,9 @@ function Started() {
 					fontStretch: 100,
 					margin: 'auto',
 				}}>
-				Our technology performing fast blockchain (120K TPS) and it has
-				guaranteed AI-based data security. Proof of Stake, its consensus
-				algorithm enables unlimited speeds.
+				You can see your Degree NFTs in the wallet at here, we help you store,
+				transfer your degree with the cost cheapest, faster with technolygy's
+				Difinity.
 			</div>
 
 			<div
@@ -59,7 +61,7 @@ function Started() {
 				src={images.bg_stared}
 				width='100%'
 				height='100%'
-				style={{ marginTop: -50, zIndex: -100 }}
+				style={{ marginTop: -50, zIndex: -100, zIndex: -100 }}
 			/>
 			<div style={{ position: 'absolute', top: 10 }}>
 				<img
@@ -71,6 +73,21 @@ function Started() {
 			</div>
 			<div style={{ position: 'absolute', top: 10, right: 10 }}>
 				<img src={images.Ellipse6} width='500px' height='500px' />
+			</div>
+			<div style={{ marginTop: 150 }}>
+				<div style={{ position: 'relative' }}>
+					<img src={images.MyTeam} width='100%' height='100%' />
+				</div>
+				<div
+					style={{
+						fontSize: 40,
+						color: 'white',
+						position: 'absolute',
+						marginTop: -200,
+						marginLeft: 50,
+					}}>
+					We go from CODER POLY CLUB
+				</div>
 			</div>
 		</div>
 	);

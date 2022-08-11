@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import {
 	Container,
 	Logo,
@@ -21,6 +21,7 @@ function Navbar(props) {
 	const { principal, disconnect } = useConnect();
 
 	const { prinpId, setPrinpId, logout } = props;
+	const [reload, setReload] = useState(false);
 
 	const onConnectWallet = async () => {
 		try {
@@ -43,7 +44,7 @@ function Navbar(props) {
 	const onDisconnect = () => {
 		disconnect();
 		logout();
-		window.location.reload();
+		setReload(!reload);
 	};
 
 	const scrollToTop = () => {
@@ -72,6 +73,9 @@ function Navbar(props) {
 						<Link to='nft/create' style={{ color: 'black' }}>
 							<MenuItem>Create</MenuItem>
 						</Link>
+						<Link to='/profile' style={{ color: 'black' }}>
+							<MenuItem>Profile</MenuItem>
+						</Link>
 					</Menu>
 
 					<Option>
@@ -89,7 +93,11 @@ function Navbar(props) {
 							<>
 								<OptionItem onClick={onDisconnect}>
 									<WalletAddress>
-										{principal?.slice(0, 3)} ... {principal?.slice(60, 63)}
+										{principal
+											? principal?.slice(0, 3) +
+											  '...' +
+											  principal?.slice(60, 63)
+											: 'Connect'}
 									</WalletAddress>
 								</OptionItem>
 							</>
