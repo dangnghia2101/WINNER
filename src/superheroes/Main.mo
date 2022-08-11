@@ -142,7 +142,6 @@ shared(msg) actor class NFTSale(
     public shared(msg) func add_user(walletAddress : Principal, username : Text, cccd : Text ) : async [UserInfo] {   
         users.put(walletAddress,{username = username ; cccd = cccd});
         info.put(cccd, {walletAddress = walletAddress ; username = username});
-        Iter.toArray(users.vals());
     };
 
     public query func getValInfo() : async [Info] {
