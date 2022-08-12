@@ -76,6 +76,9 @@ function Navbar(props) {
 						<Link to='/profile' style={{ color: 'black' }}>
 							<MenuItem>Profile</MenuItem>
 						</Link>
+						<Link to='/nfts' style={{ color: 'black' }}>
+							<MenuItem>NFTs</MenuItem>
+						</Link>
 					</Menu>
 
 					<Option>

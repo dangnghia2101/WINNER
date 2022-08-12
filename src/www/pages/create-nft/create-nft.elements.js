@@ -4,7 +4,6 @@ export const Container = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 30px;
 `
 
 export const Wrapper = styled.div`
@@ -38,10 +37,7 @@ export const BodyWrapper = styled.div`
 `
 
 export const FormItem = styled.div`
-    display: flex;
-    flex-direction: column;
-    margin-top: 20px;
-    align-items: flex-start;
+    margin: auto;
 `
 
 export const FormItemName = styled.div`

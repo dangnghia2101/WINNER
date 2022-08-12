@@ -9,7 +9,8 @@ export const Container = styled.div`
     z-index: 100;
     top: 0; // cứng ở 1 chỗ 
     box-shadow: 0px 5px 8px -9px #04C4D9;
-    background-color: black;
+    background-color: rgba(17, 17, 17, 0.5);
+    backdrop-filter: blur(20px) saturate(180%);
 `
 
 
@@ -29,6 +30,19 @@ export const Name = styled.p`
     font-weight: bold;
     font-size: 23px;
     color: white
+`
+
+export const InputSearch = styled.input`
+    background: #1b1a21;
+    border-radius: 10px;
+    border: none;
+    padding: 7px 19px 7px 15px;
+    font-family: var(--font-family);
+    outline: none;
+    color: whitesmoke;
+    flex: 0.3;
+    display: flex;
+    margin-right: 1rem;
 `
 
 export const Right = styled.div`

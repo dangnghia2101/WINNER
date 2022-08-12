@@ -2,7 +2,6 @@ import { lazy } from 'react'
 
 //Layouts:
 import MarketLayout from '../components/layout/market-layout'
-import GameLayout from '../components/layout/game-layout'
 
 //Pages
 const HomePage = lazy(() => import("./home"))
@@ -35,24 +34,31 @@ const routes = [
         layout: MarketLayout
     },
     {
-        path: "nft/create",
+        path: "/nft/create",
         exact: true,
         public: true,
         component: CreateNft,
         layout: MarketLayout
     },
     {
-        path: "started",
+        path: "/started",
         exact: true,
         public: true,
         component: Started,
         layout: MarketLayout
     },
     {
-        path: "profile",
+        path: "/profile",
         exact: true,
         public: true,
         component: Profile,
+        layout: MarketLayout
+    },
+    {
+        path: "nfts",
+        exact: true,
+        public: true,
+        component: HomePage,
         layout: MarketLayout
     },
 

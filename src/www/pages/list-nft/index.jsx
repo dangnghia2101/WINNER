@@ -9,6 +9,7 @@ import {
 import { customAxios } from '../../utils/custom-axios';
 import { useCanister, useConnect } from '@connect2ic/react';
 import { Principal } from '@dfinity/principal';
+import './index.css';
 
 function ListNft() {
 	const {
@@ -63,7 +64,11 @@ function ListNft() {
 	return (
 		<Container>
 			<TopWrapper>
-				<Title>Explore</Title>
+				<Title
+					className='fontLucidaNormal'
+					style={{ fontWeight: 'bold', color: 'white' }}>
+					Explore
+				</Title>
 			</TopWrapper>
 
 			<ListNftWrapper>
@@ -73,7 +78,11 @@ function ListNft() {
 			</ListNftWrapper>
 
 			<TopWrapper>
-				<Title>My NFT</Title>
+				<Title
+					className='fontLucidaNormal'
+					style={{ fontWeight: 'bold', color: 'white' }}>
+					Certificate
+				</Title>
 			</TopWrapper>
 
 			<ListNftWrapper>

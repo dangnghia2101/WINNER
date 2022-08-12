@@ -63,6 +63,7 @@ function Started() {
 				height='100%'
 				style={{ marginTop: -50, zIndex: -100, zIndex: -100 }}
 			/>
+
 			<div style={{ position: 'absolute', top: 10 }}>
 				<img
 					style={{ position: 'absolute' }}
@@ -74,19 +75,58 @@ function Started() {
 			<div style={{ position: 'absolute', top: 10, right: 10 }}>
 				<img src={images.Ellipse6} width='500px' height='500px' />
 			</div>
-			<div style={{ marginTop: 150 }}>
-				<div style={{ position: 'relative' }}>
+
+			<div
+				className='fontArial'
+				style={{
+					fontSize: 25,
+					color: 'white',
+					fontWeight: 'bold',
+					color: 'white',
+					textAlign: 'center',
+					alignSelf: 'center',
+					marginTop: 100,
+				}}>
+				Read more
+			</div>
+
+			<div
+				style={{
+					marginTop: 100,
+					flexDirection: 'row',
+					width: '100%',
+					justifyItems: 'center',
+					display: 'flex',
+				}}
+				className='row'>
+				<div style={{ width: '60%' }}>
 					<img src={images.MyTeam} width='100%' height='100%' />
 				</div>
-				<div
-					style={{
-						fontSize: 40,
-						color: 'white',
-						position: 'absolute',
-						marginTop: -200,
-						marginLeft: 50,
-					}}>
-					We go from CODER POLY CLUB
+				<div>
+					<div
+						className='fontArial'
+						style={{
+							fontSize: 30,
+							color: 'white',
+							marginTop: 10,
+							marginLeft: 50,
+							fontWeight: 'bold',
+							color: 'white',
+						}}>
+						WE GO FROM CODER POLY CLUB
+					</div>
+					<div
+						className='fontArial'
+						style={{
+							fontSize: 15,
+							color: 'white',
+							marginLeft: 50,
+							width: 300,
+							color: 'white',
+						}}>
+						My team stydying at FPT POLYTECHNCI Ho Chi Minh city, this project
+						will change people have a degee
+					</div>
 				</div>
 			</div>
 		</div>
