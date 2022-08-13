@@ -15,6 +15,7 @@ import {
 	InputSearch,
 } from './navbar-elements';
 import { Link } from 'react-router-dom';
+import { images } from '../../assets/images';
 import { withContext } from '../../hooks';
 import { ConnectButton, ConnectDialog, useConnect } from '@connect2ic/react';
 
@@ -57,11 +58,7 @@ function Navbar(props) {
 			<ConnectDialog dark={false} />
 			<LogoWrapper>
 				<Link to='/' style={{ color: 'black' }}>
-					<Logo
-						src='https://motoko-lsp-client.gallerycdn.vsassets.io/extensions/motoko-lsp-client/motoko-lsp-client/2.2.0/1583876431744/Microsoft.VisualStudio.Services.Icons.Default'
-						alt=''
-						onClick={scrollToTop}
-					/>
+					<Logo src={images.olive} alt='' onClick={scrollToTop} />
 				</Link>
 				<Name>WINNER</Name>
 			</LogoWrapper>

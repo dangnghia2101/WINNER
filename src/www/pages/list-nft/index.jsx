@@ -114,14 +114,13 @@ const textTitle = {
 	fontWeight: 'bold',
 	color: 'white',
 	paddingTop: 60,
-	paddingBottom: 40,
 };
 
 const textDay = {
 	textAlign: 'center',
 	fontSize: 15,
 	color: 'gray',
-	marginBottom: 40,
+	marginBottom: 60,
 };
 
 export default ListNft;

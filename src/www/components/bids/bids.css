@@ -9,15 +9,16 @@
 .bids-container-text {
 	align-items: flex-start;
 	left: 0;
-	width: 100%;
+	width: 80%;
 }
-.bids-container-text h1 {
+.bids-container-text h2 {
 	font-family: var(--font-family);
 	font-weight: 600;
-	font-size: 28px;
+	font-size: 20px;
 	line-height: 42px;
 	color: #ffffff;
 	margin-bottom: 1rem;
+	margin-left: 20px;
 }
 .bids-container-card {
 	margin: 0 -5px;

@@ -18,7 +18,7 @@ const Bids = ({ title }) => {
 		<div className='bids section__padding'>
 			<div className='bids-container'>
 				<div className='bids-container-text'>
-					<h1>{title}</h1>
+					<h2>{title}</h2>
 				</div>
 				<div className='bids-container-card'>
 					<div className='card-column'>
