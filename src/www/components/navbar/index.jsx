@@ -12,6 +12,7 @@ import {
 	Right,
 	WalletAddress,
 	ConnectBtnSt,
+	InputSearch,
 } from './navbar-elements';
 import { Link } from 'react-router-dom';
 import { withContext } from '../../hooks';
@@ -62,7 +63,7 @@ function Navbar(props) {
 						onClick={scrollToTop}
 					/>
 				</Link>
-				<Name>NFPTU</Name>
+				<Name>WINNER</Name>
 			</LogoWrapper>
 			<Right>
 				<OptionWrapper>
@@ -70,7 +71,7 @@ function Navbar(props) {
 						<Link to='/' style={{ color: 'black' }} onClick={scrollToTop}>
 							<MenuItem>Home</MenuItem>
 						</Link>
-						<Link to='nft/create' style={{ color: 'black' }}>
+						<Link to='/nft/create' style={{ color: 'black' }}>
 							<MenuItem>Create</MenuItem>
 						</Link>
 						<Link to='/profile' style={{ color: 'black' }}>
@@ -78,6 +79,9 @@ function Navbar(props) {
 						</Link>
 						<Link to='/nfts' style={{ color: 'black' }}>
 							<MenuItem>NFTs</MenuItem>
+						</Link>
+						<Link to='/ranking' style={{ color: 'black' }}>
+							<MenuItem>Ranking</MenuItem>
 						</Link>
 					</Menu>
 

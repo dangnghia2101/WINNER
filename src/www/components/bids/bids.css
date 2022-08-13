@@ -139,6 +139,7 @@
 .row1 {
 	display: flex;
 	flex-flow: row;
+	align-items: center;
 }
 
 .boxNumPage {
@@ -155,4 +156,8 @@
 	padding: auto;
 	margin-top: 5px;
 	margin-left: 10px;
+}
+
+div {
+	font-family: 'Poppins', sans-serif;
 }

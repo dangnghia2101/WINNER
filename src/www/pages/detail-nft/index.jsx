@@ -1,187 +1,92 @@
-import React, { useState, useEffect } from 'react'
-import {
-    Favorite,
-    Description,
-    Facebook,
-    AccountBalanceWallet,
-    Ballot,
-    ExpandLess,
-    ExpandMore
-} from '@mui/icons-material';
-import {
-    BuyTitle,
-    BuyWrapper,
-    CollectionName,
-    CollectionWrapper,
-    Container,
-    DescInfo,
-    DescToggle,
-    DescWrapper,
-    DetailsInfo,
-    DetailsToggle,
-    DetailsWrapper,
-    FavoriteName,
-    FavoriteWrapper,
-    HeartWrapper,
-    IconItem,
-    IconWrapper,
-    Image,
-    ImageContainer,
-    ImageTop,
-    Logo,
-    LogoPrice,
-    NftName,
-    OwnedBy,
-    OwnedByTitle,
-    OwnedByTitleName,
-    OwnerWrapper,
-    Price,
-    PriceDetail,
-    PriceWrapper,
-    TopWrapper,
-    TopWrapperLeft,
-    TopWrapperRight,
-    DescScroll,
-    DetailsInfoLeft,
-    DetailsInfoRight,
-    DetailsToggleLeft,
-    DetailsToggleLeftTitle,
-    DetailsInfoLeftItem,
-    DetailsInfoRightItem,
-    ButtonWrapper,
-    MakeOfferTitle,
-    MakeOfferWrapper
-} from './detail-nft.elements'
-import ItemActivity from './components/item-activity'
-import { useLocation } from 'react-router-dom';
-import { superheroes } from "../../../declarations";
-import { customAxios } from "../../utils/custom-axios";
-import { useCanister, useConnect } from '@connect2ic/react';
-import { Input } from 'antd';
-import { Principal } from '@dfinity/principal';
-import { toast } from 'react-toastify';
+import React from 'react';
+import './item.css';
+import creator from '../../assets/images/seller2.png';
+import item from '../../assets/images/item1.png';
 
-function DetailNft() {
-    const {
-        isConnected,
-        disconnect,
-        activeProvider,
-        isIdle,
-        connect,
-        isConnecting,
-        principal
-    } = useConnect();
-    const [superheroes, { loading, error }] = useCanister('superheroes');
-    const [listAllNFt, setListAllNFt] = useState([]);
-    const [nft, setNft] = useState()
-    const [value, setValue] = useState()
+const Index = () => {
+	return (
+		<div className='item section__padding'>
+			<div className='item-image'>
+				<img src={item} alt='item' />
+			</div>
+			<div className='item-content'>
+				<div className='item-content-title'>
+					<h1>Top 100 studens excerlent</h1>
+					<p>
+						<span>Summer september</span> ‧ 13/08/2022
+					</p>
+				</div>
+				<div
+					className='row1'
+					style={{ justifyContent: 'space-between', width: '100%' }}>
+					<div className='item-content-creator'>
+						<div>
+							<p>Owner</p>
+						</div>
+						<div>
+							<img src={creator} alt='creator' />
+							<p>Dang Tuan Nghia </p>
+						</div>
+					</div>
 
-    const handleInputChange = (value) => {
-        console.log(value);
-        setValue(value.target.value)
-    }
+					<div className='item-content-certification'>
+						<div>
+							<p>Certification by</p>
+						</div>
+						<img
+							src={
+								'https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/FPT_Polytechnic.png/1200px-FPT_Polytechnic.png'
+							}
+							alt='creator'
+						/>
+						<p>FPT POLYTECHNIC </p>
+					</div>
+				</div>
+				<div className='item-content-detail'>
+					<p>Description</p>
 
-    const location = useLocation();
+					<p>
+						Lorem Ipsum is simply dummy text of the printing and typesetting
+						industry. Lorem Ipsum has been the industry's standard dummy text
+						ever since the 1500s, when an unknown printer took a galley of type
+						and scrambled it to make a type specimen book
+					</p>
+				</div>
+				<div
+					className='item-content-detail'
+					style={{ flexDirection: 'row', display: 'flex' }}>
+					<div className='box-more'>
+						<div style={{ margin: 10 }}>GPA 3.8</div>
+					</div>
+					<div className='box-more'>
+						<div style={{ margin: 10 }}>TOP 25</div>
+					</div>
+				</div>
+				<div
+					className='item-content-detail'
+					style={{ flexDirection: 'row', display: 'flex' }}>
+					<div
+						style={{
+							padding: 5,
+							backgroundColor: 'white',
+							borderRadius: 10,
+							width: 170,
+							alignSelf: 'center',
+							justifySelf: 'center',
+							paddingTop: 10,
+							paddingBottom: 10,
+						}}>
+						{' '}
+						Transfer nft
+					</div>
+					<input
+						type='text'
+						placeholder='Paste address you want tranfer this nft'
+					/>
+				</div>
+			</div>
+		</div>
+	);
+};
 
-    const desc = location.pathname.split('/')[2];
-
-    const [isToggleDetails, setIsToggleDetails] = useState(true)
-
-    const handleToggle = (type) => {
-        if (type === 'details') {
-            setIsToggleDetails(prev => !prev)
-        }
-    }
-
-    useEffect(async () => {
-        if (principal && superheroes) {
-            getListAll();
-        }
-    }, [principal, superheroes]);
-
-    const getListAll = async () => {
-        const res = await superheroes.getAllTokens();
-        const promise4all = Promise.all(
-            res.map(function (el) {
-                return customAxios(el.metadata[0]?.tokenUri);
-            })
-        );
-        const resu = await promise4all;
-		const newlist = res.map((el, index) => {
-			return {...el, ...resu[index]}
-		})
-		console.log(newlist);
-        setListAllNFt(newlist);
-    };
-
-    const getNft = () => {
-        const nft = listAllNFt.find((item) => Number(item.index) == desc)
-        console.log(nft);
-        setNft(nft)
-    }
-
-    useEffect(() => {
-        getNft()
-    }, [listAllNFt])
-
-    const onSendNFT = async () => {
-        const res = await superheroes.transfer(Principal.fromText(value), BigInt(desc))
-        console.log(res);
-        getListAll();
-        toast('Send NFT success!')
-    }
-
-    return (
-        <Container>
-            <TopWrapper>
-                <TopWrapperLeft>
-                    <ImageContainer>
-                        <ImageTop>
-                            <Logo src="https://cryptologos.cc/logos/internet-computer-icp-logo.png" alt="" />
-                            <HeartWrapper>
-                                <Favorite style={{ cursor: 'pointer' }} />
-                                <div style={{ marginLeft: '5px' }}>1</div>
-                            </HeartWrapper>
-                        </ImageTop>
-
-                        <Image src={nft?.image} alt="" />
-                    </ImageContainer>
-                </TopWrapperLeft>
-
-                <TopWrapperRight>
-                    <NftName>{nft?.name}</NftName>
-
-                    <OwnerWrapper>
-                        <OwnedBy>
-                            <OwnedByTitle>Owned by</OwnedByTitle>
-                            <OwnedByTitleName>{nft?.owner?.toString()}</OwnedByTitleName>
-                        </OwnedBy>
-
-                    </OwnerWrapper>
-
-                    <PriceWrapper>
-                        <PriceDetail>
-                            <Input
-                                value={value}
-                                size="small"
-                                onChange={handleInputChange}
-                                placeholder='Principal'
-                            />
-                        </PriceDetail>
-
-                        <ButtonWrapper onClick={onSendNFT}>
-                            <BuyWrapper>
-                                <AccountBalanceWallet />
-                                <BuyTitle >Send NFT</BuyTitle>
-                            </BuyWrapper>
-
-                        </ButtonWrapper>
-                    </PriceWrapper>
-
-                </TopWrapperRight>
-            </TopWrapper>
-        </Container>
-    )
-}
-
-export default DetailNft
+export default Index;

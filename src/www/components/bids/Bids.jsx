@@ -22,112 +22,119 @@ const Bids = ({ title }) => {
 				</div>
 				<div className='bids-container-card'>
 					<div className='card-column'>
-						<div className='bids-card'>
-							<div className='bids-card-top'>
-								<img src={Certificate} alt='' />
-								<p
-									className='bids-title'
-									style={{ fontSize: 18, textAlign: 'center' }}>
-									Top 100 student excelent
-								</p>
+						<Link
+							to={`/nft/123`}
+							style={{ justifiContent: 'center', alignItems: 'center' }}>
+							<div className='bids-card'>
+								<div className='bids-card-top'>
+									<img src={Certificate} alt='' />
+									<p
+										className='bids-title'
+										style={{ fontSize: 18, textAlign: 'center' }}>
+										Top 100 student excelent
+									</p>
 
-								<div
-									className='row1'
-									style={{ justifyContent: 'space-between' }}>
-									<Link
-										to={`/post/123`}
+									<div
 										className='row1'
-										style={{ justifiContent: 'center', alignItems: 'center' }}>
-										<img className='imgAvatar' src={images.NhutVy} alt='' />
+										style={{ justifyContent: 'space-between' }}>
+										<div className='row1'>
+											<img className='imgAvatar' src={images.NhutVy} alt='' />
 
-										<p style={{ marginLeft: 10 }} className='bids-title'>
-											Dang Tuan Nghia
+											<p style={{ marginLeft: 10 }} className='bids-title'>
+												Dang Tuan Nghia
+											</p>
+										</div>
+
+										<p className='bids-title' style={{ fontSize: 12 }}>
+											GPA 3.6
 										</p>
-									</Link>
-									<p className='bids-title' style={{ fontSize: 12 }}>
-										GPA 3.6
+									</div>
+								</div>
+								<div className='bids-card-bottom'>
+									<p>FPT POLYTECHNIC</p>
+									<p>
+										08/08/2022 <span> 08:00 AM</span>
 									</p>
 								</div>
 							</div>
-							<div className='bids-card-bottom'>
-								<p>FPT POLYTECHNIC</p>
-								<p>
-									08/08/2022 <span> 08:00 AM</span>
-								</p>
+						</Link>
+					</div>
+
+					<div className='card-column'>
+						<Link
+							to={`/nft/123`}
+							style={{ justifiContent: 'center', alignItems: 'center' }}>
+							<div className='bids-card'>
+								<div className='bids-card-top'>
+									<img src={Certificate} alt='' />
+									<p
+										className='bids-title'
+										style={{ fontSize: 18, textAlign: 'center' }}>
+										Top 100 student excelent
+									</p>
+
+									<div
+										className='row1'
+										style={{ justifyContent: 'space-between' }}>
+										<div className='row1'>
+											<img className='imgAvatar' src={images.NhutVy} alt='' />
+
+											<p style={{ marginLeft: 10 }} className='bids-title'>
+												Dang Tuan Nghia
+											</p>
+										</div>
+
+										<p className='bids-title' style={{ fontSize: 12 }}>
+											GPA 3.6
+										</p>
+									</div>
+								</div>
+								<div className='bids-card-bottom'>
+									<p>FPT POLYTECHNIC</p>
+									<p>
+										08/08/2022 <span> 08:00 AM</span>
+									</p>
+								</div>
 							</div>
-						</div>
+						</Link>
 					</div>
 					<div className='card-column'>
-						<div className='bids-card'>
-							<div className='bids-card-top'>
-								<img src={Certificate} alt='' />
-								<p
-									className='bids-title'
-									style={{ fontSize: 18, textAlign: 'center' }}>
-									Top 100 student excelent
-								</p>
+						<Link
+							to={`/nft/123`}
+							style={{ justifiContent: 'center', alignItems: 'center' }}>
+							<div className='bids-card'>
+								<div className='bids-card-top'>
+									<img src={Certificate} alt='' />
+									<p
+										className='bids-title'
+										style={{ fontSize: 18, textAlign: 'center' }}>
+										Top 100 student excelent
+									</p>
 
-								<div
-									className='row1'
-									style={{ justifyContent: 'space-between' }}>
-									<Link
-										to={`/post/123`}
+									<div
 										className='row1'
-										style={{ justifiContent: 'center', alignItems: 'center' }}>
-										<img className='imgAvatar' src={images.NhutVy} alt='' />
+										style={{ justifyContent: 'space-between' }}>
+										<div className='row1'>
+											<img className='imgAvatar' src={images.NhutVy} alt='' />
 
-										<p style={{ marginLeft: 10 }} className='bids-title'>
-											Dang Tuan Nghia
+											<p style={{ marginLeft: 10 }} className='bids-title'>
+												Dang Tuan Nghia
+											</p>
+										</div>
+
+										<p className='bids-title' style={{ fontSize: 12 }}>
+											GPA 3.6
 										</p>
-									</Link>
-									<p className='bids-title' style={{ fontSize: 12 }}>
-										GPA 3.6
+									</div>
+								</div>
+								<div className='bids-card-bottom'>
+									<p>FPT POLYTECHNIC</p>
+									<p>
+										08/08/2022 <span> 08:00 AM</span>
 									</p>
 								</div>
 							</div>
-							<div className='bids-card-bottom'>
-								<p>FPT POLYTECHNIC</p>
-								<p>
-									08/08/2022 <span> 08:00 AM</span>
-								</p>
-							</div>
-						</div>
-					</div>
-					<div className='card-column'>
-						<div className='bids-card'>
-							<div className='bids-card-top'>
-								<img src={Certificate} alt='' />
-								<p
-									className='bids-title'
-									style={{ fontSize: 18, textAlign: 'center' }}>
-									Top 100 student excelent
-								</p>
-
-								<div
-									className='row1'
-									style={{ justifyContent: 'space-between' }}>
-									<Link
-										to={`/post/123`}
-										className='row1'
-										style={{ justifiContent: 'center', alignItems: 'center' }}>
-										<img className='imgAvatar' src={images.NhutVy} alt='' />
-
-										<p style={{ marginLeft: 10 }} className='bids-title'>
-											Dang Tuan Nghia
-										</p>
-									</Link>
-									<p className='bids-title' style={{ fontSize: 12 }}>
-										GPA 3.6
-									</p>
-								</div>
-							</div>
-							<div className='bids-card-bottom'>
-								<p>FPT POLYTECHNIC</p>
-								<p>
-									08/08/2022 <span> 08:00 AM</span>
-								</p>
-							</div>
-						</div>
+						</Link>
 					</div>
 				</div>
 			</div>

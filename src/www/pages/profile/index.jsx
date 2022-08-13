@@ -22,7 +22,10 @@ const Profile = () => {
 			</div>
 			<div className='profile-bottom'>
 				<div className='profile-bottom-input'>
-					<input type='text' placeholder='Search Nft here' />
+					<input
+						type='text'
+						placeholder='Search by address wallet, can cuoc cong dan'
+					/>
 					<select>
 						<option>Recently Listed</option>
 						<option>Popular</option>

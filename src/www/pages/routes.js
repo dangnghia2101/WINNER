@@ -10,6 +10,7 @@ const DetailNft = lazy(() => import("./detail-nft"))
 const CreateNft = lazy(() => import("./create-nft"))
 const Started = lazy(() => import("./started"))
 const Profile = lazy(() => import("./profile"))
+const Ranking = lazy(() => import("./ranking"))
 
 const routes = [
     {
@@ -61,7 +62,13 @@ const routes = [
         component: HomePage,
         layout: MarketLayout
     },
-
+    {
+        path: "ranking",
+        exact: true,
+        public: true,
+        component: Ranking,
+        layout: MarketLayout
+    },
 ]
 
 export default routes

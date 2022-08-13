@@ -34,6 +34,7 @@ import { customAxios } from '../../utils/custom-axios';
 import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
 import { withContext } from '../../hooks';
+import { themes } from '../../assets/themes';
 
 const { Dragger } = Upload;
 const { Option } = Select;
@@ -184,10 +185,132 @@ function CreateNft(props) {
 	);
 
 	return (
-		<Container style={{ backgroundColor: 'black', paddingTop: 30 }}>
+		<Container
+			style={{ backgroundColor: themes.colors.background, paddingTop: 50 }}>
 			<Wrapper
 				style={{
-					backgroundColor: '#343444',
+					backgroundColor: themes.colors.background_box,
+					borderRadius: 15,
+					margin: 'auto',
+					width: '30%',
+					padding: 20,
+					marginTop: 20,
+				}}>
+				<div style={{ fontSize: 20, color: 'white', fontWeight: 'bold' }}>
+					Huong dan su dung
+				</div>
+				<div
+					style={{
+						backgroundColor: themes.colors.background,
+						borderRadius: 10,
+						padding: 10,
+						marginTop: 20,
+					}}>
+					<div style={{ color: 'white', fontWeight: 'bold', fontSize: 14 }}>
+						Step 1
+					</div>
+					<div style={{ color: 'white' }}>
+						Upload your image: this is image of nft for students
+					</div>
+				</div>
+
+				<div
+					style={{
+						backgroundColor: themes.colors.background,
+						borderRadius: 10,
+						padding: 10,
+						marginTop: 20,
+					}}>
+					<div style={{ color: 'white', fontWeight: 'bold', fontSize: 14 }}>
+						Step 2
+					</div>
+					<div style={{ color: 'white' }}>
+						Type degree's name: this is name of degree
+					</div>
+				</div>
+
+				<div
+					style={{
+						backgroundColor: themes.colors.background,
+						borderRadius: 10,
+						padding: 10,
+						marginTop: 20,
+					}}>
+					<div style={{ color: 'white', fontWeight: 'bold', fontSize: 14 }}>
+						Step 3
+					</div>
+					<div style={{ color: 'white' }}>
+						Type degree's description: provide all information about degree.
+					</div>
+				</div>
+
+				<div
+					style={{
+						backgroundColor: themes.colors.background,
+						borderRadius: 10,
+						padding: 10,
+						marginTop: 20,
+					}}>
+					<div style={{ color: 'white', fontWeight: 'bold', fontSize: 14 }}>
+						Step 4
+					</div>
+					<div style={{ color: 'white' }}>
+						Pass public key: Day la public cua vi nguoi nhan nft sau khi ban
+						mint ra, cach de co public key {''}
+						<a style={{ color: 'blueviolet' }} href='https://plugwallet.ooo/'>
+							tai day
+						</a>
+					</div>
+				</div>
+
+				<div
+					style={{
+						backgroundColor: themes.colors.background,
+						borderRadius: 10,
+						padding: 10,
+						marginTop: 20,
+					}}>
+					<div style={{ color: 'white', fontWeight: 'bold', fontSize: 14 }}>
+						Step 5
+					</div>
+					<div style={{ color: 'white' }}>
+						Choose degree's category: this is category of degree
+					</div>
+				</div>
+
+				<div
+					style={{
+						backgroundColor: themes.colors.background,
+						borderRadius: 10,
+						padding: 10,
+						marginTop: 20,
+					}}>
+					<div style={{ color: 'white', fontWeight: 'bold', fontSize: 14 }}>
+						Step 6
+					</div>
+					<div style={{ color: 'white' }}>
+						Choose degree's chool: this is chool cung cap bang
+					</div>
+				</div>
+
+				<div
+					style={{
+						backgroundColor: themes.colors.background,
+						borderRadius: 10,
+						padding: 10,
+						marginTop: 20,
+					}}>
+					<div style={{ color: 'white', fontWeight: 'bold', fontSize: 14 }}>
+						Step 7
+					</div>
+					<div style={{ color: 'white' }}>
+						Choose degree's gpa: nhap diem cua bang
+					</div>
+				</div>
+			</Wrapper>
+			<Wrapper
+				style={{
+					backgroundColor: themes.colors.background_box,
 					borderRadius: 15,
 					margin: 'auto',
 					width: '50%',
@@ -279,15 +402,36 @@ function CreateNft(props) {
 								<Input size='large' placeholder='Pass address wallet' />
 							</Form.Item>
 
-							<Select
-								defaultValue='Chọn loại bằng'
-								size='large'
-								style={{ width: 200, marginBottom: 20 }}>
-								<Option value='1'>Bằng tốt nghiệp</Option>
-								<Option value='2'>Bằng khen</Option>
+							<div
+								style={{
+									display: 'flex',
+									flexDirection: 'row',
+									justifyContent: 'space-between',
+								}}>
+								<Select
+									defaultValue='Chọn loại bằng'
+									size='large'
+									style={{ width: 200, marginBottom: 20 }}>
+									<Option value='1'>Bằng tốt nghiệp</Option>
+									<Option value='2'>Bằng khen</Option>
 
-								<Option value='3'>Chứng chỉ</Option>
-							</Select>
+									<Option value='3'>Chứng chỉ</Option>
+								</Select>
+								<Select
+									defaultValue='Chọn truong'
+									size='large'
+									style={{ width: 200, marginBottom: 20 }}>
+									<Option value='1'>FPT Polytechnic</Option>
+									<Option value='2'>FPT University</Option>
+
+									<Option value='3'>Uni of Greenwich</Option>
+								</Select>
+							</div>
+
+							<div style={{ color: 'white', fontSize: 14 }}>Nhap GPA</div>
+							<Form.Item name='gpa'>
+								<Input size='large' placeholder='Nhap diem GPA' />
+							</Form.Item>
 
 							<FormItem>
 								<Form.Item>

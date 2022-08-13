@@ -8,6 +8,10 @@ const images = {
     Thang: require("./founder/NguyenThang.jpeg").default,
     NhutVy: require("./founder/NhutVy.jpeg").default,
     MyTeam: require("./founder/ChungKet2.jpeg").default,
+    logo_fpt: require("./logo_fpt.png").default,
+    logo_hackathon: require("./logo_hackathon.png").default,
+    logo_ic: require("./logo_difinity.png").default,
+    logo_motoko: require("./logo_motoko.png").default,
 
 }
 

@@ -13,7 +13,6 @@ h1 {
 	-webkit-background-clip: text;
 	background-clip: text;
 	color: transparent;
-	font-family: monospace;
 	padding-top: 100px;
 	text-align: center;
 }
@@ -25,7 +24,6 @@ button {
 
 	background: none;
 	text-decoration: inherit;
-	font-family: system-ui;
 	font-size: 1rem;
 	padding: 1rem 2rem;
 
@@ -39,13 +37,42 @@ button {
 }
 
 .fontLucida {
-	font-family: 'Lucida Console', 'Courier New', monospace;
+	/* font-family: 'Lucida Console', 'Courier New', monospace; */
 }
 
 .fontLucidaNormal {
-	font-family: 'Lucida Console', 'Courier New';
+	/* font-family: 'Lucida Console', 'Courier New'; */
 }
 
 .fontArial {
-	font-family: 'Trebuchet MS', sans-serif;
+	/* font-family: 'Trebuchet MS', sans-serif; */
+}
+
+.fontArial img {
+	height: 60px;
+	width: auto;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.line-footer {
+	border-top: 10px solid;
+	border-image-slice: 1;
+
+	width: 70%;
+	border-image-source: linear-gradient(
+		to right,
+		#ff3bff,
+		#ecbfbf,
+		#ff3bff,
+		#5c24ff,
+		#d94fd5
+	);
+	align-self: center;
+	justify-self: center;
+	margin: auto;
+}
+
+div {
+	font-family: 'Poppins', sans-serif;
 }

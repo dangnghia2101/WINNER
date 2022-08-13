@@ -3,6 +3,7 @@ import NftItem from '../../components/nft-item';
 import { images } from '../../assets/images';
 import './index.css';
 import fonts from '../../assets/fonts';
+import { themes } from '../../assets/themes';
 
 function Started() {
 	return (
@@ -10,7 +11,7 @@ function Started() {
 			style={{
 				flex: 1,
 				width: '100%',
-				backgroundColor: '#000000',
+				backgroundColor: themes.colors.background_box,
 				justifyContent: 'center',
 				alignItems: 'center',
 				position: 'relative',
@@ -28,7 +29,6 @@ function Started() {
 			</div>
 
 			<div
-				className='fontArial'
 				style={{
 					color: 'white',
 					textAlign: 'center',
@@ -64,6 +64,8 @@ function Started() {
 				style={{ marginTop: -50, zIndex: -100, zIndex: -100 }}
 			/>
 
+			<div className='line-footer' />
+
 			<div style={{ position: 'absolute', top: 10 }}>
 				<img
 					style={{ position: 'absolute' }}
@@ -79,15 +81,17 @@ function Started() {
 			<div
 				className='fontArial'
 				style={{
-					fontSize: 25,
-					color: 'white',
-					fontWeight: 'bold',
-					color: 'white',
-					textAlign: 'center',
 					alignSelf: 'center',
 					marginTop: 100,
+					flexDirection: 'row',
+					display: 'flex',
+					justifyContent: 'center',
+					alignItems: 'center',
 				}}>
-				Read more
+				<img src={images.logo_ic} />
+				<img src={images.logo_fpt} />
+				<img src={images.logo_motoko} />
+				<img src={images.logo_hackathon} />
 			</div>
 
 			<div
@@ -99,7 +103,7 @@ function Started() {
 					display: 'flex',
 				}}
 				className='row'>
-				<div style={{ width: '60%' }}>
+				<div style={{ width: '60%', marginBottom: 150 }}>
 					<img src={images.MyTeam} width='100%' height='100%' />
 				</div>
 				<div>
@@ -126,6 +130,55 @@ function Started() {
 						}}>
 						My team stydying at FPT POLYTECHNCI Ho Chi Minh city, this project
 						will change people have a degee
+					</div>
+					<div
+						className='fontArial'
+						style={{
+							fontSize: 20,
+							color: 'white',
+							marginLeft: 50,
+							width: 300,
+							color: 'white',
+							marginTop: 50,
+							fontWeight: 'bold',
+						}}>
+						The advantages project
+					</div>
+					<div
+						className='fontArial'
+						style={{
+							fontSize: 15,
+							color: 'white',
+							marginLeft: 50,
+							width: 300,
+							color: 'white',
+							marginTop: 10,
+						}}>
+						{'=>'} Create NFTs faster
+					</div>
+					<div
+						className='fontArial'
+						style={{
+							fontSize: 15,
+							color: 'white',
+							marginLeft: 50,
+							width: 300,
+							color: 'white',
+							marginTop: 10,
+						}}>
+						{'=>'} Easy to watch all your degree
+					</div>
+					<div
+						className='fontArial'
+						style={{
+							fontSize: 15,
+							color: 'white',
+							marginLeft: 50,
+							width: 300,
+							color: 'white',
+							marginTop: 10,
+						}}>
+						{'=>'} The fisrt project of studenting doing NFT
 					</div>
 				</div>
 			</div>

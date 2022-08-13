@@ -105,7 +105,8 @@ export const MenuItem = styled.li`
     font-size: 17px;
     margin-right: 35px;
     cursor: pointer;
-    color: white
+    color: white;
+    font-family: 'Poppins', sans-serif;
 `
 
 export const Option = styled.div`

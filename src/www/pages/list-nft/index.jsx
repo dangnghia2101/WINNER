@@ -10,6 +10,7 @@ import { customAxios } from '../../utils/custom-axios';
 import { useCanister, useConnect } from '@connect2ic/react';
 import { Principal } from '@dfinity/principal';
 import './index.css';
+import Bids from '../../components/bids/Bids';
 
 function ListNft() {
 	const {
@@ -62,8 +63,8 @@ function ListNft() {
 	};
 
 	return (
-		<Container>
-			<TopWrapper>
+		<Container className='container'>
+			{/* <TopWrapper>
 				<Title
 					className='fontLucidaNormal'
 					style={{ fontWeight: 'bold', color: 'white' }}>
@@ -89,7 +90,16 @@ function ListNft() {
 				{listNFt.map((item, index) => (
 					<NftItem item={item} key={index} />
 				))}
-			</ListNftWrapper>
+			</ListNftWrapper> */}
+
+			<input
+				type='text'
+				placeholder='Search by public key wallet, căn trước công dân'
+			/>
+
+			<Bids title='Diploma' />
+			<Bids title='Certificate' />
+			<Bids title='Other' />
 		</Container>
 	);
 }
