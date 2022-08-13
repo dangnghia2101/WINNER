@@ -5,7 +5,7 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #000000
+    background-color: #1b1a21;
 `
 
 export const ContainerImage = styled.div`

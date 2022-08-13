@@ -84,7 +84,7 @@ module.exports = env => {
             rules: [
                 { test: /\.(ts|tsx|jsx)$/, loader: "ts-loader" },
                 { test: /\.(css|scss)$/, use: ["style-loader", "css-loader", "sass-loader"] },
-                { test: /\.(png|jpg|gif|svg|eot|ttf)$/, loader: 'url-loader' }
+                { test: /\.(png|jpg|gif|svg|eot|ttf|jpeg)$/, loader: 'url-loader' }
             ],
         },
         plugins: [

@@ -4,6 +4,8 @@ export const Container = styled.div`
     padding: 0px 50px;
     display: flex;
     flex-direction: column;
+    background-color: #14141f;
+    padding-bottom: 30px;
 `
 
 export const TopWrapper = styled.div`

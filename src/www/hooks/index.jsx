@@ -21,7 +21,7 @@ export function Provider({ children }) {
 
 	const logout = () => {
 		console.log('logout');
-		setprinpId();
+		setprinpId('');
 		localStorage.clear();
 		navigate('/');
 	};

@@ -71,7 +71,7 @@ dfx canister install superheroes --argument="(principal \"$(dfx identity get-pri
 
 ````
 ```text
-npm run start:dev
+yarn run start:dev
 ````
 
 1. Take note of the URL at which the canister is accessible.
