@@ -64,6 +64,9 @@ function ListNft() {
 
 	return (
 		<Container className='container'>
+			<div style={textTitle}>See All NFT On The World</div>
+			<div style={textDay}>15/08/2022</div>
+
 			{/* <TopWrapper>
 				<Title
 					className='fontLucidaNormal'
@@ -94,7 +97,8 @@ function ListNft() {
 
 			<input
 				type='text'
-				placeholder='Search by public key wallet, căn trước công dân'
+				placeholder='Search by address wallet, citizen identification
+				'
 			/>
 
 			<Bids title='Diploma' />
@@ -103,5 +107,21 @@ function ListNft() {
 		</Container>
 	);
 }
+
+const textTitle = {
+	textAlign: 'center',
+	fontSize: 25,
+	fontWeight: 'bold',
+	color: 'white',
+	paddingTop: 60,
+	paddingBottom: 40,
+};
+
+const textDay = {
+	textAlign: 'center',
+	fontSize: 15,
+	color: 'gray',
+	marginBottom: 40,
+};
 
 export default ListNft;

@@ -99,11 +99,10 @@ button {
 	background: #1b1a21;
 	border-radius: 10px;
 	border: none;
-	padding: 7px 19px 7px 15px;
+	padding: 10px 19px 10px 15px;
 	font-family: var(--font-family);
 	outline: none;
 	color: whitesmoke;
-	flex: 0.3;
 	display: flex;
 	margin-right: 1rem;
 }

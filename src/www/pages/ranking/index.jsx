@@ -108,7 +108,7 @@ const Ranking = () => {
 					}}>
 					<input
 						type='text'
-						placeholder='Search by address wallet, can cuoc cong dan'
+						placeholder='Search by address wallet, citizen identification'
 					/>
 					<div
 						style={{
