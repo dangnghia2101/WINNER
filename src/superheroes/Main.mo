@@ -143,7 +143,8 @@ shared(msg) actor class NFTSale(
     // Thêm tài khoản cho user
     public shared(msg) func insertUser(walletAddress : Principal, username : Text,
                 cccd : Text,  school : Nat, birthday : Text, image: Text, description: Text){   
-        users.put(walletAddress, {username = username ; cccd = cccd; school = school; birthday = birthday; image = image; description = description});
+        users.put(walletAddress, {username = username ; cccd = cccd; school = school; 
+                        birthday = birthday; image = image; description = description});
         info.put(cccd, {walletAddress = walletAddress ; username = username});
     };
 
@@ -155,7 +156,8 @@ shared(msg) actor class NFTSale(
     //Update user bằng walletAddress
     public shared(msg) func updateUser(walletAddress : Principal, username : Text, 
                 cccd : Text,  school : Nat, birthday : Text, image: Text, description: Text){  
-        users.put(walletAddress, {username = username ; cccd = cccd; school = school; birthday = birthday; image = image; description = description});
+        users.put(walletAddress, {username = username ; cccd = cccd; school = school; 
+                        birthday = birthday; image = image; description = description});
     };
 
 
