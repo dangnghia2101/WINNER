@@ -5,9 +5,11 @@ import Time "mo:base/Time";
 
 module {
     public type UserInfo = {
-        address: AID.Address;
-        createTime: Time.Time;
-        alias: Text;
-        avatar: Text;
-    }
+        username: Text;   
+        cccd: Text;
+        school: Nat;
+        birthday: Text;
+        image: Text;
+        description: Text;
+    };
 }

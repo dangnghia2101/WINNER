@@ -39,7 +39,7 @@ shared(msg) actor class NFTSale(
     type TokenInfo = Types.TokenInfo;
     type OrderInfo = Types.OrderInfo;
     type TokenInfoExt = Types.TokenInfoExt;
-    type UserInfo = Types.UserInfo;
+    type UserInfo = User.UserInfo;
     type UserInfoExt = Types.UserInfoExt;
 
     public type Errors = {
@@ -140,24 +140,34 @@ shared(msg) actor class NFTSale(
     private stable var totalOrders_: Nat = 0;
 
     // ##################
-    public shared(msg) func add_user(walletAddress : Principal, username : Text, cccd : Text ) : async [UserInfo] {   
-        users.put(walletAddress,{username = username ; cccd = cccd});
-        info.put(cccd, {walletAddress = walletAddresds ; username = username});
+    // Thêm tài khoản cho user
+    public shared(msg) func insertUser(walletAddress : Principal, username : Text,
+                cccd : Text,  school : Nat, birthday : Text, image: Text, description: Text){   
+        users.put(walletAddress, {username = username ; cccd = cccd; school = school; 
+                        birthday = birthday; image = image; description = description});
+        info.put(cccd, {walletAddress = walletAddress ; username = username});
     };
 
-
-
-    public query func getValInfo() : async [Info] {
-        Iter.toArray(info.vals());
-    };
-
-    public query func getValUsers() : async [UserInfo] {
+    // Lấy danh sách users
+    public query func getAllUser() : async [UserInfo] {
         Iter.toArray(users.vals());
     };
+
+    //Update user bằng walletAddress
+    public shared(msg) func updateUser(walletAddress : Principal, username : Text, 
+                cccd : Text,  school : Nat, birthday : Text, image: Text, description: Text){  
+        users.put(walletAddress, {username = username ; cccd = cccd; school = school; 
+                        birthday = birthday; image = image; description = description});
+    };
+
 
     // Đang chỉ lấy thông tin Info gồm name và pricipal
     public query func findUser(cccd : Text) : async ?Info {
         info.get(cccd);
+    };
+
+    public query func getValInfo() : async [Info] {
+        Iter.toArray(info.vals());
     };
 
     //###################
