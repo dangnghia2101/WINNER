@@ -5,9 +5,60 @@ import NhutVy from '../../assets/images/founder/NhutVy.jpeg';
 import Bids from '../../components/bids/Bids';
 import { themes } from '../../assets/themes';
 
+const ItemRank = () => {
+	return (
+		<div style={containerBottomRank}>
+			<div className='boxTopBottom' style={boxTopBottom}>
+				<div style={row}>
+					<div
+						style={{
+							fontWeight: 'bold',
+							fontSize: 12,
+							color: 'white',
+							marginRight: 30,
+						}}>
+						1
+					</div>
+					<img src={NhutVy} />
+
+					<div
+						style={{
+							fontWeight: 'bold',
+							fontSize: 12,
+							color: 'white',
+							marginLeft: 10,
+						}}>
+						Dang Tuan Nghia
+					</div>
+				</div>
+				<div style={{ fontWeight: 'bold', fontSize: 12, color: 'white' }}>
+					{' '}
+					FPT POLYTECHNIC HCM
+				</div>
+				<div style={{ fontWeight: 'bold', fontSize: 12, color: 'white' }}>
+					{' '}
+					19
+				</div>
+				<div style={{ fontWeight: 'bold', fontSize: 12, color: 'white' }}>
+					{' '}
+					32pz5-7bxkd-zaqki-...i-o2gh7-ctkhg-dae
+				</div>
+			</div>
+		</div>
+	);
+};
+
 const Ranking = () => {
+	var rows = [],
+		i = 0,
+		len = 10;
+	while (++i <= len) rows.push(i);
+
 	return (
 		<div className='profile section__padding'>
+			<div style={textTitle}>Top Rank Students</div>
+			<div style={textDay}>15/08/2022</div>
+
 			<div style={rowTop}>
 				<div className='boxTop' style={boxTop}>
 					<img src={NhutVy} />
@@ -46,29 +97,72 @@ const Ranking = () => {
 				</div>
 			</div>
 
-			{/* List bottom ranking */}
 			<div style={containerBottomRank}>
-				<div className='boxTopBottom' style={boxTopBottom}>
-					<div style={{ fontWeight: 'bold', fontSize: 12, color: 'white' }}>
-						1
-					</div>
-					<img src={NhutVy} />
-
-					<div style={{ fontWeight: 'bold', fontSize: 12, color: 'white' }}>
-						Dang Tuan Nghia
-					</div>
-					<div style={{ fontWeight: 'bold', fontSize: 12, color: 'white' }}>
+				<div
+					className='boxTopBottom'
+					style={{
+						width: '100%',
+						// justifyContent: 'space-between',
+						display: 'flex',
+						flexDirection: 'row',
+					}}>
+					<input
+						type='text'
+						placeholder='Search by address wallet, can cuoc cong dan'
+					/>
+					<div
+						style={{
+							fontWeight: 'bold',
+							fontSize: 12,
+							color: 'white',
+							paddingLeft: 70,
+						}}>
 						{' '}
-						21/01/2002
+						School
 					</div>
-					<div style={{ fontWeight: 'bold', fontSize: 12, color: 'white' }}>
+					<div
+						style={{
+							fontWeight: 'bold',
+							fontSize: 12,
+							color: 'white',
+							paddingLeft: 270,
+						}}>
 						{' '}
-						19
+						Sum degree
+					</div>
+					<div
+						style={{
+							fontWeight: 'bold',
+							fontSize: 12,
+							color: 'white',
+							paddingLeft: 250,
+						}}>
+						{' '}
+						Address wallet
 					</div>
 				</div>
 			</div>
+
+			{rows.map((index) => {
+				return <ItemRank />;
+			})}
 		</div>
 	);
+};
+
+const textTitle = {
+	textAlign: 'center',
+	fontSize: 25,
+	fontWeight: 'bold',
+	color: 'white',
+	paddingTop: 40,
+};
+
+const textDay = {
+	textAlign: 'center',
+	fontSize: 15,
+	color: 'gray',
+	marginBottom: 40,
 };
 
 const rowTop = {
@@ -77,6 +171,7 @@ const rowTop = {
 	margin: 'auto',
 	width: '50%',
 	justifyContent: 'space-between',
+	marginBottom: 20,
 };
 
 const boxTop = {
@@ -106,4 +201,10 @@ const containerBottomRank = {
 	marginTop: 20,
 };
 
+const row = {
+	display: 'flex',
+	flexDirection: 'row',
+	alignItems: 'center',
+	justifyContent: 'center',
+};
 export default Ranking;
