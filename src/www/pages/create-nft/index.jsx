@@ -197,7 +197,7 @@ function CreateNft(props) {
 					marginTop: 20,
 				}}>
 				<div style={{ fontSize: 20, color: 'white', fontWeight: 'bold' }}>
-					Huong dan su dung
+					User manual
 				</div>
 				<div
 					style={{
@@ -210,7 +210,7 @@ function CreateNft(props) {
 						Step 1
 					</div>
 					<div style={{ color: 'white' }}>
-						Upload your image: this is image of nft for students
+						Upload image: Here is a photo of an NFT certified person.
 					</div>
 				</div>
 
@@ -225,7 +225,7 @@ function CreateNft(props) {
 						Step 2
 					</div>
 					<div style={{ color: 'white' }}>
-						Type degree's name: this is name of degree
+						Enter degree name: this is name of degree.
 					</div>
 				</div>
 
@@ -240,7 +240,7 @@ function CreateNft(props) {
 						Step 3
 					</div>
 					<div style={{ color: 'white' }}>
-						Type degree's description: provide all information about degree.
+						Enter degree description: Provide all information about degree.
 					</div>
 				</div>
 
@@ -255,10 +255,12 @@ function CreateNft(props) {
 						Step 4
 					</div>
 					<div style={{ color: 'white' }}>
-						Pass public key: Day la public cua vi nguoi nhan nft sau khi ban
-						mint ra, cach de co public key {''}
+						Paste public key: This is the wallet address of the nft recipient,
+						after the image is minted.
+						{''}
 						<a style={{ color: 'blueviolet' }} href='https://plugwallet.ooo/'>
-							tai day
+							{' '}
+							How to create a wallet
 						</a>
 					</div>
 				</div>
@@ -274,7 +276,7 @@ function CreateNft(props) {
 						Step 5
 					</div>
 					<div style={{ color: 'white' }}>
-						Choose degree's category: this is category of degree
+						Choose degree category: this is category of degree
 					</div>
 				</div>
 
@@ -289,7 +291,7 @@ function CreateNft(props) {
 						Step 6
 					</div>
 					<div style={{ color: 'white' }}>
-						Choose degree's chool: this is chool cung cap bang
+						Choose degree chool: Graduate diploma certification facility
 					</div>
 				</div>
 
@@ -304,7 +306,7 @@ function CreateNft(props) {
 						Step 7
 					</div>
 					<div style={{ color: 'white' }}>
-						Choose degree's gpa: nhap diem cua bang
+						Choose degree's gpa: Student's GPA
 					</div>
 				</div>
 			</Wrapper>
@@ -409,18 +411,18 @@ function CreateNft(props) {
 									justifyContent: 'space-between',
 								}}>
 								<Select
-									defaultValue='Chọn loại bằng'
+									defaultValue='Category'
 									size='large'
-									style={{ width: 200, marginBottom: 20 }}>
-									<Option value='1'>Bằng tốt nghiệp</Option>
-									<Option value='2'>Bằng khen</Option>
+									style={{ width: 200, marginBottom: 20, borderRadius: 10 }}>
+									<Option value='1'>Diploma</Option>
+									<Option value='2'>Certificate</Option>
 
-									<Option value='3'>Chứng chỉ</Option>
+									<Option value='3'>Merit</Option>
 								</Select>
 								<Select
-									defaultValue='Chọn truong'
+									defaultValue='School'
 									size='large'
-									style={{ width: 200, marginBottom: 20 }}>
+									style={{ width: 200, marginBottom: 20, borderRadius: 10 }}>
 									<Option value='1'>FPT Polytechnic</Option>
 									<Option value='2'>FPT University</Option>
 
@@ -428,9 +430,9 @@ function CreateNft(props) {
 								</Select>
 							</div>
 
-							<div style={{ color: 'white', fontSize: 14 }}>Nhap GPA</div>
+							<div style={{ color: 'white', fontSize: 14 }}>Enter GPA</div>
 							<Form.Item name='gpa'>
-								<Input size='large' placeholder='Nhap diem GPA' />
+								<Input size='large' placeholder='Enter GPA' />
 							</Form.Item>
 
 							<FormItem>

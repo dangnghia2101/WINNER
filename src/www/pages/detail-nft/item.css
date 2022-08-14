@@ -94,9 +94,9 @@
 }
 
 .item-content-certification img {
-	margin-right: 10px;
-	width: auto;
-	height: 20px;
+	width: 60px;
+	height: auto;
+	margin: auto;
 }
 
 .item-content-detail {

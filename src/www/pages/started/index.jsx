@@ -178,7 +178,7 @@ function Started() {
 							color: 'white',
 							marginTop: 10,
 						}}>
-						{'=>'} The fisrt project of studenting doing NFT
+						{'=>'} The fisrt project of studenting doing Degree NFT
 					</div>
 				</div>
 			</div>

@@ -12,6 +12,7 @@ const images = {
     logo_hackathon: require("./logo_hackathon.png").default,
     logo_ic: require("./logo_difinity.png").default,
     logo_motoko: require("./logo_motoko.png").default,
+    olive: require("./olive.png").default,
 
 }
 

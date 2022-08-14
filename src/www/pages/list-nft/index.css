@@ -51,7 +51,7 @@ button {
 }
 
 .container input {
-	background: rgb(238, 238, 238);
+	background: rgb(255, 254, 254);
 	border-radius: 10px;
 	border: none;
 	padding: 12px 19px 12px 15px;
@@ -65,7 +65,7 @@ button {
 	margin: auto;
 	height: 55px;
 	font-size: 16px;
-	margin-top: 30px;
+	margin-bottom: 10px;
 }
 
 div {
