@@ -49,13 +49,20 @@ module {
         timestamp: Time.Time;
     };
     
+    public type User = {
+        username : Text;
+        cccd : Text;
+        school: Nat;
+        birthday: Text;
+        image: Text;
+        description: Text;
+    };
+
     public type UserInfo = {
         var operators: TrieSet.Set<Principal>;     // principals allowed to operate on the user's behalf
         var allowedBy: TrieSet.Set<Principal>;     // principals approved user to operate their's tokens
         var allowedTokens: TrieSet.Set<Nat>;       // tokens the user can operate
         var tokens: TrieSet.Set<Nat>;              // user's tokens
-        var username : Text;
-        var cccd : Text;
     };
 
     public type UserInfoExt = {
