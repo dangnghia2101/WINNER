@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './index.css';
 import profile_banner from '../../assets/images/profile_banner.png';
 import NhutVy from '../../assets/images/founder/NhutVy.jpeg';
 import Bids from '../../components/bids/Bids';
 import { themes } from '../../assets/themes';
 import { Link } from 'react-router-dom';
+import { useCanister, useConnect } from '@connect2ic/react';
+import { customAxios } from '../../utils/custom-axios';
+import { Principal } from '@dfinity/principal';
 
 const ItemRank = () => {
 	return (
@@ -52,6 +55,41 @@ const ItemRank = () => {
 };
 
 const Ranking = () => {
+	const [superheroes, { loading, error }] = useCanister('superheroes');
+	const [users, setUsers] = useState([]);
+
+	const {
+		isConnected,
+		disconnect,
+		activeProvider,
+		isIdle,
+		connect,
+		isConnecting,
+		principal,
+	} = useConnect();
+
+	useEffect(async () => {
+		if (superheroes) {
+			getUsers();
+		}
+	}, [superheroes]);
+
+	const getUsers = async () => {
+		console.log('======> ', superheroes);
+		const res = await superheroes.getAllUser();
+		const promise4all = Promise.all(
+			res.map(function (el) {
+				return customAxios(el.metadata[0]?.tokenUri);
+			})
+		);
+		const resu = await promise4all;
+		const newlist = res.map((el, index) => {
+			return { ...el, ...resu[index] };
+		});
+		setUsers(newlist);
+		console.log(newlist);
+	};
+
 	var rows = [],
 		i = 0,
 		len = 10;

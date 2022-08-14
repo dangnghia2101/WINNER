@@ -1,12 +1,49 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './index.css';
 import profile_banner from '../../assets/images/profile_banner.png';
 import danang from '../../assets/images/danang.jpeg';
 import NhutVy from '../../assets/images/founder/NhutVy.jpeg';
 import Bids from '../../components/bids/Bids';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { useCanister, useConnect } from '@connect2ic/react';
+import { customAxios } from '../../utils/custom-axios';
+import { Principal } from '@dfinity/principal';
 
 const Profile = () => {
+	const [superheroes, { loading, error }] = useCanister('superheroes');
+	const [listNFt, setListNFt] = useState([]);
+
+	const {
+		isConnected,
+		disconnect,
+		activeProvider,
+		isIdle,
+		connect,
+		isConnecting,
+		principal,
+	} = useConnect();
+
+	useEffect(async () => {
+		if (superheroes) {
+			getLIst();
+		}
+	}, [superheroes]);
+
+	const getLIst = async () => {
+		const res = await superheroes.getUserTokens(Principal.fromText(principal));
+		const promise4all = Promise.all(
+			res.map(function (el) {
+				return customAxios(el.metadata[0]?.tokenUri);
+			})
+		);
+		const resu = await promise4all;
+		const newlist = res.map((el, index) => {
+			return { ...el, ...resu[index] };
+		});
+		setListNFt(newlist);
+		console.log(newlist);
+	};
+
 	return (
 		<div className='profile section__padding'>
 			<div className='profile-top'>
