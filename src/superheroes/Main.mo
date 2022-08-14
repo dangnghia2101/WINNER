@@ -172,6 +172,12 @@ shared(msg) actor class NFTSale(
         Iter.toArray(info.vals());
     };
 
+
+    // tim kiem bang địa chỉ ví và trả về object 
+    public query func findUserById(walletAddress : Principal) : async ?UserInfo {
+      users.get(walletAddress);
+    }; 
+
     //###################
 
     private func addTxRecord(
