@@ -39,7 +39,8 @@ shared(msg) actor class NFTSale(
     type TokenInfo = Types.TokenInfo;
     type OrderInfo = Types.OrderInfo;
     type TokenInfoExt = Types.TokenInfoExt;
-    type UserInfo = User.UserInfo;
+    type UserInfo = Types.UserInfo;
+    type User = Types.User;
     type UserInfoExt = Types.UserInfoExt;
 
     public type Errors = {
@@ -131,6 +132,7 @@ shared(msg) actor class NFTSale(
     private stable var tokensEntries : [(Nat, TokenInfo)] = [];
     private stable var usersEntries : [(Principal, UserInfo)] = [];
      private var tokens = HashMap.HashMap<Nat, TokenInfo>(1, Nat.equal, Hash.hash);
+    private var userInfo = HashMap.HashMap<Principal, User>(1, Principal.equal, Principal.hash);
     private var users = HashMap.HashMap<Principal, UserInfo>(1, Principal.equal, Principal.hash);
     // lấy cccd làm key
     private var info = HashMap.HashMap<Text, Info>(1, Text.equal, Text.hash);
@@ -143,20 +145,20 @@ shared(msg) actor class NFTSale(
     // Thêm tài khoản cho user
     public shared(msg) func insertUser(walletAddress : Principal, username : Text,
                 cccd : Text,  school : Nat, birthday : Text, image: Text, description: Text){   
-        users.put(walletAddress, {username = username ; cccd = cccd; school = school; 
+        userInfo.put(walletAddress, {username = username ; cccd = cccd; school = school; 
                         birthday = birthday; image = image; description = description});
         info.put(cccd, {walletAddress = walletAddress ; username = username});
     };
 
     // Lấy danh sách users
-    public query func getAllUser() : async [UserInfo] {
-        Iter.toArray(users.vals());
+    public query func getAllUser() : async [User] {
+        Iter.toArray(userInfo.vals());
     };
 
     //Update user bằng walletAddress
     public shared(msg) func updateUser(walletAddress : Principal, username : Text, 
                 cccd : Text,  school : Nat, birthday : Text, image: Text, description: Text){  
-        users.put(walletAddress, {username = username ; cccd = cccd; school = school; 
+        userInfo.put(walletAddress, {username = username ; cccd = cccd; school = school; 
                         birthday = birthday; image = image; description = description});
     };
 
@@ -567,15 +569,15 @@ shared(msg) actor class NFTSale(
         tokensEntries := Iter.toArray(tokens.entries());
     };
 
-    system func postupgrade() {
-        type TokenInfo = Types.TokenInfo;
-        type UserInfo = Types.UserInfo;
-        type OrderInfo = Types.OrderInfo;
+    // system func postupgrade() {
+    //     type TokenInfo = Types.TokenInfo;
+    //     type UserInfo = Types.UserInfo;
+    //     type OrderInfo = Types.OrderInfo;
 
-        users := HashMap.fromIter<Principal, UserInfo>(usersEntries.vals(), 1, Principal.equal, Principal.hash);
-        tokens := HashMap.fromIter<Nat, TokenInfo>(tokensEntries.vals(), 1, Nat.equal, Hash.hash);
-        // orders := HashMap.fromIter<Nat, OrderInfo>(ordersEntries.vals(), 1 , Nat.equal, Hash.hash);
-        usersEntries := [];
-        tokensEntries := [];
-    };
-};
+    //     users := HashMap.fromIter<Principal, UserInfo>(usersEntries.vals(), 1, Principal.equal, Principal.hash);
+    //     tokens := HashMap.fromIter<Nat, TokenInfo>(tokensEntries.vals(), 1, Nat.equal, Hash.hash);
+    //     // orders := HashMap.fromIter<Nat, OrderInfo>(ordersEntries.vals(), 1 , Nat.equal, Hash.hash);
+    //     usersEntries := [];
+    //     tokensEntries := [];
+    // };
+};  
