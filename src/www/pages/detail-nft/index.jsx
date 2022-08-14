@@ -11,7 +11,7 @@ const Index = () => {
 			</div>
 			<div className='item-content'>
 				<div className='item-content-title'>
-					<h1>Top 100 studens excerlent</h1>
+					<h1>Top 100 studens excellent</h1>
 					<p>
 						<span>Summer september</span> ‧ 13/08/2022
 					</p>
