@@ -145,7 +145,7 @@ shared(msg) actor class NFTSale(
     // Thêm tài khoản cho user
     public shared(msg) func insertUser(walletAddress : Principal, username : Text,
                 cccd : Text,  school : Nat, birthday : Text, image: Text, description: Text){   
-        userInfo.put(walletAddress, {username = username ; cccd = cccd; school = school; 
+        userInfo.put(walletAddress, {walletAddress = walletAddress; username = username ; cccd = cccd; school = school; 
                         birthday = birthday; image = image; description = description});
         info.put(cccd, {walletAddress = walletAddress ; username = username});
     };
@@ -174,9 +174,9 @@ shared(msg) actor class NFTSale(
 
 
     // tim kiem bang địa chỉ ví và trả về object 
-    public query func findUserById(walletAddress : Principal) : async ?UserInfo {
-      users.get(walletAddress);
-    }; 
+    public query func findUserById(walletAddress : Principal) : async ?User {
+        userInfo.get(walletAddress);
+     };
 
     //###################
 
