@@ -11,26 +11,29 @@ import { Principal } from '@dfinity/principal';
 
 const Profile = () => {
 	const [superheroes, { loading, error }] = useCanister('superheroes');
-	const [listNFt, setListNFt] = useState([]);
+	const [profile, setProfile] = useState();
+	const [listDiploma, setListDiploma] = useState([]);
+	const [listCertificate, setListCertificate] = useState([]);
+	const [listOther, setListOther] = useState([]);
 
-	const {
-		isConnected,
-		disconnect,
-		activeProvider,
-		isIdle,
-		connect,
-		isConnecting,
-		principal,
-	} = useConnect();
+	const { principal } = useConnect();
 
 	useEffect(async () => {
 		if (superheroes) {
-			getLIst();
+			getMyInfor();
+			getTokensUser();
 		}
 	}, [superheroes]);
 
-	const getLIst = async () => {
+	const getMyInfor = async () => {
+		const res = await superheroes.findUserById(Principal.fromText(principal));
+		setProfile(res[0]);
+	};
+
+	const getTokensUser = async () => {
 		const res = await superheroes.getUserTokens(Principal.fromText(principal));
+		console.log('====> getListUserToken motoko 	', res);
+		// console.log(await superheroes.getPrint());
 		const promise4all = Promise.all(
 			res.map(function (el) {
 				return customAxios(el.metadata[0]?.tokenUri);
@@ -40,8 +43,10 @@ const Profile = () => {
 		const newlist = res.map((el, index) => {
 			return { ...el, ...resu[index] };
 		});
-		setListNFt(newlist);
-		console.log('newList profile ', newlist);
+
+		setListDiploma(newlist.filter((el) => el.category === '1'));
+		setListCertificate(newlist.filter((el) => el.category === '2'));
+		setListOther(newlist.filter((el) => el.category === '3'));
 	};
 
 	return (
@@ -51,12 +56,14 @@ const Profile = () => {
 					<img src={danang} alt='banner' />
 				</div>
 				<div className='profile-pic'>
-					<img src={NhutVy} alt='profile' />
-					<h3>Hoang Cong Nhut Vy</h3>
+					<img src={profile?.image} alt='profile' />
+					<h3>{profile?.username}</h3>
 					<div style={{ color: 'white' }}>Address wallet</div>
 					<div className='row1'>
 						<div style={{ color: 'white' }} className='box-account-id'>
-							32pz5-7bxkd-zaqki...z5gti-o2gh7-ctkhg-dae
+							{principal
+								? principal?.slice(0, 15) + '...' + principal?.slice(49, 63)
+								: ''}
 						</div>
 						<div style={btnCopy}>Coppy</div>
 					</div>
@@ -75,9 +82,13 @@ const Profile = () => {
 						<option>High to Low</option>
 					</select>
 				</div>
-				{/* <Bids title='Diploma' />
-				<Bids title='Certificate' />
-				<Bids title='Other' /> */}
+				{listDiploma.length > 0 ? (
+					<Bids title='Diploma' data={listDiploma} />
+				) : null}
+				{listCertificate.length > 0 ? (
+					<Bids title='Certificate' data={listCertificate} />
+				) : null}
+				{listOther.length > 0 ? <Bids title='Other' data={listOther} /> : null}
 			</div>
 		</div>
 	);

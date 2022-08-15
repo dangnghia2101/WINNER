@@ -11,5 +11,7 @@ module {
         birthday: Text;
         image: Text;
         description: Text;
+                walletAddress : Principal;
+
     };
 }

@@ -22,7 +22,6 @@ function ListNft() {
 		isConnecting,
 		principal,
 	} = useConnect();
-	const [listAllNFt, setListAllNFt] = useState([]);
 	const [listDiploma, setListDiploma] = useState([]);
 	const [listCertificate, setListCertificate] = useState([]);
 	const [listOther, setListOther] = useState([]);
@@ -47,7 +46,6 @@ function ListNft() {
 		const newlist = res.map((el, index) => {
 			return { ...el, ...resu[index] };
 		});
-		setListAllNFt(newlist);
 
 		setListDiploma(newlist.filter((el) => el.category === '1'));
 		setListCertificate(newlist.filter((el) => el.category === '2'));
@@ -71,9 +69,6 @@ function ListNft() {
 				<Bids title='Certificate' data={listCertificate} />
 			) : null}
 			{listOther.length > 0 ? <Bids title='Other' data={listOther} /> : null}
-			{/* <Bids title='Diploma' />
-			<Bids title='Certificate' />
-			<Bids title='Other' /> */}
 		</Container>
 	);
 }

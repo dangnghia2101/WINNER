@@ -50,7 +50,7 @@ module {
     };
     
     public type User = {
-        walletAddress : Principal ;
+        walletAddress : Principal;
         username : Text;
         cccd : Text;
         school: Nat;

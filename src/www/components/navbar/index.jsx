@@ -55,7 +55,10 @@ function Navbar(props) {
 
 	return (
 		<Container>
-			<ConnectDialog dark={false} />
+			{/* <div
+				style={{ position: 'absolute', height: 300, backgroundColor: 'red' }}>
+				<ConnectDialog dark={false} />
+			</div> */}
 			<LogoWrapper>
 				<Link to='/' style={{ color: 'black' }}>
 					<Logo src={images.olive} alt='' onClick={scrollToTop} />

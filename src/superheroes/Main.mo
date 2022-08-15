@@ -158,7 +158,7 @@ shared(msg) actor class NFTSale(
     //Update user bằng walletAddress
     public shared(msg) func updateUser(walletAddress : Principal, username : Text, 
                 cccd : Text,  school : Nat, birthday : Text, image: Text, description: Text){  
-        userInfo.put(walletAddress, {username = username ; cccd = cccd; school = school; 
+        userInfo.put(walletAddress, {walletAddress = walletAddress; username = username ; cccd = cccd; school = school; 
                         birthday = birthday; image = image; description = description});
     };
 
@@ -536,8 +536,6 @@ shared(msg) actor class NFTSale(
     };
 
     public query func getUserTokens(owner: Principal) : async [TokenInfoExt] {
-                Debug.print("========> getUserTokens " );
-
         let tokenIds = switch (users.get(owner)) {
             case (?user) {
                 TrieSet.toArray(user.tokens)
