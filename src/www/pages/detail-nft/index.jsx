@@ -2,12 +2,13 @@ import React from 'react';
 import './item.css';
 import creator from '../../assets/images/seller2.png';
 import item from '../../assets/images/item1.png';
+import Certificate from '../../assets/images/Certificate.png';
 
 const Index = () => {
 	return (
 		<div className='item section__padding'>
 			<div className='item-image'>
-				<img src={item} alt='item' />
+				<img src={Certificate} alt='item' />
 			</div>
 			<div className='item-content'>
 				<div className='item-content-title'>
