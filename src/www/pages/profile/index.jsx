@@ -41,7 +41,7 @@ const Profile = () => {
 			return { ...el, ...resu[index] };
 		});
 		setListNFt(newlist);
-		console.log(newlist);
+		console.log('newList profile ', newlist);
 	};
 
 	return (
@@ -75,9 +75,9 @@ const Profile = () => {
 						<option>High to Low</option>
 					</select>
 				</div>
-				<Bids title='Diploma' />
+				{/* <Bids title='Diploma' />
 				<Bids title='Certificate' />
-				<Bids title='Other' />
+				<Bids title='Other' /> */}
 			</div>
 		</div>
 	);

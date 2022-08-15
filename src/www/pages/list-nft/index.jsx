@@ -22,20 +22,22 @@ function ListNft() {
 		isConnecting,
 		principal,
 	} = useConnect();
-	const [listNFt, setListNFt] = useState([]);
 	const [listAllNFt, setListAllNFt] = useState([]);
+	const [listDiploma, setListDiploma] = useState([]);
+	const [listCertificate, setListCertificate] = useState([]);
+	const [listOther, setListOther] = useState([]);
 
 	const [superheroes, { loading, error }] = useCanister('superheroes');
 	useEffect(async () => {
 		if (superheroes) {
 			getListAll();
-			getLIst();
 		}
 	}, [superheroes]);
 
 	const getListAll = async () => {
 		const res = await superheroes.getAllTokens();
-		console.log(await superheroes.getPrint());
+		console.log('====> getListAll motoko 	', res);
+		// console.log(await superheroes.getPrint());
 		const promise4all = Promise.all(
 			res.map(function (el) {
 				return customAxios(el.metadata[0]?.tokenUri);
@@ -46,20 +48,10 @@ function ListNft() {
 			return { ...el, ...resu[index] };
 		});
 		setListAllNFt(newlist);
-	};
 
-	const getLIst = async () => {
-		const res = await superheroes.getUserTokens(Principal.fromText(principal));
-		const promise4all = Promise.all(
-			res.map(function (el) {
-				return customAxios(el.metadata[0]?.tokenUri);
-			})
-		);
-		const resu = await promise4all;
-		const newlist = res.map((el, index) => {
-			return { ...el, ...resu[index] };
-		});
-		setListNFt(newlist);
+		setListDiploma(newlist.filter((el) => el.category === '1'));
+		setListCertificate(newlist.filter((el) => el.category === '2'));
+		setListOther(newlist.filter((el) => el.category === '3'));
 	};
 
 	return (
@@ -67,43 +59,21 @@ function ListNft() {
 			<div style={textTitle}>See All NFT On The World</div>
 			<div style={textDay}>15/08/2022</div>
 
-			{/* <TopWrapper>
-				<Title
-					className='fontLucidaNormal'
-					style={{ fontWeight: 'bold', color: 'white' }}>
-					Explore
-				</Title>
-			</TopWrapper>
-
-			<ListNftWrapper>
-				{listAllNFt.map((item, index) => (
-					<NftItem item={item} key={index} />
-				))}
-			</ListNftWrapper>
-
-			<TopWrapper>
-				<Title
-					className='fontLucidaNormal'
-					style={{ fontWeight: 'bold', color: 'white' }}>
-					Certificate
-				</Title>
-			</TopWrapper>
-
-			<ListNftWrapper>
-				{listNFt.map((item, index) => (
-					<NftItem item={item} key={index} />
-				))}
-			</ListNftWrapper> */}
-
 			<input
 				type='text'
 				placeholder='Search by address wallet, citizen identification
 				'
 			/>
-
-			<Bids title='Diploma' />
+			{listDiploma.length > 0 ? (
+				<Bids title='Diploma' data={listDiploma} />
+			) : null}
+			{listCertificate.length > 0 ? (
+				<Bids title='Certificate' data={listCertificate} />
+			) : null}
+			{listOther.length > 0 ? <Bids title='Other' data={listOther} /> : null}
+			{/* <Bids title='Diploma' />
 			<Bids title='Certificate' />
-			<Bids title='Other' />
+			<Bids title='Other' /> */}
 		</Container>
 	);
 }

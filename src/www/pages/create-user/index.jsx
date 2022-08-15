@@ -1,24 +1,19 @@
 import {
 	BodyWrapper,
 	Container,
-	FormItemDesc,
-	FormItemName,
 	RedIcon,
 	Required,
 	Title,
 	FormItem,
 	Wrapper,
 	FormWrapper,
-} from './create-nft.elements';
+} from './create-user.elements';
 import { Upload, message, Form, Input, Button, Select, Modal } from 'antd';
 
 import { InboxOutlined, PlusOutlined } from '@ant-design/icons';
 import React, { useState, useEffect } from 'react';
 import { client } from '../../utilities/ipfs';
-import { superheroes } from '../../../declarations';
 import { Principal } from '@dfinity/principal';
-import { toList } from '../../utilities/idl';
-import { idlFactory } from '../../../declarations/superheroes.did.js';
 import { customAxios } from '../../utils/custom-axios';
 import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
@@ -32,7 +27,7 @@ import { useCanister, useConnect } from '@connect2ic/react';
 
 const IPFS_LINK = 'https://dweb.link/ipfs/';
 
-function CreateNft(props) {
+function CreateUser(props) {
 	const {
 		isConnected,
 		disconnect,
@@ -43,8 +38,7 @@ function CreateNft(props) {
 		principal,
 	} = useConnect();
 	const [fileImg, setFileImg] = useState('');
-	const [listNFt, setListNFt] = useState([]);
-	const [listAllNFt, setListAllNFt] = useState([]);
+	const [listUsers, setListUsers] = useState([]);
 	const [superheroes, { loading, error }] = useCanister('superheroes');
 
 	// upload image
@@ -76,56 +70,23 @@ function CreateNft(props) {
 			reader.onerror = (error) => reject(error);
 		});
 
-	useEffect(async () => {
-		if (principal && superheroes) {
-			getLIst();
-		}
-	}, [principal, superheroes]);
-
-	const getListAll = async () => {
-		console.log('SUPERHEROES_CANISTER_ID', process.env.SUPERHEROES_CANISTER_ID);
-		const res = await superheroes.getAllTokens();
-		console.log(res);
-		const promise4all = Promise.all(
-			res.map(function (el) {
-				return customAxios(el.metadata[0]?.tokenUri);
-			})
-		);
-		const resu = await promise4all;
-		console.log(resu);
-		setListAllNFt(resu);
-	};
-
 	const onFinish = async (values) => {
 		toast('Minting NFT!!!');
 
 		const cid = await client.put([fileList[0].originFileObj]);
-		console.log('===> cid ', cid);
-		const nFile = new File(
-			[
-				JSON.stringify({
-					description: values?.description,
-					name: values?.name,
-					category: values?.category,
-					school: values?.school,
-					gpa: values?.gpa,
-					chairman: values?.chairman,
-					image: `${IPFS_LINK}${cid}/${fileList[0].originFileObj.name}`,
-					timeCreate: Date.now(),
-				}),
-			],
-			`${values?.name}.json`,
-			{ type: 'text/plain' }
-		);
-		const metadataCID = await client.put([nFile]);
-		console.log('===> metadataCID ', metadataCID);
 
-		const res = await superheroes.mint(Principal.fromText(values?.address), [
-			{ tokenUri: `${IPFS_LINK}${metadataCID}/${values?.name}.json` },
-		]);
-		console.log('==== mint ', res);
-		toast('Minted NFT success!!!');
-		getLIst();
+		const image = `${IPFS_LINK}${cid}/${fileList[0].originFileObj.name}`;
+
+		const res = await superheroes.insertUser(
+			Principal.fromText(values?.address),
+			values?.username,
+			values?.identity,
+			Number(values?.school),
+			values?.birthday,
+			image,
+			values?.description
+		);
+		toast('Insert user success!!!');
 	};
 
 	const onFinishFailed = (errorInfo) => {
@@ -133,16 +94,12 @@ function CreateNft(props) {
 	};
 
 	const getLIst = async () => {
-		const res = await superheroes.getUserTokens(Principal.fromText(principal));
-		const promise4all = Promise.all(
-			res.map(function (el) {
-				return customAxios(el.metadata[0]?.tokenUri);
-			})
-		);
-		const resu = await promise4all;
-		console.log('getList ', resu);
-		setListNFt(resu);
+		const res = await superheroes.getAllUser();
+
+		setListUsers(res);
 	};
+
+	getLIst();
 
 	const handleCancel = () => setPreviewVisible(false);
 
@@ -213,7 +170,7 @@ function CreateNft(props) {
 						Step 2
 					</div>
 					<div style={{ color: 'white' }}>
-						Enter degree name: this is name of degree.
+						Enter username: this is name of student.
 					</div>
 				</div>
 
@@ -228,7 +185,8 @@ function CreateNft(props) {
 						Step 3
 					</div>
 					<div style={{ color: 'white' }}>
-						Enter degree description: Provide all information about degree.
+						Enter citizen identity card: This is citizen identity car of
+						student.
 					</div>
 				</div>
 
@@ -243,8 +201,7 @@ function CreateNft(props) {
 						Step 4
 					</div>
 					<div style={{ color: 'white' }}>
-						Paste public key: This is the wallet address of the nft recipient,
-						after the image is minted.
+						Paste public key: This is the wallet address of student.
 						{''}
 						<a style={{ color: 'blueviolet' }} href='https://plugwallet.ooo/'>
 							{' '}
@@ -264,7 +221,7 @@ function CreateNft(props) {
 						Step 5
 					</div>
 					<div style={{ color: 'white' }}>
-						Choose degree category: this is category of degree
+						Choose chool: This is school of student.
 					</div>
 				</div>
 
@@ -279,7 +236,7 @@ function CreateNft(props) {
 						Step 6
 					</div>
 					<div style={{ color: 'white' }}>
-						Choose degree chool: Graduate diploma certification facility
+						Enter description: This is all description about student.
 					</div>
 				</div>
 
@@ -309,8 +266,7 @@ function CreateNft(props) {
 						Step 8
 					</div>
 					<div style={{ color: 'white' }}>
-						Enter chairman name: This is the name of the director of the
-						facility that issued the diploma
+						Enter birthday: This is birthday of the student.
 					</div>
 				</div>
 			</Wrapper>
@@ -323,7 +279,7 @@ function CreateNft(props) {
 					padding: 20,
 					marginBottom: 50,
 				}}>
-				<Title style={{ color: 'white' }}>Create Dgree NFT</Title>
+				<Title style={{ color: 'white' }}>Create Account</Title>
 				<Required style={{ color: 'white' }}>
 					<RedIcon style={{ color: 'white' }}>*</RedIcon> Required fields
 				</Required>
@@ -367,28 +323,30 @@ function CreateNft(props) {
 									</Modal>
 								</Form.Item>
 							</FormItem>
-							<div style={{ color: 'white', fontSize: 14 }}>Name degree</div>
+							<div style={{ color: 'white', fontSize: 14 }}>Username</div>
 							<Form.Item
-								name='name'
-								rules={[{ required: true, message: 'Please input NFT name!' }]}>
+								name='username'
+								rules={[{ required: true, message: 'Please input username!' }]}>
 								<Input
 									width={'100%'}
 									size='large'
-									placeholder='Name of degree'
+									placeholder='Please input username'
 								/>
 							</Form.Item>
 
-							<div style={{ color: 'white', fontSize: 14 }}>Description</div>
-							<Form.Item name='description'>
+							<div style={{ color: 'white', fontSize: 14 }}>
+								Citizen identity card
+							</div>
+							<Form.Item name='identity'>
 								<Input
 									size='large'
-									placeholder='Provide a detailed description of degree'
+									placeholder='Please input citizen identity card'
 								/>
 							</Form.Item>
 
 							<div style={{ color: 'white', fontSize: 14 }}>Adress wallet</div>
 							<Form.Item name='address'>
-								<Input size='large' placeholder='Pass address wallet' />
+								<Input size='large' placeholder='Please input address wallet' />
 							</Form.Item>
 
 							<div
@@ -397,17 +355,6 @@ function CreateNft(props) {
 									flexDirection: 'row',
 									justifyContent: 'space-between',
 								}}>
-								<Form.Item name='category'>
-									<Select
-										defaultValue='Category'
-										size='large'
-										style={{ width: 200, marginBottom: 20, borderRadius: 10 }}>
-										<Option value='1'>Diploma</Option>
-										<Option value='2'>Certificate</Option>
-
-										<Option value='3'>Merit</Option>
-									</Select>
-								</Form.Item>
 								<Form.Item name='school'>
 									<Select
 										defaultValue='School'
@@ -421,16 +368,14 @@ function CreateNft(props) {
 								</Form.Item>
 							</div>
 
-							<div style={{ color: 'white', fontSize: 14 }}>Enter GPA</div>
-							<Form.Item name='gpa'>
-								<Input size='large' placeholder='Enter GPA' />
+							<div style={{ color: 'white', fontSize: 14 }}>Description</div>
+							<Form.Item name='description'>
+								<Input size='large' placeholder='Please input description' />
 							</Form.Item>
 
-							<div style={{ color: 'white', fontSize: 14 }}>
-								Enter name of chairman
-							</div>
-							<Form.Item name='chairman'>
-								<Input size='large' placeholder='Name of chairman' />
+							<div style={{ color: 'white', fontSize: 14 }}>Birthday</div>
+							<Form.Item name='birthday'>
+								<Input size='large' placeholder='Please input birthday' />
 							</Form.Item>
 
 							<FormItem>
@@ -452,4 +397,4 @@ function CreateNft(props) {
 	);
 }
 
-export default withContext(CreateNft);
+export default withContext(CreateUser);
