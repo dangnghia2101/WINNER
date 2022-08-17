@@ -4,7 +4,7 @@
  * License    : Apache 2.0 with LLVM Exception
  * Stability  : Experimental
  */
-
+import AID "./Utils/AccountId";
 import HashMap "mo:base/HashMap";
 import Cycles "mo:base/ExperimentalCycles";
 import Principal "mo:base/Principal";
@@ -21,7 +21,6 @@ import Result "mo:base/Result";
 import Prelude "mo:base/Prelude";
 import Buffer "mo:base/Buffer";
 import Types "./types";
-import AID "./Utils/AccountId";
 import User "./User";
 import Debug "mo:base/Debug"
 
@@ -144,9 +143,8 @@ shared(msg) actor class NFTSale(
     // ##################
     // Thêm tài khoản cho user
     public shared(msg) func insertUser(walletAddress : Principal, username : Text,
-                cccd : Text,  school : Nat, birthday : Text, image: Text, description: Text){   
-        userInfo.put(walletAddress, {walletAddress = walletAddress; username = username ; cccd = cccd; school = school; 
-                        birthday = birthday; image = image; description = description});
+                cccd : Text, school : Nat, birthday : Text, image: Text, description: Text){   
+        userInfo.put(walletAddress, {walletAddress = walletAddress; role = 1; username = username ; cccd = cccd; school = school; birthday = birthday; image = image; description = description});
         info.put(cccd, {walletAddress = walletAddress ; username = username});
     };
 
@@ -157,9 +155,9 @@ shared(msg) actor class NFTSale(
 
     //Update user bằng walletAddress
     public shared(msg) func updateUser(walletAddress : Principal, username : Text, 
-                cccd : Text,  school : Nat, birthday : Text, image: Text, description: Text){  
-        userInfo.put(walletAddress, {walletAddress = walletAddress; username = username ; cccd = cccd; school = school; 
-                        birthday = birthday; image = image; description = description});
+                cccd : Text,  school : Nat, birthday : Text, image: Text, description: Text, role : Nat){
+          userInfo.put(walletAddress, {walletAddress = walletAddress; role = role; username = username ; cccd = cccd; school = school; 
+            birthday = birthday; image = image; description = description});
     };
 
 
@@ -584,4 +582,4 @@ shared(msg) actor class NFTSale(
     //     usersEntries := [];
     //     tokensEntries := [];
     // };
-};  
+};

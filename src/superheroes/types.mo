@@ -52,6 +52,7 @@ module {
     public type User = {
         walletAddress : Principal;
         username : Text;
+        role : Nat;
         cccd : Text;
         school: Nat;
         birthday: Text;
