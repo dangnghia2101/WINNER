@@ -74,8 +74,6 @@ button {
 .profile-pic img {
 	border: 6px solid var(--color-bg);
 	border-radius: 50%;
-	width: 150px;
-	height: 150px;
 	object-fit: cover;
 }
 .profile-pic h3 {
@@ -133,9 +131,11 @@ button {
 	display: flex;
 }
 
-@media screen and (max-width: 1050px) {
+@media screen and (max-width: 1550px) {
 	.profile-pic img {
 		width: 50%;
+		height: auto;
+		object-fit: cover;
 	}
 	.profile-pic {
 		margin-top: -50px;

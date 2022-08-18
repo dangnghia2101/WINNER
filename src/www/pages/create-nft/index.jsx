@@ -82,25 +82,10 @@ function CreateNft(props) {
 		}
 	}, [principal, superheroes]);
 
-	const getListAll = async () => {
-		console.log('SUPERHEROES_CANISTER_ID', process.env.SUPERHEROES_CANISTER_ID);
-		const res = await superheroes.getAllTokens();
-		console.log(res);
-		const promise4all = Promise.all(
-			res.map(function (el) {
-				return customAxios(el.metadata[0]?.tokenUri);
-			})
-		);
-		const resu = await promise4all;
-		console.log(resu);
-		setListAllNFt(resu);
-	};
-
 	const onFinish = async (values) => {
 		toast('Minting NFT!!!');
 
 		const cid = await client.put([fileList[0].originFileObj]);
-		console.log('===> cid ', cid);
 		const nFile = new File(
 			[
 				JSON.stringify({
@@ -108,7 +93,7 @@ function CreateNft(props) {
 					name: values?.name,
 					category: values?.category,
 					school: values?.school,
-					gpa: values?.gpa,
+					rating: values?.rating,
 					chairman: values?.chairman,
 					image: `${IPFS_LINK}${cid}/${fileList[0].originFileObj.name}`,
 					timeCreate: Date.now(),
@@ -294,7 +279,7 @@ function CreateNft(props) {
 						Step 7
 					</div>
 					<div style={{ color: 'white' }}>
-						Choose degree's gpa: Student's GPA
+						Choose degree's rating: Student's rating
 					</div>
 				</div>
 
@@ -421,9 +406,9 @@ function CreateNft(props) {
 								</Form.Item>
 							</div>
 
-							<div style={{ color: 'white', fontSize: 14 }}>Enter GPA</div>
-							<Form.Item name='gpa'>
-								<Input size='large' placeholder='Enter GPA' />
+							<div style={{ color: 'white', fontSize: 14 }}>Enter rating</div>
+							<Form.Item name='rating'>
+								<Input size='large' placeholder='Enter rating' />
 							</Form.Item>
 
 							<div style={{ color: 'white', fontSize: 14 }}>

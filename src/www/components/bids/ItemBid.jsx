@@ -6,11 +6,11 @@ import { useCanister, useConnect } from '@connect2ic/react';
 
 const getSchool = (_value) => {
 	switch (_value) {
-		case '1':
+		case 1:
 			return 'FPT POLYTECHNIC';
-		case '2':
+		case 2:
 			return 'FPT UNIVERSITY';
-		case '3':
+		case 3:
 			return 'UNI OF GREENWICH';
 		default:
 			return 'FPT POLYTECHNIC';
@@ -51,7 +51,8 @@ const ItemBid = ({ item }) => {
 	return (
 		<div className='card-column'>
 			<Link
-				to={'/nft/123'}
+				to={`/nft/${item.index}`}
+				params={item}
 				style={{ justifiContent: 'center', alignItems: 'center' }}>
 				<div className='bids-card'>
 					<div className='bids-card-top'>
@@ -72,12 +73,12 @@ const ItemBid = ({ item }) => {
 							</div>
 
 							<p className='bids-title' style={{ fontSize: 12 }}>
-								GPA {item.gpa}
+								Rating {item.rating}
 							</p>
 						</div>
 					</div>
 					<div className='bids-card-bottom'>
-						<p>{getSchool(item.school)}</p>
+						<p>{getSchool(Number(item.school))}</p>
 						<p>{formatDate(item.timeCreate)}</p>
 					</div>
 				</div>

@@ -8,7 +8,6 @@ import {
 } from './list-nft.elements';
 import { customAxios } from '../../utils/custom-axios';
 import { useCanister, useConnect } from '@connect2ic/react';
-import { Principal } from '@dfinity/principal';
 import './index.css';
 import Bids from '../../components/bids/Bids';
 
@@ -35,7 +34,6 @@ function ListNft() {
 
 	const getListAll = async () => {
 		const res = await superheroes.getAllTokens();
-		console.log('====> getListAll motoko 	', res);
 		// console.log(await superheroes.getPrint());
 		const promise4all = Promise.all(
 			res.map(function (el) {

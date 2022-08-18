@@ -9,7 +9,9 @@ import { useCanister, useConnect } from '@connect2ic/react';
 import { customAxios } from '../../utils/custom-axios';
 import { Principal } from '@dfinity/principal';
 
-const ItemRank = () => {
+const ItemRank = ({ item, index }) => {
+	console.log('===> item ', item);
+	const address = Principal.fromUint8Array(item.walletAddress._arr).toString();
 	return (
 		<Link to={`/profile`}>
 			<div style={containerBottomRank}>
@@ -22,9 +24,9 @@ const ItemRank = () => {
 								color: 'white',
 								marginRight: 30,
 							}}>
-							1
+							{index + 4}
 						</div>
-						<img src={NhutVy} />
+						<img src={item.image} />
 
 						<div
 							style={{
@@ -33,20 +35,19 @@ const ItemRank = () => {
 								color: 'white',
 								marginLeft: 10,
 							}}>
-							Dang Tuan Nghia
+							{item.username}
 						</div>
 					</div>
 					<div style={{ fontWeight: 'bold', fontSize: 12, color: 'white' }}>
-						{' '}
-						FPT POLYTECHNIC HCM
+						{getSchool(Number(item.school))}
 					</div>
 					<div style={{ fontWeight: 'bold', fontSize: 12, color: 'white' }}>
-						{' '}
-						19
+						{item.sumDegree}
 					</div>
 					<div style={{ fontWeight: 'bold', fontSize: 12, color: 'white' }}>
-						{' '}
-						32pz5-7bxkd-zaqki-...i-o2gh7-ctkhg-dae
+						{address.slice(0, 20) +
+							'...' +
+							address.slice(address.length - 20, address.length - 1)}
 					</div>
 				</div>
 			</div>
@@ -54,9 +55,23 @@ const ItemRank = () => {
 	);
 };
 
+const getSchool = (_value) => {
+	switch (_value) {
+		case 1:
+			return 'FPT POLYTECHNIC';
+		case 2:
+			return 'FPT UNIVERSITY';
+		case 3:
+			return 'UNI OF GREENWICH';
+		default:
+			return 'FPT POLYTECHNIC';
+	}
+};
+
 const Ranking = () => {
 	const [superheroes, { loading, error }] = useCanister('superheroes');
-	const [users, setUsers] = useState([]);
+	const [usersTop3, setUsersTop3] = useState([]);
+	const [usersRemain, setUsersRemain] = useState([]);
 
 	const {
 		isConnected,
@@ -74,20 +89,28 @@ const Ranking = () => {
 		}
 	}, [superheroes]);
 
-	const getUsers = async () => {
-		console.log('======> ', superheroes);
-		const res = await superheroes.getAllUser();
-		const promise4all = Promise.all(
-			res.map(function (el) {
-				return customAxios(el.metadata[0]?.tokenUri);
+	const EvaluateRank = (users) => {
+		return Promise.all(
+			users.map(async (item) => {
+				const res = await superheroes.getUserTokens(item.walletAddress);
+				return { ...item, sumDegree: res.length };
 			})
 		);
-		const resu = await promise4all;
-		const newlist = res.map((el, index) => {
-			return { ...el, ...resu[index] };
-		});
-		setUsers(newlist);
-		console.log(newlist);
+	};
+
+	const getUsers = async () => {
+		try {
+			const res = await superheroes.getAllUser();
+			const newRank = await EvaluateRank(res);
+			newRank.sort((a, b) => b.sumDegree - a.sumDegree);
+			if (newRank.length > 3) {
+				setUsersRemain(newRank.splice(3, newRank.length - 3));
+			}
+			setUsersTop3(newRank.splice(0, 3));
+			// console.log('user remain ', usersRemain);
+		} catch (error) {
+			console.log('[getUsers] error', error);
+		}
 	};
 
 	var rows = [],
@@ -101,47 +124,25 @@ const Ranking = () => {
 			<div style={textDay}>15/08/2022</div>
 
 			<div style={rowTop}>
-				<Link to={`/profile`}>
-					<div className='boxTop' style={boxTop}>
-						<img src={NhutVy} />
-						<div>Hoang Cong Nhut Vy</div>
-						<p style={{ fontSize: 10, color: 'gray' }}>FPT POLYTECHNIC</p>
-						<p style={{ fontSize: 12, color: 'white', fontWeight: 'bold' }}>
-							<span style={{ fontWeight: 'normal' }}> Sum degree</span> 26
-						</p>
-						<p style={{ fontSize: 12, color: 'white', fontWeight: 'bold' }}>
-							<span style={{ fontWeight: 'normal' }}> Top ranking</span> 2
-						</p>
-					</div>
-				</Link>
-
-				<Link to={`/profile`}>
-					<div className='boxTop' style={boxTop}>
-						<img src={NhutVy} />
-						<div>Hoang Cong Nhut Vy</div>
-						<p style={{ fontSize: 10, color: 'gray' }}>FPT POLYTECHNIC</p>
-						<p style={{ fontSize: 12, color: 'white', fontWeight: 'bold' }}>
-							<span style={{ fontWeight: 'normal' }}> Sum degree</span> 36
-						</p>
-						<p style={{ fontSize: 12, color: 'white', fontWeight: 'bold' }}>
-							<span style={{ fontWeight: 'normal' }}> Top ranking</span> 1
-						</p>
-					</div>
-				</Link>
-
-				<Link to={`/profile`}>
-					<div className='boxTop' style={boxTop}>
-						<img src={NhutVy} />
-						<div>Hoang Cong Nhut Vy</div>
-						<p style={{ fontSize: 10, color: 'gray' }}>FPT POLYTECHNIC</p>
-						<p style={{ fontSize: 12, color: 'white', fontWeight: 'bold' }}>
-							<span style={{ fontWeight: 'normal' }}> Sum degree</span> 16
-						</p>
-						<p style={{ fontSize: 12, color: 'white', fontWeight: 'bold' }}>
-							<span style={{ fontWeight: 'normal' }}> Top ranking</span> 3
-						</p>
-					</div>
-				</Link>
+				{usersTop3.map((item, index) => (
+					<Link to={`/profile`}>
+						<div className='boxTop' style={boxTop}>
+							<img src={item?.image} />
+							<div>{item?.username}</div>
+							<p style={{ fontSize: 10, color: 'gray' }}>
+								{getSchool(Number(item?.school))}
+							</p>
+							<p style={{ fontSize: 12, color: 'white', fontWeight: 'bold' }}>
+								<span style={{ fontWeight: 'normal' }}> Sum degree</span>{' '}
+								{item?.sumDegree}
+							</p>
+							<p style={{ fontSize: 12, color: 'white', fontWeight: 'bold' }}>
+								<span style={{ fontWeight: 'normal' }}> Top ranking</span>{' '}
+								{index + 1}
+							</p>
+						</div>
+					</Link>
+				))}
 			</div>
 
 			<div style={containerBottomRank}>
@@ -190,8 +191,8 @@ const Ranking = () => {
 				</div>
 			</div>
 
-			{rows.map((index) => {
-				return <ItemRank />;
+			{usersRemain.map((item, index) => {
+				return <ItemRank item={item} index={index} />;
 			})}
 		</div>
 	);

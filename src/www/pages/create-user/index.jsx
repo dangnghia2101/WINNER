@@ -71,7 +71,7 @@ function CreateUser(props) {
 		});
 
 	const onFinish = async (values) => {
-		toast('Minting NFT!!!');
+		toast('Waiting...!!!');
 
 		const cid = await client.put([fileList[0].originFileObj]);
 
@@ -251,7 +251,7 @@ function CreateUser(props) {
 						Step 7
 					</div>
 					<div style={{ color: 'white' }}>
-						Choose degree's gpa: Student's GPA
+						Choose degree's rating: Student's rating
 					</div>
 				</div>
 
