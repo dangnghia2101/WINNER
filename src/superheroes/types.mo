@@ -106,4 +106,24 @@ module {
         to: Record;
         timestamp: Time.Time;
     };
+
+    // Khai báo trường School
+    public type SchoolList ={
+        id: Nat;
+        Name: Text;
+    };
+
+     public type SchoolId ={
+        id: Nat;
+    };
+
+    // Khai báo trường Degree
+    public type DegreeList ={
+        id: Nat;
+        degreeName: Text;
+    };
+
+     public type DegreeId ={
+        id: Nat;
+    };
 };

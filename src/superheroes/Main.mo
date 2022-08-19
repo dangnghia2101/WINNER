@@ -41,6 +41,10 @@ shared(msg) actor class NFTSale(
     type UserInfo = Types.UserInfo;
     type User = Types.User;
     type UserInfoExt = Types.UserInfoExt;
+    type SchoolList = Types.SchoolList;
+    type SchoolId = Types.SchoolId;
+    type DegreeList = Types.DegreeList;
+    type DegreeId = Types.DegreeId;
 
     public type Errors = {
         #Unauthorized;
@@ -177,6 +181,74 @@ shared(msg) actor class NFTSale(
      };
 
     //###################
+
+    // Hash của trường học
+    private var school = HashMap.HashMap<Nat, SchoolList>(1, Nat.equal, Hash.hash);
+    private var schoolId = HashMap.HashMap<Nat, SchoolId>(1, Nat.equal, Hash.hash);
+
+    // create school name
+    public shared(msg) func insertSchool(name : Text){   
+        var id : Nat = 0;
+          for (sc : SchoolId in schoolId.vals()) {
+              if(id < sc.id){
+                  id := sc.id;
+              }
+         };
+        id+=1;
+        school.put(id, {id = id ;Name = name});
+        schoolId.put(id,{id = id});
+    };
+
+    // get school list
+    public query func getAllSchool() : async [SchoolList] {
+        Iter.toArray(school.vals());
+    };
+
+    //delete school by key
+    public shared(msg) func deleteSchool(key : Nat): async ?SchoolList{   
+        var id : Nat = school.size();
+        school.remove(key);
+    };
+
+
+    //find school by key
+    public shared(msg) func findSchool(key : Nat): async ?SchoolList{   
+        school.get(key);
+    };
+
+    // Hash của degree
+    private var degree = HashMap.HashMap<Nat, DegreeList>(1, Nat.equal, Hash.hash);
+    private var degreeId = HashMap.HashMap<Nat, DegreeId>(1, Nat.equal, Hash.hash);
+
+    // create degree name
+    public shared(msg) func insertDegree(degreeName : Text){   
+        var id : Nat = 0;
+          for (sc : DegreeId in degreeId.vals()) {
+              if(id < sc.id){
+                  id := sc.id;
+              }
+         };
+        id+=1;
+        degree.put(id, {id = id ;degreeName = degreeName});
+        degreeId.put(id,{id = id});
+    };
+
+    // get degree list
+    public query func getAllDegree() : async [DegreeList] {
+        Iter.toArray(degree.vals());
+    };
+
+    //delete degree by key
+    public shared(msg) func deleteDegree(key : Nat): async ?DegreeList{   
+        var id : Nat = degree.size();
+        degree.remove(key);
+    };
+
+
+    //find degree by key
+    public shared(msg) func findDegree(key : Nat): async ?DegreeList{   
+        degree.get(key);
+    };
 
     private func addTxRecord(
         caller: Principal, op: Operation, tokenIndex: ?Nat,
