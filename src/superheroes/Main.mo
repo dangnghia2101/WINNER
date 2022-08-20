@@ -21,7 +21,6 @@ import Result "mo:base/Result";
 import Prelude "mo:base/Prelude";
 import Buffer "mo:base/Buffer";
 import Types "./types";
-import User "./User";
 import Debug "mo:base/Debug"
 
 shared(msg) actor class NFTSale(
