@@ -53,6 +53,8 @@ function Navbar(props) {
 		window.scrollTo({ top: 0, behavior: 'smooth' });
 	};
 
+	const urlProfile = `/profile/${principal}`;
+
 	return (
 		<Container>
 			{/* <div
@@ -77,7 +79,10 @@ function Navbar(props) {
 						<Link to='/create-user' style={{ color: 'black' }}>
 							<MenuItem>User</MenuItem>
 						</Link>
-						<Link to='/profile' style={{ color: 'black' }}>
+						<Link to='/manage-user' style={{ color: 'black' }}>
+							<MenuItem>Manage</MenuItem>
+						</Link>
+						<Link to={urlProfile} style={{ color: 'black' }}>
 							<MenuItem>Profile</MenuItem>
 						</Link>
 						<Link to='/nfts' style={{ color: 'black' }}>

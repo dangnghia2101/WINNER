@@ -45,69 +45,39 @@ button {
 
 .profile {
 	padding: 0;
+	flex: 1;
 	/* padding-bottom: 6rem; */
 	background-color: #24252d;
-}
-.profile-top {
-	position: relative;
-	padding-bottom: 3.75rem;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-}
-.profile-banner {
-	width: 100%;
-}
-.profile-banner img {
-	width: 100%;
-	object-fit: cover;
-}
-.profile-pic {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	width: 400px;
-	margin-top: -100px;
-}
-.profile-pic img {
-	border: 6px solid var(--color-bg);
-	border-radius: 50%;
-	object-fit: cover;
-}
-.profile-pic h3 {
-	font-family: var(--font-family);
-	font-weight: 600;
-	font-size: 28px;
-	line-height: 42px;
-	text-align: center;
-	color: #ffffff;
-}
-.profile-bottom {
-	/* padding: 4rem 6rem; */
 	padding-bottom: 30px;
 }
 
-.profile-bottom-input {
-	display: flex;
-	justify-content: center;
+.boxTop img {
+	object-fit: cover;
+	height: 100px;
+	width: 100px;
+	border-radius: 50%;
+	margin: auto;
+}
+
+.boxTop div {
+	color: white;
+	font-size: 15px;
+	font-weight: bold;
+}
+
+.boxTopBottom {
+	flex-direction: row;
 	align-items: center;
 }
 
-.box-account-id {
-	background: #1b1a21;
-	border-radius: 10px;
-	border: none;
-	padding: 10px 19px 10px 15px;
-	font-family: var(--font-family);
-	outline: none;
-	color: whitesmoke;
-	display: flex;
-	margin-right: 1rem;
+.boxTopBottom img {
+	object-fit: cover;
+	height: 40px;
+	width: 40px;
+	border-radius: 5px;
 }
 
-.profile-bottom-input input {
+.boxTopBottom input {
 	background: #1b1a21;
 	border-radius: 10px;
 	border: none;
@@ -115,27 +85,14 @@ button {
 	font-family: var(--font-family);
 	outline: none;
 	color: whitesmoke;
-	flex: 0.3;
 	display: flex;
 	margin-right: 1rem;
-}
-.profile-bottom-input select {
-	background: #1b1a21;
-	border-radius: 10px;
-	border: none;
-	padding: 7px 19px 7px 15px;
-	font-family: var(--font-family);
-	outline: none;
-	color: whitesmoke;
-	flex: 0.1;
-	display: flex;
+	width: 380px;
 }
 
-@media screen and (max-width: 1550px) {
+@media screen and (max-width: 1050px) {
 	.profile-pic img {
-		width: 200px;
-		height: 200px;
-		object-fit: cover;
+		width: 50%;
 	}
 	.profile-pic {
 		margin-top: -50px;

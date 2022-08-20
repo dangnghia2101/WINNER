@@ -14,12 +14,9 @@ import { InboxOutlined, PlusOutlined } from '@ant-design/icons';
 import React, { useState, useEffect } from 'react';
 import { client } from '../../utilities/ipfs';
 import { Principal } from '@dfinity/principal';
-import { customAxios } from '../../utils/custom-axios';
 import { toast } from 'react-toastify';
-import { Link } from 'react-router-dom';
 import { withContext } from '../../hooks';
 import { themes } from '../../assets/themes';
-import { NFTStorage, File } from 'nft.storage';
 
 const { Dragger } = Upload;
 const { Option } = Select;

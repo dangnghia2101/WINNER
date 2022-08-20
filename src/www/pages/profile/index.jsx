@@ -16,6 +16,9 @@ const Profile = () => {
 	const [listCertificate, setListCertificate] = useState([]);
 	const [listOther, setListOther] = useState([]);
 
+	const address = location.pathname.split('/')[2];
+	if (address.length === 0) address = principal;
+
 	const { principal } = useConnect();
 
 	useEffect(async () => {
@@ -26,13 +29,12 @@ const Profile = () => {
 	}, [superheroes]);
 
 	const getMyInfor = async () => {
-		const res = await superheroes.findUserById(Principal.fromText(principal));
+		const res = await superheroes.findUserById(Principal.fromText(address));
 		setProfile(res[0]);
 	};
 
 	const getTokensUser = async () => {
-		const res = await superheroes.getUserTokens(Principal.fromText(principal));
-		console.log('====> getListUserToken motoko 	', res);
+		const res = await superheroes.getUserTokens(Principal.fromText(address));
 		// console.log(await superheroes.getPrint());
 		const promise4all = Promise.all(
 			res.map(function (el) {
@@ -62,7 +64,7 @@ const Profile = () => {
 					<div className='row1'>
 						<div style={{ color: 'white' }} className='box-account-id'>
 							{principal
-								? principal?.slice(0, 15) + '...' + principal?.slice(49, 63)
+								? address?.slice(0, 15) + '...' + address?.slice(49, 63)
 								: ''}
 						</div>
 						<div style={btnCopy}>Coppy</div>
