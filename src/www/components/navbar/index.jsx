@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
 	Container,
 	Logo,
@@ -12,31 +12,33 @@ import {
 	Right,
 	WalletAddress,
 	ConnectBtnSt,
-	InputSearch,
 } from './navbar-elements';
 import { Link } from 'react-router-dom';
 import { images } from '../../assets/images';
 import { withContext } from '../../hooks';
-import { ConnectButton, ConnectDialog, useConnect } from '@connect2ic/react';
+import { ConnectButton, useConnect, useCanister } from '@connect2ic/react';
+import { Principal } from '@dfinity/principal';
 
 function Navbar(props) {
 	const { principal, disconnect } = useConnect();
 
 	const { prinpId, setPrinpId, logout } = props;
 	const [reload, setReload] = useState(false);
+	const [profile, setProfile] = useState();
+	const [superheroes, { loading, error }] = useCanister('superheroes');
+
+	const getMyInfor = async () => {
+		const res = await superheroes.findUserById(Principal.fromText(principal));
+		setProfile(res[0]);
+		console.log('===> profile.current', profile);
+	};
+
+	useEffect(async () => {
+		await getMyInfor();
+	}, [superheroes]);
 
 	const onConnectWallet = async () => {
 		try {
-			console.log(principal);
-			// const publicKey = await window.ic.plug.requestConnect({
-			// });
-			// const NNSUiActor = await window.ic.plug.createActor({
-			// 	canisterId: process.env.SUPERHEROES_CANISTER_ID,
-			// 	interfaceFactory: idlFactory,
-			// });
-
-			// const princi = await window.ic.plug.agent.getPrincipal();
-
 			setPrinpId(principal);
 		} catch (e) {
 			console.log(e);
@@ -73,15 +75,19 @@ function Navbar(props) {
 						<Link to='/' style={{ color: 'black' }} onClick={scrollToTop}>
 							<MenuItem>Home</MenuItem>
 						</Link>
-						<Link to='/nft/create' style={{ color: 'black' }}>
-							<MenuItem>Degree</MenuItem>
-						</Link>
+						{profile?.role != 1 && (
+							<Link to='/nft/create' style={{ color: 'black' }}>
+								<MenuItem>Degree</MenuItem>
+							</Link>
+						)}
 						<Link to='/create-user' style={{ color: 'black' }}>
 							<MenuItem>User</MenuItem>
 						</Link>
-						<Link to='/manage-user' style={{ color: 'black' }}>
-							<MenuItem>Manage</MenuItem>
-						</Link>
+						{profile?.role == 3 && (
+							<Link to='/manage-user' style={{ color: 'black' }}>
+								<MenuItem>Manage</MenuItem>
+							</Link>
+						)}
 						<Link to={urlProfile} style={{ color: 'black' }}>
 							<MenuItem>Profile</MenuItem>
 						</Link>

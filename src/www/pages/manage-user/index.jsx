@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './index.css';
-import profile_banner from '../../assets/images/profile_banner.png';
-import NhutVy from '../../assets/images/founder/NhutVy.jpeg';
-import Bids from '../../components/bids/Bids';
 import { themes } from '../../assets/themes';
 import { useCanister, useConnect } from '@connect2ic/react';
+import { Principal } from '@dfinity/principal';
+import NotPermistion from '../../components/not-permistion';
 
 import ItemRank from './ItemUser';
 
@@ -30,8 +29,9 @@ const formatDate = (_timestamp) => {
 const ManageUser = () => {
 	const [superheroes, { loading, error }] = useCanister('superheroes');
 	const [users, setUsers] = useState([]);
-	const [usersRemain, setUsersRemain] = useState([]);
-
+	const [search, setSearch] = useState('');
+	const [usersSearch, setUsersSearch] = useState([]);
+	const profile = useRef();
 	const {
 		isConnected,
 		disconnect,
@@ -44,9 +44,17 @@ const ManageUser = () => {
 
 	useEffect(async () => {
 		if (superheroes) {
-			getUsers();
+			await getMyInfor();
+			await getUsers();
 		}
 	}, [superheroes]);
+
+	const getMyInfor = async () => {
+		const res = await superheroes.findUserById(Principal.fromText(principal));
+		profile.current = res[0];
+
+		console.log('profile.current', profile.current);
+	};
 
 	const getUsers = async () => {
 		try {
@@ -59,67 +67,105 @@ const ManageUser = () => {
 		}
 	};
 
-	var rows = [],
-		i = 0,
-		len = 10;
-	while (++i <= len) rows.push(i);
+	const findSearch = (e) => {
+		const keyword = e.target.value;
+		const test = users;
+		if (keyword.length > 0) {
+			let listSearch = [];
 
-	return (
-		<div className='profile section__padding'>
-			<div style={textTitle}>Manage all users</div>
-			<div style={textDay}>{formatDate(new Date())}</div>
+			try {
+				if (listSearch.length === 0) {
+					listSearch = test.filter(
+						(item) =>
+							Principal.fromUint8Array(item.walletAddress._arr).toString() ==
+							keyword.toString()
+					);
+				}
+			} catch (e) {}
 
-			<div style={containerBottomRank}>
-				<div
-					className='boxTopBottom'
-					style={{
-						width: '100%',
-						// justifyContent: 'space-between',
-						display: 'flex',
-						flexDirection: 'row',
-					}}>
-					<input
-						type='text'
-						placeholder='Search by address wallet, citizen identification'
-					/>
+			if (listSearch.length === 0)
+				listSearch = test.filter(
+					(item) =>
+						item.username.includes(keyword) || item.cccd.includes(keyword)
+				);
+
+			setUsersSearch(listSearch);
+		} else {
+			setUsersSearch(users);
+		}
+		setSearch(keyword);
+	};
+
+	const renderMain = () => {
+		return (
+			<div className='profile section__padding'>
+				<div style={textTitle}>Manage all users</div>
+				<div style={textDay}>{formatDate(new Date())}</div>
+
+				<div style={containerBottomRank}>
 					<div
+						className='boxTopBottom'
 						style={{
-							fontWeight: 'bold',
-							fontSize: 12,
-							color: 'white',
-							paddingLeft: 100,
+							width: '100%',
+							// justifyContent: 'space-between',
+							display: 'flex',
+							flexDirection: 'row',
 						}}>
-						{' '}
-						School
-					</div>
-					<div
-						style={{
-							fontWeight: 'bold',
-							fontSize: 12,
-							color: 'white',
-							paddingLeft: 400,
-						}}>
-						{' '}
-						Information
-					</div>
-					<div
-						style={{
-							fontWeight: 'bold',
-							fontSize: 12,
-							color: 'white',
-							paddingLeft: 150,
-						}}>
-						{' '}
-						Manager
+						<input
+							onChange={findSearch}
+							value={search}
+							type='text'
+							placeholder='Search by address wallet, citizen identification'
+						/>
+						<div
+							style={{
+								fontWeight: 'bold',
+								fontSize: 12,
+								color: 'white',
+								paddingLeft: 100,
+							}}>
+							{' '}
+							School
+						</div>
+						<div
+							style={{
+								fontWeight: 'bold',
+								fontSize: 12,
+								color: 'white',
+								paddingLeft: 400,
+							}}>
+							{' '}
+							Information
+						</div>
+						<div
+							style={{
+								fontWeight: 'bold',
+								fontSize: 12,
+								color: 'white',
+								paddingLeft: 150,
+							}}>
+							{' '}
+							Manager
+						</div>
 					</div>
 				</div>
-			</div>
 
-			{users.map((item, index) => {
-				return <ItemRank item={item} index={index} />;
-			})}
-		</div>
-	);
+				{search.length > 0
+					? usersSearch.map((item, index) => {
+							return item.role !== 3 ? (
+								<ItemRank item={item} index={index} />
+							) : null;
+					  })
+					: users.map((item, index) => {
+							return item.role !== 3 ? (
+								<ItemRank item={item} index={index} />
+							) : null;
+					  })}
+			</div>
+		);
+	};
+
+	return profile.current?.role == 3 ? renderMain() : NotPermistion();
 };
 
 const textTitle = {

@@ -22,7 +22,6 @@ const getSchool = (_value) => {
 const ItemRank = ({ item, index }) => {
 	const [superheroes, { loading, error }] = useCanister('superheroes');
 
-	console.log('===> item user ', item);
 	const onChange = async (checked) => {
 		const res = await superheroes.updateUser(
 			item?.walletAddress,
@@ -34,8 +33,6 @@ const ItemRank = ({ item, index }) => {
 			item.description,
 			checked === true ? 2 : 1
 		);
-
-		console.log(`switch to ${res} `, test);
 	};
 	return (
 		<div style={containerBottomRank}>

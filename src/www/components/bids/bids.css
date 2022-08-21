@@ -23,6 +23,7 @@
 .bids-container-card {
 	margin: 0 -5px;
 	width: 80%;
+	overflow-x: 'scroll';
 }
 .bids-container-card:after {
 	content: '';
@@ -160,5 +161,5 @@
 }
 
 div {
-	font-family: 'Poppins', sans-serif;
+	ily: 'Poppins', sans-serif;
 }

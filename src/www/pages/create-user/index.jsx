@@ -17,6 +17,8 @@ import { Principal } from '@dfinity/principal';
 import { toast } from 'react-toastify';
 import { withContext } from '../../hooks';
 import { themes } from '../../assets/themes';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import TextField from '@mui/material/TextField';
 
 const { Dragger } = Upload;
 const { Option } = Select;
@@ -25,17 +27,8 @@ import { useCanister, useConnect } from '@connect2ic/react';
 const IPFS_LINK = 'https://dweb.link/ipfs/';
 
 function CreateUser(props) {
-	const {
-		isConnected,
-		disconnect,
-		activeProvider,
-		isIdle,
-		connect,
-		isConnecting,
-		principal,
-	} = useConnect();
 	const [fileImg, setFileImg] = useState('');
-	const [listUsers, setListUsers] = useState([]);
+	const [date, setDate] = useState();
 	const [superheroes, { loading, error }] = useCanister('superheroes');
 
 	// upload image
@@ -89,14 +82,6 @@ function CreateUser(props) {
 	const onFinishFailed = (errorInfo) => {
 		console.log('Failed:', errorInfo);
 	};
-
-	const getLIst = async () => {
-		const res = await superheroes.getAllUser();
-
-		setListUsers(res);
-	};
-
-	getLIst();
 
 	const handleCancel = () => setPreviewVisible(false);
 
@@ -320,7 +305,7 @@ function CreateUser(props) {
 									</Modal>
 								</Form.Item>
 							</FormItem>
-							<div style={{ color: 'white', fontSize: 14 }}>Username</div>
+							<div style={{ color: 'white', fontSize: 14 }}>Full name</div>
 							<Form.Item
 								name='username'
 								rules={[{ required: true, message: 'Please input username!' }]}>

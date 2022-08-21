@@ -1,15 +1,30 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import NftItem from '../../components/nft-item';
-import {
-	Container,
-	ListNftWrapper,
-	Title,
-	TopWrapper,
-} from './list-nft.elements';
+import { Container } from './list-nft.elements';
 import { customAxios } from '../../utils/custom-axios';
 import { useCanister, useConnect } from '@connect2ic/react';
 import './index.css';
 import Bids from '../../components/bids/Bids';
+import { Principal } from '@dfinity/principal';
+
+const formatDate = (_timestamp) => {
+	var date = new Date(_timestamp);
+
+	var month = date.getMonth() + 1;
+	var day = date.getDate();
+	var hour = date.getHours();
+	var min = date.getMinutes();
+
+	month = (month < 10 ? '0' : '') + month;
+	day = (day < 10 ? '0' : '') + day;
+	hour = (hour < 10 ? '0' : '') + hour;
+	min = (min < 10 ? '0' : '') + min;
+
+	var str =
+		date.getFullYear() + '/' + month + '/' + day + ' ' + hour + ':' + min;
+
+	return str;
+};
 
 function ListNft() {
 	const {
@@ -24,6 +39,9 @@ function ListNft() {
 	const [listDiploma, setListDiploma] = useState([]);
 	const [listCertificate, setListCertificate] = useState([]);
 	const [listOther, setListOther] = useState([]);
+	const [search, setSearch] = useState('');
+	const [searchNfts, setNftsSearch] = useState('');
+	const listAll = useRef([]);
 
 	const [superheroes, { loading, error }] = useCanister('superheroes');
 	useEffect(async () => {
@@ -32,9 +50,32 @@ function ListNft() {
 		}
 	}, [superheroes]);
 
+	const findSearch = (e) => {
+		const keyword = e.target.value;
+		const test = listAll.current;
+		if (keyword.length > 0) {
+			let listSearch = test.filter((item) => item.name.includes(keyword));
+
+			console.log('listSearch 1 ', listSearch);
+
+			if (listSearch.length === 0) {
+				listSearch = test.filter(
+					(item) =>
+						Principal.fromUint8Array(item.owner._arr).toString() ==
+						keyword.toString()
+				);
+			}
+
+			setNftsSearch(listSearch);
+		} else {
+			setNftsSearch(listAll.current);
+		}
+		setSearch(keyword);
+	};
+
 	const getListAll = async () => {
 		const res = await superheroes.getAllTokens();
-		// console.log(await superheroes.getPrint());
+		console.log(res);
 		const promise4all = Promise.all(
 			res.map(function (el) {
 				return customAxios(el.metadata[0]?.tokenUri);
@@ -45,28 +86,34 @@ function ListNft() {
 			return { ...el, ...resu[index] };
 		});
 
+		listAll.current = newlist;
 		setListDiploma(newlist.filter((el) => el.category === '1'));
 		setListCertificate(newlist.filter((el) => el.category === '2'));
 		setListOther(newlist.filter((el) => el.category === '3'));
 	};
 
+	const renderList = (list, title) => {
+		return list.length > 0 ? <Bids title={title} data={list} /> : null;
+	};
+
 	return (
 		<Container className='container'>
 			<div style={textTitle}>See All NFT On The World</div>
-			<div style={textDay}>15/08/2022</div>
+			<div style={textDay}>{formatDate(new Date())}</div>
 
 			<input
+				value={search}
+				onChange={findSearch}
 				type='text'
-				placeholder='Search by address wallet, citizen identification
-				'
+				placeholder='Search by address wallet and name degress'
 			/>
-			{listDiploma.length > 0 ? (
-				<Bids title='Diploma' data={listDiploma} />
-			) : null}
-			{listCertificate.length > 0 ? (
-				<Bids title='Certificate' data={listCertificate} />
-			) : null}
-			{listOther.length > 0 ? <Bids title='Other' data={listOther} /> : null}
+			{search.length > 0
+				? renderList(searchNfts, 'Other')
+				: [
+						renderList(listDiploma, 'Diploma'),
+						renderList(listCertificate, 'Certificate'),
+						renderList(listOther, 'Other'),
+				  ]}
 		</Container>
 	);
 }

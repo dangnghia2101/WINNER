@@ -13,11 +13,28 @@ import { Principal } from '@dfinity/principal';
 import { MdDelete } from 'react-icons/md';
 import { AiOutlineSearch } from 'react-icons/ai';
 
+const formatDate = (_timestamp) => {
+	var date = new Date(_timestamp);
+
+	var month = date.getMonth() + 1;
+	var day = date.getDate();
+	var hour = date.getHours();
+	var min = date.getMinutes();
+
+	month = (month < 10 ? '0' : '') + month;
+	day = (day < 10 ? '0' : '') + day;
+	hour = (hour < 10 ? '0' : '') + hour;
+	min = (min < 10 ? '0' : '') + min;
+
+	var str =
+		date.getFullYear() + '/' + month + '/' + day + ' ' + hour + ':' + min;
+
+	return str;
+};
+
 const Ranking = () => {
 	const [superheroes, { loading, error }] = useCanister('superheroes');
-	// const [users, setUsers] = useState([]);
 	const users = useRef([]);
-	const [usersRemain, setUsersRemain] = useState([]);
 	const [usersSearch, setUsersSearch] = useState([]);
 	const [search, setSearch] = useState('');
 
@@ -192,7 +209,6 @@ const Ranking = () => {
 						value={search}
 						onChange={findSearch}
 						placeholder='     Search by address wallet, citizen identification'
-						onMouseLeave={(e) => setSearch('')}
 					/>
 					<div style={iconClear} onClick={() => setInitial()}>
 						<MdDelete size={20} color='white' />
@@ -263,7 +279,7 @@ const Ranking = () => {
 	return (
 		<div className='profile section__padding'>
 			<div style={textTitle}>Top Rank Students</div>
-			<div style={textDay}>15/08/2022</div>
+			<div style={textDay}>{formatDate(new Date())}</div>
 
 			{renderListTop()}
 
