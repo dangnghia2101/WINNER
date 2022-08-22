@@ -68,6 +68,7 @@
 	margin-right: 10px;
 	width: 50px;
 	height: 50px;
+	object-fit: cover;
 }
 
 .item-content-certification {
@@ -196,10 +197,6 @@
 		margin: 0;
 	}
 	.item-content__input input,
-	.item-content__input button {
-		font-size: 16px;
-		line-height: 24px;
-	}
 	.item-content-buy .primary-btn {
 		padding: 0.75rem 20px;
 	}
@@ -217,10 +214,6 @@
 		line-height: 26px;
 	}
 	.item-content__input input,
-	.item-content__input button {
-		font-size: 12px;
-		line-height: 16px;
-	}
 	.item {
 		padding-inline: 1rem !important ;
 		padding-top: 1rem !important;

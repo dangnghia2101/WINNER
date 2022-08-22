@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
 	Container,
 	Logo,
@@ -12,31 +12,40 @@ import {
 	Right,
 	WalletAddress,
 	ConnectBtnSt,
-	InputSearch,
 } from './navbar-elements';
 import { Link } from 'react-router-dom';
 import { images } from '../../assets/images';
 import { withContext } from '../../hooks';
-import { ConnectButton, ConnectDialog, useConnect } from '@connect2ic/react';
+import { ConnectButton, useConnect, useCanister } from '@connect2ic/react';
+import { Principal } from '@dfinity/principal';
 
 function Navbar(props) {
-	const { principal, disconnect } = useConnect();
+	const { principal, disconnect, isConnected } = useConnect();
 
 	const { prinpId, setPrinpId, logout } = props;
 	const [reload, setReload] = useState(false);
+	const [profile, setProfile] = useState();
+	const [superheroes, { loading, error }] = useCanister('superheroes');
+
+	useEffect(() => {}, [disconnect]);
+
+	useEffect(() => {
+		if (isConnected) {
+			setReload(true);
+		}
+	}, [principal]);
+
+	const getMyInfor = async () => {
+		const res = await superheroes.findUserById(Principal.fromText(principal));
+		setProfile(res[0]);
+	};
+
+	useEffect(async () => {
+		await getMyInfor();
+	}, [superheroes]);
 
 	const onConnectWallet = async () => {
 		try {
-			console.log(principal);
-			// const publicKey = await window.ic.plug.requestConnect({
-			// });
-			// const NNSUiActor = await window.ic.plug.createActor({
-			// 	canisterId: process.env.SUPERHEROES_CANISTER_ID,
-			// 	interfaceFactory: idlFactory,
-			// });
-
-			// const princi = await window.ic.plug.agent.getPrincipal();
-
 			setPrinpId(principal);
 		} catch (e) {
 			console.log(e);
@@ -53,9 +62,14 @@ function Navbar(props) {
 		window.scrollTo({ top: 0, behavior: 'smooth' });
 	};
 
+	const urlProfile = `/profile/${principal}`;
+
 	return (
 		<Container>
-			<ConnectDialog dark={false} />
+			{/* <div
+				style={{ position: 'absolute', height: 300, backgroundColor: 'red' }}>
+				<ConnectDialog dark={false} />
+			</div> */}
 			<LogoWrapper>
 				<Link to='/' style={{ color: 'black' }}>
 					<Logo src={images.olive} alt='' onClick={scrollToTop} />
@@ -68,10 +82,12 @@ function Navbar(props) {
 						<Link to='/' style={{ color: 'black' }} onClick={scrollToTop}>
 							<MenuItem>Home</MenuItem>
 						</Link>
-						<Link to='/nft/create' style={{ color: 'black' }}>
-							<MenuItem>Create</MenuItem>
-						</Link>
-						<Link to='/profile' style={{ color: 'black' }}>
+						{profile?.role >= 2 && (
+							<Link to='/manage' style={{ color: 'black' }}>
+								<MenuItem>Manage</MenuItem>
+							</Link>
+						)}
+						<Link to={urlProfile} style={{ color: 'black' }}>
 							<MenuItem>Profile</MenuItem>
 						</Link>
 						<Link to='/nfts' style={{ color: 'black' }}>

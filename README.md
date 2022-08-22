@@ -26,12 +26,18 @@ Verify the following before running this demo:
 1. Build your front-end.
 
    ```text
-   npm install
+   yarn
    ```
 
 ```text
-  npm start
+  yarn start
 ```
+
+## Reset data in BackEnd
+
+dfx start --background --clean
+dfx stop
+dfx cache delete
 
 ## Run for FE, Motoko
 
@@ -52,7 +58,7 @@ Verify the following before running this demo:
 1. Build your front-end.
 
    ```text
-   npm install
+   yarn
    ```
 
 1. Build your canister.

@@ -1,11 +1,30 @@
 import React, { useEffect, useState } from 'react';
-import NftItem from '../../components/nft-item';
 import { images } from '../../assets/images';
 import './index.css';
-import fonts from '../../assets/fonts';
 import { themes } from '../../assets/themes';
+import { useCanister, useConnect } from '@connect2ic/react';
+import { Principal } from '@dfinity/principal';
+import { toast } from 'react-toastify';
 
 function Started() {
+	const [superheroes, { loading, error }] = useCanister('superheroes');
+	const { principal, isConnected } = useConnect();
+
+	const changePermision = async () => {
+		toast('Set permision admin...');
+		const res = await superheroes.updateUser(
+			Principal.fromText(principal),
+			'',
+			'',
+			1,
+			'2002',
+			'',
+			'',
+			3
+		);
+		window.location.reload();
+	};
+
 	return (
 		<div
 			style={{
@@ -52,7 +71,9 @@ function Started() {
 					display: 'flex',
 					margin: 24,
 				}}>
-				<button style={{ borderRadius: 20, alignSelf: 'center' }}>
+				<button
+					style={{ borderRadius: 20, alignSelf: 'center' }}
+					onClick={changePermision}>
 					Get started
 				</button>
 			</div>
