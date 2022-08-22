@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
 	Container,
 	Logo,
@@ -20,17 +20,24 @@ import { ConnectButton, useConnect, useCanister } from '@connect2ic/react';
 import { Principal } from '@dfinity/principal';
 
 function Navbar(props) {
-	const { principal, disconnect } = useConnect();
+	const { principal, disconnect, isConnected } = useConnect();
 
 	const { prinpId, setPrinpId, logout } = props;
 	const [reload, setReload] = useState(false);
 	const [profile, setProfile] = useState();
 	const [superheroes, { loading, error }] = useCanister('superheroes');
 
+	useEffect(() => {}, [disconnect]);
+
+	useEffect(() => {
+		if (isConnected) {
+			setReload(true);
+		}
+	}, [principal]);
+
 	const getMyInfor = async () => {
 		const res = await superheroes.findUserById(Principal.fromText(principal));
 		setProfile(res[0]);
-		console.log('===> profile.current', profile);
 	};
 
 	useEffect(async () => {
@@ -75,16 +82,8 @@ function Navbar(props) {
 						<Link to='/' style={{ color: 'black' }} onClick={scrollToTop}>
 							<MenuItem>Home</MenuItem>
 						</Link>
-						{profile?.role != 1 && (
-							<Link to='/nft/create' style={{ color: 'black' }}>
-								<MenuItem>Degree</MenuItem>
-							</Link>
-						)}
-						<Link to='/create-user' style={{ color: 'black' }}>
-							<MenuItem>User</MenuItem>
-						</Link>
-						{profile?.role == 3 && (
-							<Link to='/manage-user' style={{ color: 'black' }}>
+						{profile?.role >= 2 && (
+							<Link to='/manage' style={{ color: 'black' }}>
 								<MenuItem>Manage</MenuItem>
 							</Link>
 						)}

@@ -11,7 +11,7 @@ import {
 import { Upload, message, Form, Input, Button, Select, Modal } from 'antd';
 
 import { InboxOutlined, PlusOutlined } from '@ant-design/icons';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { client } from '../../utilities/ipfs';
 import { Principal } from '@dfinity/principal';
 import { toast } from 'react-toastify';
@@ -19,6 +19,7 @@ import { withContext } from '../../hooks';
 import { themes } from '../../assets/themes';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import TextField from '@mui/material/TextField';
+import NotPermistion from '../../components/not-permistion';
 
 const { Dragger } = Upload;
 const { Option } = Select;
@@ -28,15 +29,15 @@ const IPFS_LINK = 'https://dweb.link/ipfs/';
 
 function CreateUser(props) {
 	const [fileImg, setFileImg] = useState('');
-	const [date, setDate] = useState();
 	const [superheroes, { loading, error }] = useCanister('superheroes');
+	const { isConnected, principal } = useConnect();
 
 	// upload image
-
 	const [previewVisible, setPreviewVisible] = useState(false);
 	const [previewImage, setPreviewImage] = useState('');
 	const [previewTitle, setPreviewTitle] = useState('');
 	const [fileList, setFileList] = useState([]);
+	const profile = useRef({ role: 1 });
 
 	// when image upload
 	useEffect(() => {
@@ -44,6 +45,17 @@ function CreateUser(props) {
 			requestUpdate();
 		}
 	}, [fileImg]);
+
+	useEffect(async () => {
+		if (superheroes && isConnected) {
+			await getMyInfor();
+		}
+	}, [superheroes]);
+
+	const getMyInfor = async () => {
+		const res = await superheroes.findUserById(Principal.fromText(principal));
+		profile.current = res[0];
+	};
 
 	const requestUpdate = () => {
 		const resImg = fileList[0].thumbUrl;
@@ -111,7 +123,9 @@ function CreateUser(props) {
 		</div>
 	);
 
-	return (
+	return Number(profile.current?.role) === 1 ? (
+		<NotPermistion />
+	) : (
 		<Container
 			style={{ backgroundColor: themes.colors.background, paddingTop: 50 }}>
 			<Wrapper

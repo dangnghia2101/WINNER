@@ -29,7 +29,7 @@ const IPFS_LINK = 'https://dweb.link/ipfs/';
 function CreateNft(props) {
 	const { principal } = useConnect();
 	const [fileImg, setFileImg] = useState('');
-	const profile = useRef();
+	const profile = useRef({ role: 1 });
 	const [superheroes, { loading, error }] = useCanister('superheroes');
 
 	// upload image
@@ -69,7 +69,6 @@ function CreateNft(props) {
 	useEffect(async () => {
 		if (principal && superheroes) {
 			await getMyInfor();
-			getLIst();
 		}
 	}, [principal, superheroes]);
 
@@ -106,18 +105,6 @@ function CreateNft(props) {
 
 	const onFinishFailed = (errorInfo) => {
 		console.log('Failed:', errorInfo);
-	};
-
-	const getLIst = async () => {
-		const res = await superheroes.getUserTokens(Principal.fromText(principal));
-		const promise4all = Promise.all(
-			res.map(function (el) {
-				return customAxios(el.metadata[0]?.tokenUri);
-			})
-		);
-		const resu = await promise4all;
-		console.log('getList ', resu);
-		setListNFt(resu);
 	};
 
 	const handleCancel = () => setPreviewVisible(false);
@@ -441,7 +428,7 @@ function CreateNft(props) {
 		);
 	};
 
-	return profile?.current !== 1 ? renderMain() : <NotPermistion />;
+	return Number(profile.current?.role) !== 1 ? renderMain() : <NotPermistion />;
 }
 
 export default withContext(CreateNft);

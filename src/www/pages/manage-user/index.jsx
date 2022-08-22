@@ -31,7 +31,7 @@ const ManageUser = () => {
 	const [users, setUsers] = useState([]);
 	const [search, setSearch] = useState('');
 	const [usersSearch, setUsersSearch] = useState([]);
-	const profile = useRef();
+	const profile = useRef({ role: 1 });
 	const {
 		isConnected,
 		disconnect,
@@ -52,8 +52,6 @@ const ManageUser = () => {
 	const getMyInfor = async () => {
 		const res = await superheroes.findUserById(Principal.fromText(principal));
 		profile.current = res[0];
-
-		console.log('profile.current', profile.current);
 	};
 
 	const getUsers = async () => {
