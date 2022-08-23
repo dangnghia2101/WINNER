@@ -27,25 +27,13 @@ button {
 	font-size: 1rem;
 	padding: 1rem 2rem;
 
-	border-image-source: linear-gradient(to left, #743ad5, #d53a9d);
+	/* border-image-source: linear-gradient(to left, #743ad5, #d53a9d); */
 
 	border-radius: 10px !important;
 	color: white;
 	margin: auto;
 
 	background-clip: padding-box;
-}
-
-.fontLucida {
-	/* font-family: 'Lucida Console', 'Courier New', monospace; */
-}
-
-.fontLucidaNormal {
-	/* font-family: 'Lucida Console', 'Courier New'; */
-}
-
-.fontArial {
-	/* font-family: 'Trebuchet MS', sans-serif; */
 }
 
 .fontArial img {

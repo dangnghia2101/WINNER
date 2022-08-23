@@ -8,20 +8,25 @@ import {
 	Wrapper,
 	FormWrapper,
 } from './create-user.elements';
-import { Upload, message, Form, Input, Button, Select, Modal } from 'antd';
+import {
+	Upload,
+	InputNumber,
+	Form,
+	Input,
+	Button,
+	Select,
+	Modal,
+	DatePicker,
+} from 'antd';
 
-import { InboxOutlined, PlusOutlined } from '@ant-design/icons';
+import { PlusOutlined } from '@ant-design/icons';
 import React, { useState, useEffect, useRef } from 'react';
-import { client } from '../../utilities/ipfs';
 import { Principal } from '@dfinity/principal';
 import { toast } from 'react-toastify';
 import { withContext } from '../../hooks';
 import { themes } from '../../assets/themes';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import TextField from '@mui/material/TextField';
 import NotPermistion from '../../components/not-permistion';
 
-const { Dragger } = Upload;
 const { Option } = Select;
 import { useCanister, useConnect } from '@connect2ic/react';
 
@@ -38,6 +43,7 @@ function CreateUser(props) {
 	const [previewTitle, setPreviewTitle] = useState('');
 	const [fileList, setFileList] = useState([]);
 	const profile = useRef({ role: 1 });
+	const datePicker = useRef('');
 
 	// when image upload
 	useEffect(() => {
@@ -51,6 +57,10 @@ function CreateUser(props) {
 			await getMyInfor();
 		}
 	}, [superheroes]);
+
+	const onChangeDate = (date, dateString) => {
+		datePicker.current = dateString;
+	};
 
 	const getMyInfor = async () => {
 		const res = await superheroes.findUserById(Principal.fromText(principal));
@@ -84,7 +94,7 @@ function CreateUser(props) {
 			values?.username,
 			values?.identity,
 			Number(values?.school),
-			values?.birthday,
+			datePicker.current,
 			image,
 			values?.description
 		);
@@ -334,9 +344,13 @@ function CreateUser(props) {
 								Citizen identity card
 							</div>
 							<Form.Item name='identity'>
-								<Input
+								<InputNumber
 									size='large'
+									min={100000000}
+									max={999999999999}
 									placeholder='Please input citizen identity card'
+									type={'number'}
+									style={{ width: '100%' }}
 								/>
 							</Form.Item>
 
@@ -353,9 +367,13 @@ function CreateUser(props) {
 								}}>
 								<Form.Item name='school'>
 									<Select
-										defaultValue='School'
+										defaultValue='Choose chool'
 										size='large'
-										style={{ width: 200, marginBottom: 20, borderRadius: 10 }}>
+										style={{
+											width: '100%',
+											marginBottom: 10,
+											borderRadius: 10,
+										}}>
 										<Option value='1'>FPT Polytechnic</Option>
 										<Option value='2'>FPT University</Option>
 
@@ -371,7 +389,12 @@ function CreateUser(props) {
 
 							<div style={{ color: 'white', fontSize: 14 }}>Birthday</div>
 							<Form.Item name='birthday'>
-								<Input size='large' placeholder='Please input birthday' />
+								{/* <Input size='large' placeholder='Please input birthday' /> */}
+								<DatePicker
+									style={{ width: '100%' }}
+									onChange={onChangeDate}
+									placeholder='Please picke birthday'
+								/>
 							</Form.Item>
 
 							<FormItem>

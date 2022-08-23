@@ -7,6 +7,7 @@ import { customAxios } from '../../utils/custom-axios';
 import { Principal } from '@dfinity/principal';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { toast } from 'react-toastify';
+import { NullClass } from '@dfinity/candid/lib/cjs/idl';
 
 const Profile = () => {
 	const [superheroes, { loading, error }] = useCanister('superheroes');
@@ -70,7 +71,9 @@ const Profile = () => {
 	};
 
 	const renderList = (list, title) => {
-		return list.length > 0 ? <Bids title={title} data={list} /> : null;
+		return list.length > 0 ? (
+			<Bids title={title} data={list} key={Math.random()} />
+		) : null;
 	};
 
 	return (
@@ -81,21 +84,27 @@ const Profile = () => {
 				</div>
 
 				<div className='profile-pic'>
-					<img src={profile?.image} alt='profile' />
+					{profile?.image ? <img src={profile?.image} alt='profile' /> : null}
 					<h3>{profile?.username}</h3>
 					<div style={{ color: 'white' }}>Address wallet</div>
-					<div className='row1'>
-						<div style={{ color: 'white' }} className='box-account-id'>
-							{principal
-								? address?.slice(0, 15) + '...' + address?.slice(49, 63)
-								: ''}
+					{principal ? (
+						<div className='row1'>
+							<div style={{ color: 'white' }} className='box-account-id'>
+								{principal
+									? address?.slice(0, 15) + '...' + address?.slice(49, 63)
+									: ''}
+							</div>
+							<CopyToClipboard
+								text={address}
+								onCopy={() => toast('Copied to clipboard!')}>
+								<div style={btnCopy}>
+									<a style={{ color: 'white' }}>Coppy</a>
+								</div>
+							</CopyToClipboard>
 						</div>
-						<CopyToClipboard
-							text={address}
-							onCopy={() => toast('Copied to clipboard!')}>
-							<button style={btnCopy}>Coppy</button>
-						</CopyToClipboard>
-					</div>
+					) : (
+						NullClass
+					)}
 				</div>
 			</div>
 			<div className='profile-bottom'>
@@ -134,7 +143,6 @@ const btnCopy = {
 	paddingRight: 10,
 	paddingTop: 5,
 	paddingBottom: 5,
-	color: 'black',
 	borderStyle: 'solid',
 };
 

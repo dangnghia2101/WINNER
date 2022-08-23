@@ -1,12 +1,10 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-    padding: 0px 50px;
     display: flex;
-    flex: 1;
     flex-direction: column;
     background-color: #14141f;
-    padding-bottom: 30px;
+    width: 100%
 `;
 
 export const TopWrapper = styled.div`

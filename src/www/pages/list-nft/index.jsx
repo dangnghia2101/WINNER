@@ -97,7 +97,7 @@ function ListNft() {
 	};
 
 	return (
-		<Container className='container'>
+		<div className='container'>
 			<div style={textTitle}>See All NFT On The World</div>
 			<div style={textDay}>{formatDate(new Date())}</div>
 
@@ -114,7 +114,7 @@ function ListNft() {
 						renderList(listCertificate, 'Certificate'),
 						renderList(listOther, 'Other'),
 				  ]}
-		</Container>
+		</div>
 	);
 }
 

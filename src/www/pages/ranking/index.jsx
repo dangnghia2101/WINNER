@@ -208,9 +208,9 @@ const Ranking = () => {
 						type='text'
 						value={search}
 						onChange={findSearch}
-						placeholder='     Search by address wallet, citizen identification'
+						placeholder='Search by address wallet, citizen identification'
 					/>
-					<div style={iconClear} onClick={() => setInitial()}>
+					<div style={iconClear} onClick={() => setSearch('')}>
 						<MdDelete size={20} color='white' />
 					</div>
 					<div

@@ -13,7 +13,7 @@ const Bids = ({ title, data }) => {
 				</div>
 				<div className='bids-container-card'>
 					{data.map((item) => (
-						<ItemBid item={item} />
+						<ItemBid item={item} key={Math.random()} />
 					))}
 				</div>
 			</div>

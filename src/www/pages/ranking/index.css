@@ -81,8 +81,7 @@ button {
 	background: #1b1a21;
 	border-radius: 10px;
 	border: none;
-	padding: 7px 19px 7px 15px;
-	font-family: var(--font-family);
+	padding: 10px 19px 10px 40px;
 	outline: none;
 	color: whitesmoke;
 	display: flex;

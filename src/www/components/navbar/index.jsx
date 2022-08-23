@@ -36,8 +36,10 @@ function Navbar(props) {
 	}, [principal]);
 
 	const getMyInfor = async () => {
-		const res = await superheroes.findUserById(Principal.fromText(principal));
-		setProfile(res[0]);
+		if (principal) {
+			const res = await superheroes.findUserById(Principal.fromText(principal));
+			setProfile(res[0]);
+		}
 	};
 
 	useEffect(async () => {
