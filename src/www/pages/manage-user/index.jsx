@@ -57,8 +57,9 @@ const ManageUser = () => {
 	const getUsers = async () => {
 		try {
 			const res = await superheroes.getAllUser();
+			const filterUser = res.filter((item) => Number(item.role) != 3);
 
-			setUsers(res);
+			setUsers(filterUser);
 			// console.log('user remain ', usersRemain);
 		} catch (error) {
 			console.log('[getUsers] error', error);
