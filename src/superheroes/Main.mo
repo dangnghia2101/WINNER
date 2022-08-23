@@ -197,7 +197,7 @@ shared(msg) actor class NFTSale(
         }else if(walletAddress == admins.dangtruong){
           userInfo.put(walletAddress, adminInfo.dangtruong);
         }else if(walletAddress == admins.tuannghia2){
-          userInfo.put(walletAddress, adminInfo.tuannghia);
+          userInfo.put(walletAddress, adminInfo.tuannghia2);
         }
       }
     };
