@@ -149,20 +149,34 @@ shared(msg) actor class NFTSale(
       dangtruong: Principal = Principal.fromText("f4bkg-aa6oj-rq3m3-zkirc-ibqed-r7lzd-26vim-wq2hv-4tarp-dpmp4-jae");
     };
 
-    var adminInfo = {
+     var adminInfo = {
       tuannghia = {
+        walletAddress: Principal = admins.tuannghia;
         username = "Dang Tuan Nghia"; 
+        role = 3 ;
+        cccd = "1234567890";
+        school = 1;
+        birthday = "2003-01-22";
+        image = "https://bafybeidogmnnguoj5cgyucveurkgavzhdlsqbxyaszwe4kv2jvvw7phnla.ipfs.w3s.link/49dfe71fe9db2c8575ca%20%281%29.jpg";
+        description = "The currents and weather of the Grand Line's open sea are extremely unpredictable, whereas in the vicinity of islands the climate is stable.[8] The magnetic fields within the Grand Line cause normal compasses to malfunction, making it even more difficult to navigate,[9] and instead a special compass called a Log Pose[Jp 15] must be used.[10] The Log Pose functions by locking on to one island's magnetic field and then locking on to another island's magnetic field.[11] The time for it to set depends on the island."
+      };
+      tuannghia2 = {
+        walletAddress: Principal = admins.tuannghia2;
+        username = "Dang Tuan Nghia"; 
+        role = 3 ;
         cccd = "123456789";
         school = 1;
-        birthday = "21-01-2003";
+        birthday = "2003-01-22";
         image = "https://bafybeidogmnnguoj5cgyucveurkgavzhdlsqbxyaszwe4kv2jvvw7phnla.ipfs.w3s.link/49dfe71fe9db2c8575ca%20%281%29.jpg";
         description = "The currents and weather of the Grand Line's open sea are extremely unpredictable, whereas in the vicinity of islands the climate is stable.[8] The magnetic fields within the Grand Line cause normal compasses to malfunction, making it even more difficult to navigate,[9] and instead a special compass called a Log Pose[Jp 15] must be used.[10] The Log Pose functions by locking on to one island's magnetic field and then locking on to another island's magnetic field.[11] The time for it to set depends on the island."
       };
       dangtruong = {
+        walletAddress: Principal = admins.dangtruong;
         username = "Phan Nguyen Dang Truong";
+        role = 3;
         cccd = "12345678";
         school = 1;
-        birthday = "21-01-2002";
+        birthday = "2003-01-22";
         image = "https://bafybeidogmnnguoj5cgyucveurkgavzhdlsqbxyaszwe4kv2jvvw7phnla.ipfs.w3s.link/49dfe71fe9db2c8575ca%20%281%29.jpg";
         description = "The currents and weather of the Grand Line's open sea are extremely unpredictable, whereas in the vicinity of islands the climate is stable.[8] The magnetic fields within the Grand Line cause normal compasses to malfunction, making it even more difficult to navigate,[9] and instead a special compass called a Log Pose[Jp 15] must be used.[10] The Log Pose functions by locking on to one island's magnetic field and then locking on to another island's magnetic field.[11] The time for it to set depends on the island."
       };
@@ -179,14 +193,11 @@ shared(msg) actor class NFTSale(
     public shared(msg) func isAdmin(walletAddress : Principal) {
       if(userInfo.get(walletAddress) == null){
         if(walletAddress == admins.tuannghia){
-          userInfo.put(walletAddress, {walletAddress = walletAddress; role = role.admin; username = adminInfo.tuannghia.username; cccd = 
-          adminInfo.tuannghia.cccd; school = adminInfo.tuannghia.school; birthday = adminInfo.tuannghia.birthday; image = adminInfo.tuannghia.image; description = adminInfo.tuannghia.description});
+          userInfo.put(walletAddress, adminInfo.tuannghia);
         }else if(walletAddress == admins.dangtruong){
-          userInfo.put(walletAddress, {walletAddress = walletAddress; role = role.admin; username = adminInfo.dangtruong.username; cccd = 
-          adminInfo.dangtruong.cccd; school = adminInfo.dangtruong.school; birthday = adminInfo.dangtruong.birthday; image = adminInfo.dangtruong.image; description = adminInfo.dangtruong.description});
+          userInfo.put(walletAddress, adminInfo.dangtruong);
         }else if(walletAddress == admins.tuannghia2){
-          userInfo.put(walletAddress, {walletAddress = walletAddress; role = role.admin; username = adminInfo.tuannghia.username; cccd = 
-          adminInfo.tuannghia.cccd; school = adminInfo.tuannghia.school; birthday = adminInfo.tuannghia.birthday; image = adminInfo.tuannghia.image; description = adminInfo.tuannghia.description});
+          userInfo.put(walletAddress, adminInfo.tuannghia2);
         }
       }
     };
