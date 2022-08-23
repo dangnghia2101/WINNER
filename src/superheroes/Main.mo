@@ -150,8 +150,14 @@ shared(msg) actor class NFTSale(
 
 
     // ##################
-    // Cho quyền admin
 
+    // RoleUser: {
+    //     "employee": 1,
+    //     "manager": 2,
+    //     "admin": 3,
+    // };
+
+    // Cho quyền admin
     public shared(msg) func isAdmin(walletAddress : Principal) {
       if(userInfo.get(walletAddress) == null){
         if(walletAddress == tuannghia){
