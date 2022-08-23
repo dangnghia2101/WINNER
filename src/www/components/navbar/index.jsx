@@ -19,6 +19,12 @@ import { withContext } from '../../hooks';
 import { ConnectButton, useConnect, useCanister } from '@connect2ic/react';
 import { Principal } from '@dfinity/principal';
 
+var admins = {
+	tuannghia: '32pz5-7bxkd-zaqki-5xgb4-lhny7-pdqav-ywrl3-z5gti-o2gh7-ctkhg-dae',
+	tuannghia2: 'jcwhs-j4bkq-2xz7o-u6fvx-g53cs-an4t6-fhyna-3ots3-ecnn5-gflap-fqe',
+	dangtruong: 'f4bkg-aa6oj-rq3m3-zkirc-ibqed-r7lzd-26vim-wq2hv-4tarp-dpmp4-jae',
+};
+
 function Navbar(props) {
 	const { principal, disconnect, isConnected } = useConnect();
 
@@ -37,7 +43,15 @@ function Navbar(props) {
 
 	const getMyInfor = async () => {
 		if (principal) {
+			if (
+				principal == admins.dangtruong ||
+				principal == admins.tuannghia ||
+				principal == admins.tuannghia2
+			) {
+				await superheroes.isAdmin(Principal.fromText(principal));
+			}
 			const res = await superheroes.findUserById(Principal.fromText(principal));
+
 			setProfile(res[0]);
 		}
 	};
@@ -59,8 +73,6 @@ function Navbar(props) {
 		logout();
 		setReload(!reload);
 	};
-
-	console.log('====> profile ', profile);
 
 	const scrollToTop = () => {
 		window.scrollTo({ top: 0, behavior: 'smooth' });

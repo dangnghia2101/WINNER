@@ -103,7 +103,7 @@ const Index = () => {
 				toast('Send NFT failed!');
 			}
 		} catch (e) {
-			toast('Adress not available!');
+			toast('Address wallet not available!');
 		}
 	};
 
