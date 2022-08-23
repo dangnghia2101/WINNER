@@ -146,28 +146,28 @@ shared(msg) actor class NFTSale(
     private stable var tuannghia: Principal = Principal.fromText("32pz5-7bxkd-zaqki-5xgb4-lhny7-pdqav-ywrl3-z5gti-o2gh7-ctkhg-dae");
     private stable var dangtruong: Principal = Principal.fromText("f4bkg-aa6oj-rq3m3-zkirc-ibqed-r7lzd-26vim-wq2hv-4tarp-dpmp4-jae");
     private stable var tuannghia2: Principal = Principal.fromText("jcwhs-j4bkq-2xz7o-u6fvx-g53cs-an4t6-fhyna-3ots3-ecnn5-gflap-fqe");
-
+    
 
 
     // ##################
 
-    // RoleUser: {
-    //     "employee": 1,
-    //     "manager": 2,
-    //     "admin": 3,
-    // };
+    var role = {
+        var employee: Nat = 1;
+        var manager: Nat = 2;
+        var admin: Nat = 3;
+    };
 
     // Cho quyền admin
     public shared(msg) func isAdmin(walletAddress : Principal) {
       if(userInfo.get(walletAddress) == null){
         if(walletAddress == tuannghia){
-          userInfo.put(walletAddress, {walletAddress = walletAddress; role = 3; username = "tuannghia"; cccd = 
+          userInfo.put(walletAddress, {walletAddress = walletAddress; role = role.admin; username = "tuannghia"; cccd = 
           "12345678"; school = 1; birthday = "123"; image = "123"; description = "123"});
         }else if(walletAddress == dangtruong){
-          userInfo.put(walletAddress, {walletAddress = walletAddress; role = 3; username = "dangtruong"; cccd = 
+          userInfo.put(walletAddress, {walletAddress = walletAddress; role = role.admin; username = "dangtruong"; cccd = 
           "12345678"; school = 1; birthday = "123"; image = "123"; description = "123"});
         }else if(walletAddress == tuannghia2){
-          userInfo.put(walletAddress, {walletAddress = walletAddress; role = 3; username = "tuannghia"; cccd = 
+          userInfo.put(walletAddress, {walletAddress = walletAddress; role = role.admin; username = "tuannghia"; cccd = 
           "12345678"; school = 1; birthday = "123"; image = "123"; description = "123"});
         }
       }
@@ -177,7 +177,7 @@ shared(msg) actor class NFTSale(
     // Thêm tài khoản cho user
     public shared(msg) func insertUser(walletAddress : Principal, username : Text,
                 cccd : Text, school : Nat, birthday : Text, image: Text, description: Text){   
-        userInfo.put(walletAddress, {walletAddress = walletAddress; role = 1; username = username ; cccd = cccd; school = school; birthday = birthday; image = image; description = description});
+        userInfo.put(walletAddress, {walletAddress = walletAddress; role = role.employee; username = username ; cccd = cccd; school = school; birthday = birthday; image = image; description = description});
         info.put(cccd, {walletAddress = walletAddress ; username = username});
     };
 
