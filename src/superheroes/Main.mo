@@ -144,13 +144,13 @@ shared(msg) actor class NFTSale(
     private stable var totalOrders_: Nat = 0;
 
     var admins = {
-      var tuannghia: Principal = Principal.fromText("32pz5-7bxkd-zaqki-5xgb4-lhny7-pdqav-ywrl3-z5gti-o2gh7-ctkhg-dae");
-      var tuannghia2: Principal = Principal.fromText("jcwhs-j4bkq-2xz7o-u6fvx-g53cs-an4t6-fhyna-3ots3-ecnn5-gflap-fqe");
+      tuannghia: Principal = Principal.fromText("32pz5-7bxkd-zaqki-5xgb4-lhny7-pdqav-ywrl3-z5gti-o2gh7-ctkhg-dae");
+      tuannghia2: Principal = Principal.fromText("jcwhs-j4bkq-2xz7o-u6fvx-g53cs-an4t6-fhyna-3ots3-ecnn5-gflap-fqe");
       dangtruong: Principal = Principal.fromText("f4bkg-aa6oj-rq3m3-zkirc-ibqed-r7lzd-26vim-wq2hv-4tarp-dpmp4-jae");
     };
 
     var adminInfo = {
-      var tuannghia = {
+      tuannghia = {
         username = "tuannghia"; 
         cccd = "12345678";
         school = 1;
@@ -158,7 +158,7 @@ shared(msg) actor class NFTSale(
         image = "123";
         description = "123"
       };
-      var dangtruong = {
+      dangtruong = {
         username = "dangtruong";
         cccd = "12345678";
         school = 1;
@@ -170,9 +170,9 @@ shared(msg) actor class NFTSale(
     // ##################
 
     var role = {
-        var employee: Nat = 1;
-        var manager: Nat = 2;
-        var admin: Nat = 3;
+        employee: Nat = 1;
+        manager: Nat = 2;
+        admin: Nat = 3;
     };
 
     // Cho quyền admin
