@@ -1,0 +1,10 @@
+.text {
+	text-transform: uppercase;
+	background: linear-gradient(to right, #30cfd0 0%, #330867 100%);
+	-webkit-text-fill-color: transparent;
+	-webkit-background-clip: text;
+	font-size: 20px;
+	font-weight: bold;
+	text-align: center;
+	padding-top: 300px;
+}

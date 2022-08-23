@@ -12,6 +12,9 @@ const Started = lazy(() => import("./started"))
 const Profile = lazy(() => import("./profile"))
 const Ranking = lazy(() => import("./ranking"))
 const CreateUser = lazy(() => import("./create-user"))
+const ManageUser = lazy(() => import("./manage-user"))
+const ManageDegree = lazy(() => import("./manage-degree"))
+const Manage = lazy(() => import("./manage"))
 
 const routes = [
     {
@@ -43,7 +46,7 @@ const routes = [
         layout: MarketLayout
     },
     {
-        path: "/profile",
+        path: "/profile/:address",
         exact: true,
         public: true,
         component: Profile,
@@ -67,10 +70,30 @@ const routes = [
         path: "create-user",
         exact: true,
         public: true,
-        component: createUser,
+        component: CreateUser,
         layout: MarketLayout
     },
-
+    {
+        path: "manage-user",
+        exact: true,
+        public: true,
+        component: ManageUser,
+        layout: MarketLayout
+    },
+    {
+        path: "manage-degree",
+        exact: true,
+        public: true,
+        component: ManageDegree,
+        layout: MarketLayout
+    },
+    {
+        path: "manage",
+        exact: true,
+        public: true,
+        component: Manage,
+        layout: MarketLayout
+    },
 ]
 
 export default routes

@@ -158,7 +158,7 @@ const Index = () => {
 				<div
 					className='item-content-detail'
 					style={{ flexDirection: 'row', display: 'flex' }}>
-					<button
+					<div
 						style={{
 							padding: 5,
 							backgroundColor: 'white',
@@ -172,7 +172,7 @@ const Index = () => {
 						onClick={transferToken}>
 						{' '}
 						Transfer nft
-					</button>
+					</div>
 					<input
 						type='text'
 						placeholder='Paste address you want tranfer this nft'

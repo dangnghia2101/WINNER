@@ -6,6 +6,8 @@ import { useCanister, useConnect } from '@connect2ic/react';
 import './index.css';
 import Bids from '../../components/bids/Bids';
 import { Principal } from '@dfinity/principal';
+import NotPermistion from '../../components/not-permistion';
+import { toast } from 'react-toastify';
 
 const formatDate = (_timestamp) => {
 	var date = new Date(_timestamp);
@@ -26,7 +28,33 @@ const formatDate = (_timestamp) => {
 	return str;
 };
 
-function ListNft() {
+const getSchool = (_value) => {
+	switch (_value) {
+		case 1:
+			return 'FPT POLYTECHNIC';
+		case 2:
+			return 'FPT UNIVERSITY';
+		case 3:
+			return 'UNI OF GREENWICH';
+		default:
+			return 'FPT POLYTECHNIC';
+	}
+};
+
+const getLogoSchool = (_value) => {
+	switch (_value) {
+		case 1:
+			return 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/FPT_Polytechnic.png/1200px-FPT_Polytechnic.png';
+		case 2:
+			return 'https://cdn.haitrieu.com/wp-content/uploads/2021/10/Logo-Dai-hoc-FPT.png';
+		case 3:
+			return 'https://d201g1c8t1ay3d.cloudfront.net/wp-content/uploads/2019/10/University-of-Greenwich-logo.jpg';
+		default:
+			return 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/FPT_Polytechnic.png/1200px-FPT_Polytechnic.png';
+	}
+};
+
+function ManageDegree() {
 	const {
 		isConnected,
 		disconnect,
@@ -42,21 +70,30 @@ function ListNft() {
 	const [search, setSearch] = useState('');
 	const [searchNfts, setNftsSearch] = useState('');
 	const listAll = useRef([]);
+	const profile = useRef({ role: 1 });
 
 	const [superheroes, { loading, error }] = useCanister('superheroes');
 	useEffect(async () => {
-		if (superheroes) {
-			getListAll();
+		if (superheroes && isConnected) {
+			await getMyInfor();
+			await getListAll();
 		}
 	}, [superheroes]);
+
+	const getMyInfor = async () => {
+		try {
+			const res = await superheroes.findUserById(Principal.fromText(principal));
+			profile.current = res[0];
+		} catch (e) {
+			toast('Please connect with your wallet');
+		}
+	};
 
 	const findSearch = (e) => {
 		const keyword = e.target.value;
 		const test = listAll.current;
 		if (keyword.length > 0) {
 			let listSearch = test.filter((item) => item.name.includes(keyword));
-
-			console.log('listSearch 1 ', listSearch);
 
 			if (listSearch.length === 0) {
 				listSearch = test.filter(
@@ -86,19 +123,32 @@ function ListNft() {
 			return { ...el, ...resu[index] };
 		});
 
-		listAll.current = newlist;
-		setListDiploma(newlist.filter((el) => el.category === '1'));
-		setListCertificate(newlist.filter((el) => el.category === '2'));
-		setListOther(newlist.filter((el) => el.category === '3'));
+		const newList2 = newlist.filter(
+			(item) => Number(item.school) === Number(profile.current?.school)
+		);
+
+		listAll.current = newList2;
+		setListDiploma(newList2.filter((el) => el.category === '1'));
+		setListCertificate(newList2.filter((el) => el.category === '2'));
+		setListOther(newList2.filter((el) => el.category === '3'));
 	};
 
 	const renderList = (list, title) => {
 		return list.length > 0 ? <Bids title={title} data={list} /> : null;
 	};
 
-	return (
+	return Number(profile.current?.role) === 2 ? (
 		<Container className='container'>
-			<div style={textTitle}>See All NFT On The World</div>
+			<div style={textTitle}>
+				<img
+					src={getLogoSchool(Number(profile.current?.school))}
+					width={100}
+					height={'auto'}
+				/>
+			</div>
+			<div style={textTitle}>
+				See All NFT Off {getSchool(Number(profile.current?.school))}
+			</div>
 			<div style={textDay}>{formatDate(new Date())}</div>
 
 			<input
@@ -115,6 +165,8 @@ function ListNft() {
 						renderList(listOther, 'Other'),
 				  ]}
 		</Container>
+	) : (
+		<NotPermistion />
 	);
 }
 
@@ -133,4 +185,4 @@ const textDay = {
 	marginBottom: 60,
 };
 
-export default ListNft;
+export default ManageDegree;

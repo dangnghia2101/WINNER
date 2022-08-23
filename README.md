@@ -26,11 +26,11 @@ Verify the following before running this demo:
 1. Build your front-end.
 
    ```text
-   npm install
+   yarn
    ```
 
 ```text
-  npm start
+  yarn start
 ```
 
 ## Reset data in BackEnd
