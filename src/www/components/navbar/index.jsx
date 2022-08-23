@@ -60,6 +60,8 @@ function Navbar(props) {
 		setReload(!reload);
 	};
 
+	console.log('====> profile ', profile);
+
 	const scrollToTop = () => {
 		window.scrollTo({ top: 0, behavior: 'smooth' });
 	};

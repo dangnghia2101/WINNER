@@ -19,6 +19,7 @@ import {
 	DatePicker,
 } from 'antd';
 
+import { client } from '../../utilities/ipfs';
 import { PlusOutlined } from '@ant-design/icons';
 import React, { useState, useEffect, useRef } from 'react';
 import { Principal } from '@dfinity/principal';
@@ -92,13 +93,14 @@ function CreateUser(props) {
 		const res = await superheroes.insertUser(
 			Principal.fromText(values?.address),
 			values?.username,
-			values?.identity,
+			values?.identity + '',
 			Number(values?.school),
 			datePicker.current,
 			image,
 			values?.description
 		);
 		toast('Insert user success!!!');
+		window.location.reload();
 	};
 
 	const onFinishFailed = (errorInfo) => {
@@ -388,14 +390,12 @@ function CreateUser(props) {
 							</Form.Item>
 
 							<div style={{ color: 'white', fontSize: 14 }}>Birthday</div>
-							<Form.Item name='birthday'>
-								{/* <Input size='large' placeholder='Please input birthday' /> */}
-								<DatePicker
-									style={{ width: '100%' }}
-									onChange={onChangeDate}
-									placeholder='Please picke birthday'
-								/>
-							</Form.Item>
+							{/* <Input size='large' placeholder='Please input birthday' /> */}
+							<DatePicker
+								style={{ width: '100%' }}
+								onChange={onChangeDate}
+								placeholder='Please picke birthday'
+							/>
 
 							<FormItem>
 								<Form.Item>
