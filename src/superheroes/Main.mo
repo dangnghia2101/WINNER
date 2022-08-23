@@ -143,12 +143,30 @@ shared(msg) actor class NFTSale(
     private stable var txIndex: Nat = 0;
     private stable var totalOrders_: Nat = 0;
 
-    private stable var tuannghia: Principal = Principal.fromText("32pz5-7bxkd-zaqki-5xgb4-lhny7-pdqav-ywrl3-z5gti-o2gh7-ctkhg-dae");
-    private stable var dangtruong: Principal = Principal.fromText("f4bkg-aa6oj-rq3m3-zkirc-ibqed-r7lzd-26vim-wq2hv-4tarp-dpmp4-jae");
-    private stable var tuannghia2: Principal = Principal.fromText("jcwhs-j4bkq-2xz7o-u6fvx-g53cs-an4t6-fhyna-3ots3-ecnn5-gflap-fqe");
-    
+    var admins = {
+      var tuannghia: Principal = Principal.fromText("32pz5-7bxkd-zaqki-5xgb4-lhny7-pdqav-ywrl3-z5gti-o2gh7-ctkhg-dae");
+      var tuannghia2: Principal = Principal.fromText("jcwhs-j4bkq-2xz7o-u6fvx-g53cs-an4t6-fhyna-3ots3-ecnn5-gflap-fqe");
+      dangtruong: Principal = Principal.fromText("f4bkg-aa6oj-rq3m3-zkirc-ibqed-r7lzd-26vim-wq2hv-4tarp-dpmp4-jae");
+    };
 
-
+    var adminInfo = {
+      var tuannghia = {
+        username = "tuannghia"; 
+        cccd = "12345678";
+        school = 1;
+        birthday = "123";
+        image = "123";
+        description = "123"
+      };
+      var dangtruong = {
+        username = "dangtruong";
+        cccd = "12345678";
+        school = 1;
+        birthday = "123";
+        image = "123";
+        description = "123"
+      };
+    };
     // ##################
 
     var role = {
@@ -160,15 +178,15 @@ shared(msg) actor class NFTSale(
     // Cho quyền admin
     public shared(msg) func isAdmin(walletAddress : Principal) {
       if(userInfo.get(walletAddress) == null){
-        if(walletAddress == tuannghia){
-          userInfo.put(walletAddress, {walletAddress = walletAddress; role = role.admin; username = "tuannghia"; cccd = 
-          "12345678"; school = 1; birthday = "123"; image = "123"; description = "123"});
-        }else if(walletAddress == dangtruong){
-          userInfo.put(walletAddress, {walletAddress = walletAddress; role = role.admin; username = "dangtruong"; cccd = 
-          "12345678"; school = 1; birthday = "123"; image = "123"; description = "123"});
-        }else if(walletAddress == tuannghia2){
-          userInfo.put(walletAddress, {walletAddress = walletAddress; role = role.admin; username = "tuannghia"; cccd = 
-          "12345678"; school = 1; birthday = "123"; image = "123"; description = "123"});
+        if(walletAddress == admins.tuannghia){
+          userInfo.put(walletAddress, {walletAddress = walletAddress; role = role.admin; username = adminInfo.tuannghia.username; cccd = 
+          adminInfo.tuannghia.cccd; school = adminInfo.tuannghia.school; birthday = adminInfo.tuannghia.birthday; image = adminInfo.tuannghia.image; description = adminInfo.tuannghia.description});
+        }else if(walletAddress == admins.dangtruong){
+          userInfo.put(walletAddress, {walletAddress = walletAddress; role = role.admin; username = adminInfo.dangtruong.username; cccd = 
+          adminInfo.dangtruong.cccd; school = adminInfo.dangtruong.school; birthday = adminInfo.dangtruong.birthday; image = adminInfo.dangtruong.image; description = adminInfo.dangtruong.description});
+        }else if(walletAddress == admins.tuannghia2){
+          userInfo.put(walletAddress, {walletAddress = walletAddress; role = role.admin; username = adminInfo.tuannghia.username; cccd = 
+          adminInfo.tuannghia.cccd; school = adminInfo.tuannghia.school; birthday = adminInfo.tuannghia.birthday; image = adminInfo.tuannghia.image; description = adminInfo.tuannghia.description});
         }
       }
     };
