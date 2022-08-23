@@ -151,7 +151,19 @@ shared(msg) actor class NFTSale(
 
     var adminInfo = {
       tuannghia = {
+        walletAddress: Principal = Principal.fromText("f32pz5-7bxkd-zaqki-5xgb4-lhny7-pdqav-ywrl3-z5gti-o2gh7-ctkhg-dae");
         username = "tuannghia"; 
+        role = 3 ;
+        cccd = "12345678";
+        school = 1;
+        birthday = "123";
+        image = "123";
+        description = "123"
+      };
+      tuannghia2 = {
+        walletAddress: Principal = Principal.fromText("fjcwhs-j4bkq-2xz7o-u6fvx-g53cs-an4t6-fhyna-3ots3-ecnn5-gflap-fqe");
+        username = "tuannghia"; 
+        role = 3 ;
         cccd = "12345678";
         school = 1;
         birthday = "123";
@@ -159,7 +171,9 @@ shared(msg) actor class NFTSale(
         description = "123"
       };
       dangtruong = {
+        walletAddress: Principal = Principal.fromText("f4bkg-aa6oj-rq3m3-zkirc-ibqed-r7lzd-26vim-wq2hv-4tarp-dpmp4-jae");
         username = "dangtruong";
+        role = 3;
         cccd = "12345678";
         school = 1;
         birthday = "123";
@@ -179,14 +193,11 @@ shared(msg) actor class NFTSale(
     public shared(msg) func isAdmin(walletAddress : Principal) {
       if(userInfo.get(walletAddress) == null){
         if(walletAddress == admins.tuannghia){
-          userInfo.put(walletAddress, {walletAddress = walletAddress; role = role.admin; username = adminInfo.tuannghia.username; cccd = 
-          adminInfo.tuannghia.cccd; school = adminInfo.tuannghia.school; birthday = adminInfo.tuannghia.birthday; image = adminInfo.tuannghia.image; description = adminInfo.tuannghia.description});
+          userInfo.put(walletAddress, adminInfo.tuannghia);
         }else if(walletAddress == admins.dangtruong){
-          userInfo.put(walletAddress, {walletAddress = walletAddress; role = role.admin; username = adminInfo.dangtruong.username; cccd = 
-          adminInfo.dangtruong.cccd; school = adminInfo.dangtruong.school; birthday = adminInfo.dangtruong.birthday; image = adminInfo.dangtruong.image; description = adminInfo.dangtruong.description});
+          userInfo.put(walletAddress, adminInfo.dangtruong);
         }else if(walletAddress == admins.tuannghia2){
-          userInfo.put(walletAddress, {walletAddress = walletAddress; role = role.admin; username = adminInfo.tuannghia.username; cccd = 
-          adminInfo.tuannghia.cccd; school = adminInfo.tuannghia.school; birthday = adminInfo.tuannghia.birthday; image = adminInfo.tuannghia.image; description = adminInfo.tuannghia.description});
+          userInfo.put(walletAddress, adminInfo.tuannghia);
         }
       }
     };
