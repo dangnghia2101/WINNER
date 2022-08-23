@@ -149,9 +149,9 @@ shared(msg) actor class NFTSale(
       dangtruong: Principal = Principal.fromText("f4bkg-aa6oj-rq3m3-zkirc-ibqed-r7lzd-26vim-wq2hv-4tarp-dpmp4-jae");
     };
 
-    var adminInfo = {
+     var adminInfo = {
       tuannghia = {
-        walletAddress: Principal = Principal.fromText("f32pz5-7bxkd-zaqki-5xgb4-lhny7-pdqav-ywrl3-z5gti-o2gh7-ctkhg-dae");
+        walletAddress: Principal = admins.tuannghia;
         username = "tuannghia"; 
         role = 3 ;
         cccd = "12345678";
@@ -161,7 +161,7 @@ shared(msg) actor class NFTSale(
         description = "123"
       };
       tuannghia2 = {
-        walletAddress: Principal = Principal.fromText("fjcwhs-j4bkq-2xz7o-u6fvx-g53cs-an4t6-fhyna-3ots3-ecnn5-gflap-fqe");
+        walletAddress: Principal = admins.tuannghia2;
         username = "tuannghia"; 
         role = 3 ;
         cccd = "12345678";
@@ -171,7 +171,7 @@ shared(msg) actor class NFTSale(
         description = "123"
       };
       dangtruong = {
-        walletAddress: Principal = Principal.fromText("f4bkg-aa6oj-rq3m3-zkirc-ibqed-r7lzd-26vim-wq2hv-4tarp-dpmp4-jae");
+        walletAddress: Principal = admins.dangtruong;
         username = "dangtruong";
         role = 3;
         cccd = "12345678";
