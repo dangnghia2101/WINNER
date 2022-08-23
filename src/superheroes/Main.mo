@@ -704,11 +704,9 @@ shared(msg) actor class NFTSale(
     system func postupgrade() {
         type TokenInfo = Types.TokenInfo;
         type UserInfo = Types.UserInfo;
-        type OrderInfo = Types.OrderInfo;
 
         users := HashMap.fromIter<Principal, UserInfo>(usersEntries.vals(), 1, Principal.equal, Principal.hash);
         tokens := HashMap.fromIter<Nat, TokenInfo>(tokensEntries.vals(), 1, Nat.equal, Hash.hash);
-        // orders := HashMap.fromIter<Nat, OrderInfo>(ordersEntries.vals(), 1 , Nat.equal, Hash.hash);
         usersEntries := [];
         tokensEntries := [];
     };
