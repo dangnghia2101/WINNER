@@ -68,6 +68,13 @@ button {
 	margin-bottom: 10px;
 }
 
+.container {
+	display: flex;
+	flex-direction: column;
+	background-color: #14141f;
+	width: 100%;
+}
+
 div {
 	font-family: 'Poppins', sans-serif;
 }

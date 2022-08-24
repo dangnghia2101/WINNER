@@ -190,7 +190,7 @@ const Ranking = () => {
 
 	const renderHeaderListBottom = () => {
 		return (
-			<div style={containerBottomRank}>
+			<div style={containerBottomRank} key={Math.random()}>
 				<div
 					className='boxTopBottom'
 					style={{
@@ -208,9 +208,9 @@ const Ranking = () => {
 						type='text'
 						value={search}
 						onChange={findSearch}
-						placeholder='     Search by address wallet, citizen identification'
+						placeholder='Search by address wallet, citizen identification'
 					/>
-					<div style={iconClear} onClick={() => setInitial()}>
+					<div style={iconClear} onClick={() => setSearch('')}>
 						<MdDelete size={20} color='white' />
 					</div>
 					<div
@@ -254,7 +254,7 @@ const Ranking = () => {
 		return (
 			<div style={rowTop}>
 				{data?.map((item, index) => (
-					<Link to={`/profile/${item.walletAddress}`}>
+					<Link key={Math.random()} to={`/profile/${item.walletAddress}`}>
 						<div className='boxTop' style={boxTop}>
 							<img src={item?.image} />
 							<div>{item?.username}</div>
@@ -287,10 +287,10 @@ const Ranking = () => {
 
 			{search.length === 0
 				? usersSearch?.slice(3, usersSearch.length)?.map((item, index) => {
-						return <ItemRank item={item} index={index} />;
+						return <ItemRank item={item} index={index} key={Math.random()} />;
 				  })
 				: usersSearch?.map((item, index) => {
-						return <ItemRank item={item} index={index} />;
+						return <ItemRank item={item} index={index} key={Math.random()} />;
 				  })}
 		</div>
 	);

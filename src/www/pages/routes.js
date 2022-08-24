@@ -5,7 +5,7 @@ import MarketLayout from '../components/layout/market-layout'
 import createUser from './create-user'
 
 //Pages
-const HomePage = lazy(() => import("./home"))
+const ListNft = lazy(() => import("./list-nft"))
 const DetailNft = lazy(() => import("./detail-nft"))
 const CreateNft = lazy(() => import("./create-nft"))
 const Started = lazy(() => import("./started"))
@@ -56,7 +56,7 @@ const routes = [
         path: "nfts",
         exact: true,
         public: true,
-        component: HomePage,
+        component: ListNft,
         layout: MarketLayout
     },
     {

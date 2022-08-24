@@ -1,26 +1,7 @@
-h1 {
-	font-size: 60px;
-	font-weight: 450;
-	background-image: linear-gradient(
-		to right,
-		#ff3bff,
-		#ecbfbf,
-		#ff3bff,
-		#5c24ff,
-		#d94fd5
-	);
-	-webkit-background-clip: text;
-	-webkit-background-clip: text;
-	background-clip: text;
-	color: transparent;
-	font-family: monospace;
-	padding-top: 20px;
-	text-align: center;
-}
-
 .row1 {
 	display: flex;
 	flex-flow: row;
+	margin-top: 10px;
 }
 
 .profile {
@@ -49,12 +30,14 @@ h1 {
 	justify-content: center;
 	align-items: center;
 	width: 400px;
-	margin-top: -100px;
+	margin-top: -105px;
 }
 .profile-pic img {
-	border: 6px solid var(--color-bg);
+	border: 3px solid white;
 	border-radius: 50%;
 	object-fit: cover;
+	width: 200px;
+	height: 200px;
 }
 .profile-pic h3 {
 	font-family: var(--font-family);
@@ -118,7 +101,7 @@ h1 {
 		object-fit: cover;
 	}
 	.profile-pic {
-		margin-top: -50px;
+		margin-top: -105px;
 	}
 }
 @media screen and (max-width: 550px) {

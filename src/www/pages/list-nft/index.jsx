@@ -44,7 +44,7 @@ function ListNft() {
 	const listAll = useRef([]);
 
 	const [superheroes, { loading, error }] = useCanister('superheroes');
-	useEffect(async () => {
+	useEffect(() => {
 		if (superheroes) {
 			getListAll();
 		}
@@ -93,11 +93,13 @@ function ListNft() {
 	};
 
 	const renderList = (list, title) => {
-		return list.length > 0 ? <Bids title={title} data={list} /> : null;
+		return list.length > 0 ? (
+			<Bids title={title} data={list} key={Math.random()} />
+		) : null;
 	};
 
 	return (
-		<Container className='container'>
+		<div className='container'>
 			<div style={textTitle}>See All NFT On The World</div>
 			<div style={textDay}>{formatDate(new Date())}</div>
 
@@ -114,7 +116,7 @@ function ListNft() {
 						renderList(listCertificate, 'Certificate'),
 						renderList(listOther, 'Other'),
 				  ]}
-		</Container>
+		</div>
 	);
 }
 

@@ -21,7 +21,6 @@ import Result "mo:base/Result";
 import Prelude "mo:base/Prelude";
 import Buffer "mo:base/Buffer";
 import Types "./types";
-import User "./User";
 import Debug "mo:base/Debug"
 
 shared(msg) actor class NFTSale(
@@ -41,6 +40,10 @@ shared(msg) actor class NFTSale(
     type UserInfo = Types.UserInfo;
     type User = Types.User;
     type UserInfoExt = Types.UserInfoExt;
+    type SchoolList = Types.SchoolList;
+    type SchoolId = Types.SchoolId;
+    type DegreeList = Types.DegreeList;
+    type DegreeId = Types.DegreeId;
 
     public type Errors = {
         #Unauthorized;
@@ -140,11 +143,70 @@ shared(msg) actor class NFTSale(
     private stable var txIndex: Nat = 0;
     private stable var totalOrders_: Nat = 0;
 
+    var admins = {
+      tuannghia: Principal = Principal.fromText("32pz5-7bxkd-zaqki-5xgb4-lhny7-pdqav-ywrl3-z5gti-o2gh7-ctkhg-dae");
+      tuannghia2: Principal = Principal.fromText("jcwhs-j4bkq-2xz7o-u6fvx-g53cs-an4t6-fhyna-3ots3-ecnn5-gflap-fqe");
+      dangtruong: Principal = Principal.fromText("f4bkg-aa6oj-rq3m3-zkirc-ibqed-r7lzd-26vim-wq2hv-4tarp-dpmp4-jae");
+    };
+
+     var adminInfo = {
+      tuannghia = {
+        walletAddress: Principal = admins.tuannghia;
+        username = "Dang Tuan Nghia"; 
+        role = 3 ;
+        cccd = "1234567890";
+        school = 1;
+        birthday = "2003-01-22";
+        image = "https://bafybeidogmnnguoj5cgyucveurkgavzhdlsqbxyaszwe4kv2jvvw7phnla.ipfs.w3s.link/49dfe71fe9db2c8575ca%20%281%29.jpg";
+        description = "The currents and weather of the Grand Line's open sea are extremely unpredictable, whereas in the vicinity of islands the climate is stable.[8] The magnetic fields within the Grand Line cause normal compasses to malfunction, making it even more difficult to navigate,[9] and instead a special compass called a Log Pose[Jp 15] must be used.[10] The Log Pose functions by locking on to one island's magnetic field and then locking on to another island's magnetic field.[11] The time for it to set depends on the island."
+      };
+      tuannghia2 = {
+        walletAddress: Principal = admins.tuannghia2;
+        username = "Dang Tuan Nghia"; 
+        role = 3 ;
+        cccd = "123456789";
+        school = 1;
+        birthday = "2003-01-22";
+        image = "https://bafybeidogmnnguoj5cgyucveurkgavzhdlsqbxyaszwe4kv2jvvw7phnla.ipfs.w3s.link/49dfe71fe9db2c8575ca%20%281%29.jpg";
+        description = "The currents and weather of the Grand Line's open sea are extremely unpredictable, whereas in the vicinity of islands the climate is stable.[8] The magnetic fields within the Grand Line cause normal compasses to malfunction, making it even more difficult to navigate,[9] and instead a special compass called a Log Pose[Jp 15] must be used.[10] The Log Pose functions by locking on to one island's magnetic field and then locking on to another island's magnetic field.[11] The time for it to set depends on the island."
+      };
+      dangtruong = {
+        walletAddress: Principal = admins.dangtruong;
+        username = "Phan Nguyen Dang Truong";
+        role = 3;
+        cccd = "12345678";
+        school = 1;
+        birthday = "2003-01-22";
+        image = "https://bafybeidogmnnguoj5cgyucveurkgavzhdlsqbxyaszwe4kv2jvvw7phnla.ipfs.w3s.link/49dfe71fe9db2c8575ca%20%281%29.jpg";
+        description = "The currents and weather of the Grand Line's open sea are extremely unpredictable, whereas in the vicinity of islands the climate is stable.[8] The magnetic fields within the Grand Line cause normal compasses to malfunction, making it even more difficult to navigate,[9] and instead a special compass called a Log Pose[Jp 15] must be used.[10] The Log Pose functions by locking on to one island's magnetic field and then locking on to another island's magnetic field.[11] The time for it to set depends on the island."
+      };
+    };
     // ##################
+
+    var role = {
+        employee: Nat = 1;
+        manager: Nat = 2;
+        admin: Nat = 3;
+    };
+
+    // Cho quyền admin
+    public shared(msg) func isAdmin(walletAddress : Principal) {
+      if(userInfo.get(walletAddress) == null){
+        if(walletAddress == admins.tuannghia){
+          userInfo.put(walletAddress, adminInfo.tuannghia);
+        }else if(walletAddress == admins.dangtruong){
+          userInfo.put(walletAddress, adminInfo.dangtruong);
+        }else if(walletAddress == admins.tuannghia2){
+          userInfo.put(walletAddress, adminInfo.tuannghia2);
+        }
+      }
+    };
+
+
     // Thêm tài khoản cho user
     public shared(msg) func insertUser(walletAddress : Principal, username : Text,
                 cccd : Text, school : Nat, birthday : Text, image: Text, description: Text){   
-        userInfo.put(walletAddress, {walletAddress = walletAddress; role = 1; username = username ; cccd = cccd; school = school; birthday = birthday; image = image; description = description});
+        userInfo.put(walletAddress, {walletAddress = walletAddress; role = role.employee; username = username ; cccd = cccd; school = school; birthday = birthday; image = image; description = description});
         info.put(cccd, {walletAddress = walletAddress ; username = username});
     };
 
@@ -177,6 +239,74 @@ shared(msg) actor class NFTSale(
      };
 
     //###################
+
+    // Hash của trường học
+    private var school = HashMap.HashMap<Nat, SchoolList>(1, Nat.equal, Hash.hash);
+    private var schoolId = HashMap.HashMap<Nat, SchoolId>(1, Nat.equal, Hash.hash);
+
+    // create school name
+    public shared(msg) func insertSchool(name : Text){   
+        var id : Nat = 0;
+          for (sc : SchoolId in schoolId.vals()) {
+              if(id < sc.id){
+                  id := sc.id;
+              }
+         };
+        id+=1;
+        school.put(id, {id = id ;Name = name});
+        schoolId.put(id,{id = id});
+    };
+
+    // get school list
+    public query func getAllSchool() : async [SchoolList] {
+        Iter.toArray(school.vals());
+    };
+
+    //delete school by key
+    public shared(msg) func deleteSchool(key : Nat): async ?SchoolList{   
+        var id : Nat = school.size();
+        school.remove(key);
+    };
+
+
+    //find school by key
+    public shared(msg) func findSchool(key : Nat): async ?SchoolList{   
+        school.get(key);
+    };
+
+    // Hash của degree
+    private var degree = HashMap.HashMap<Nat, DegreeList>(1, Nat.equal, Hash.hash);
+    private var degreeId = HashMap.HashMap<Nat, DegreeId>(1, Nat.equal, Hash.hash);
+
+    // create degree name
+    public shared(msg) func insertDegree(degreeName : Text){   
+        var id : Nat = 0;
+          for (sc : DegreeId in degreeId.vals()) {
+              if(id < sc.id){
+                  id := sc.id;
+              }
+         };
+        id+=1;
+        degree.put(id, {id = id ;degreeName = degreeName});
+        degreeId.put(id,{id = id});
+    };
+
+    // get degree list
+    public query func getAllDegree() : async [DegreeList] {
+        Iter.toArray(degree.vals());
+    };
+
+    //delete degree by key
+    public shared(msg) func deleteDegree(key : Nat): async ?DegreeList{   
+        var id : Nat = degree.size();
+        degree.remove(key);
+    };
+
+
+    //find degree by key
+    public shared(msg) func findDegree(key : Nat): async ?DegreeList{   
+        degree.get(key);
+    };
 
     private func addTxRecord(
         caller: Principal, op: Operation, tokenIndex: ?Nat,
@@ -571,15 +701,13 @@ shared(msg) actor class NFTSale(
         tokensEntries := Iter.toArray(tokens.entries());
     };
 
-    // system func postupgrade() {
-    //     type TokenInfo = Types.TokenInfo;
-    //     type UserInfo = Types.UserInfo;
-    //     type OrderInfo = Types.OrderInfo;
+    system func postupgrade() {
+        type TokenInfo = Types.TokenInfo;
+        type UserInfo = Types.UserInfo;
 
-    //     users := HashMap.fromIter<Principal, UserInfo>(usersEntries.vals(), 1, Principal.equal, Principal.hash);
-    //     tokens := HashMap.fromIter<Nat, TokenInfo>(tokensEntries.vals(), 1, Nat.equal, Hash.hash);
-    //     // orders := HashMap.fromIter<Nat, OrderInfo>(ordersEntries.vals(), 1 , Nat.equal, Hash.hash);
-    //     usersEntries := [];
-    //     tokensEntries := [];
-    // };
+        users := HashMap.fromIter<Principal, UserInfo>(usersEntries.vals(), 1, Principal.equal, Principal.hash);
+        tokens := HashMap.fromIter<Nat, TokenInfo>(tokensEntries.vals(), 1, Nat.equal, Hash.hash);
+        usersEntries := [];
+        tokensEntries := [];
+    };
 };

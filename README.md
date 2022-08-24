@@ -33,12 +33,6 @@ Verify the following before running this demo:
   yarn start
 ```
 
-## Reset data in BackEnd
-
-dfx start --background --clean
-dfx stop
-dfx cache delete
-
 ## Run for FE, Motoko
 
 1. Start a local internet computer.
@@ -87,3 +81,9 @@ yarn run start:dev
    ```
 
 1. Open the aforementioned URL in your web browser.
+
+## Reset data in BackEnd
+
+dfx start --background --clean
+dfx stop
+dfx cache delete
