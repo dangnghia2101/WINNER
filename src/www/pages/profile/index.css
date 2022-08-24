@@ -36,6 +36,8 @@
 	border: 3px solid white;
 	border-radius: 50%;
 	object-fit: cover;
+	width: 200px;
+	height: 200px;
 }
 .profile-pic h3 {
 	font-family: var(--font-family);
