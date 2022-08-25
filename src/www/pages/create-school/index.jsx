@@ -1,26 +1,18 @@
 import {
 	BodyWrapper,
 	Container,
-	RedIcon,
-	Required,
 	Title,
 	FormItem,
 	Wrapper,
 	FormWrapper,
 } from './create-school.elements';
 import {
-	Upload,
-	InputNumber,
 	Form,
 	Input,
 	Button,
 	Select,
-	Modal,
-	DatePicker,
 } from 'antd';
 
-import { client } from '../../utilities/ipfs';
-import { PlusOutlined } from '@ant-design/icons';
 import React, { useState, useEffect, useRef } from 'react';
 import { Principal } from '@dfinity/principal';
 import { toast } from 'react-toastify';
@@ -31,27 +23,11 @@ import NotPermistion from '../../components/not-permistion';
 const { Option } = Select;
 import { useCanister, useConnect } from '@connect2ic/react';
 
-const IPFS_LINK = 'https://dweb.link/ipfs/';
-
 function CreateSchool(props) {
-	const [fileImg, setFileImg] = useState('');
 	const [superheroes, { loading, error }] = useCanister('superheroes');
 	const { isConnected, principal } = useConnect();
 
-	// upload image
-	const [previewVisible, setPreviewVisible] = useState(false);
-	const [previewImage, setPreviewImage] = useState('');
-	const [previewTitle, setPreviewTitle] = useState('');
-	const [fileList, setFileList] = useState([]);
 	const profile = useRef({ role: 1 });
-	const datePicker = useRef('');
-
-	// when image upload
-	useEffect(() => {
-		if (fileImg[0]) {
-			requestUpdate();
-		}
-	}, [fileImg]);
 
 	useEffect(async () => {
 		if (superheroes && isConnected) {
@@ -59,45 +35,19 @@ function CreateSchool(props) {
 		}
 	}, [superheroes]);
 
-	const onChangeDate = (date, dateString) => {
-		datePicker.current = dateString;
-	};
-
 	const getMyInfor = async () => {
 		const res = await superheroes.findUserById(Principal.fromText(principal));
 		profile.current = res[0];
 	};
 
-	const requestUpdate = () => {
-		const resImg = fileList[0].thumbUrl;
-		setFileImg(resImg);
-	};
-
-	const getBase64 = (file) =>
-		new Promise((resolve, reject) => {
-			const reader = new FileReader();
-			reader.readAsDataURL(file);
-
-			reader.onload = () => resolve(reader.result);
-
-			reader.onerror = (error) => reject(error);
-		});
-
-	var min = 1;
-   	var max = 100;
-   	var rand =  min + (Math.random() * (max-min));
-
 	const onFinish = async (values) => {
 		toast('Waiting...!!!');
-
-		const cid = await client.put([fileList[0].originFileObj]);
-
-		const image = `${IPFS_LINK}${cid}/${fileList[0].originFileObj.name}`;
 
 		const res = await superheroes.insertSchool(
 			rand,
 			values?.Name,
 		);
+
 		toast('Insert user success!!!');
 		window.location.reload();
 	};
@@ -105,34 +55,6 @@ function CreateSchool(props) {
 	const onFinishFailed = (errorInfo) => {
 		console.log('Failed:', errorInfo);
 	};
-
-	const handleCancel = () => setPreviewVisible(false);
-
-	const handlePreview = async (file) => {
-		if (!file.url && !file.preview) {
-			file.preview = await getBase64(file.originFileObj);
-		}
-
-		setPreviewImage(file.url || file.preview);
-		setPreviewVisible(true);
-		setPreviewTitle(
-			file.name || file.url.substring(file.url.lastIndexOf('/') + 1)
-		);
-	};
-
-	const handleChange = ({ fileList: newFileList }) => setFileList(newFileList);
-
-	const uploadButton = (
-		<div>
-			<PlusOutlined />
-			<div
-				style={{
-					marginTop: 8,
-				}}>
-				Upload image
-			</div>
-		</div>
-	);
 
 	return Number(profile.current?.role) === 1 ? (
 		<NotPermistion />
@@ -177,6 +99,51 @@ function CreateSchool(props) {
 						Step 2
 					</div>
 					<div style={{ color: 'white' }}>
+						Address: This is address of school
+					</div>
+				</div>
+
+				<div
+					style={{
+						backgroundColor: themes.colors.background,
+						borderRadius: 10,
+						padding: 10,
+						marginTop: 20,
+					}}>
+					<div style={{ color: 'white', fontWeight: 'bold', fontSize: 14 }}>
+						Step 3
+					</div>
+					<div style={{ color: 'white' }}>
+						School Code: This is code of school
+					</div>
+				</div>
+
+				<div
+					style={{
+						backgroundColor: themes.colors.background,
+						borderRadius: 10,
+						padding: 10,
+						marginTop: 20,
+					}}>
+					<div style={{ color: 'white', fontWeight: 'bold', fontSize: 14 }}>
+						Step 4
+					</div>
+					<div style={{ color: 'white' }}>
+						Chairman: This is name of chairman
+					</div>
+				</div>
+
+				<div
+					style={{
+						backgroundColor: themes.colors.background,
+						borderRadius: 10,
+						padding: 10,
+						marginTop: 20,
+					}}>
+					<div style={{ color: 'white', fontWeight: 'bold', fontSize: 14 }}>
+						Step 5
+					</div>
+					<div style={{ color: 'white' }}>
 						Submit: After entering, will press send 
 					</div>
 				</div>
@@ -200,12 +167,42 @@ function CreateSchool(props) {
 						<FormWrapper>
 							<div style={{ color: 'white', fontSize: 14 }}>School Name</div>
 							<Form.Item
-								name='Name'
+								name='SchoolName'
 								rules={[{ required: true, message: 'Please input school name!' }]}>
 								<Input
 									width={'100%'}
 									size='large'
 									placeholder='Please input school name'
+								/>
+							</Form.Item>
+							<div style={{ color: 'white', fontSize: 14 }}>Address</div>
+							<Form.Item
+								name='Address'
+								rules={[{ required: true, message: 'Please input address!' }]}>
+								<Input
+									width={'100%'}
+									size='large'
+									placeholder='Please input address'
+								/>
+							</Form.Item>
+							<div style={{ color: 'white', fontSize: 14 }}>School Code</div>
+							<Form.Item
+								name='SchoolCode'
+								rules={[{ required: true, message: 'Please input school code!' }]}>
+								<Input
+									width={'100%'}
+									size='large'
+									placeholder='Please input school code'
+								/>
+							</Form.Item>
+							<div style={{ color: 'white', fontSize: 14 }}>Chairman</div>
+							<Form.Item
+								name='Chairman'
+								rules={[{ required: true, message: 'Please input chairman!' }]}>
+								<Input
+									width={'100%'}
+									size='large'
+									placeholder='Please input chairman'
 								/>
 							</Form.Item>
 							<FormItem>
