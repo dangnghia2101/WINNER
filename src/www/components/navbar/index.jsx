@@ -74,42 +74,45 @@ function Navbar(props) {
 		setReload(!reload);
 	};
 
-	const scrollToTop = () => {
+	const selectTab = () => {
 		window.scrollTo({ top: 0, behavior: 'smooth' });
 	};
 
 	const urlProfile = `/profile/${principal}`;
 
 	return (
-		<Container>
-			{/* <div
-				style={{ position: 'absolute', height: 300, backgroundColor: 'red' }}>
-				<ConnectDialog dark={false} />
-			</div> */}
+		<Container style={
+			 {
+				position: '-webkit-sticky',
+				position: 'sticky',
+				top: 0,
+				zIndex: 999
+			}
+		}>
 			<LogoWrapper>
 				<Link to='/' style={{ color: 'black' }}>
-					<Logo src={images.olive} alt='' onClick={scrollToTop} />
+					<Logo src={images.olive} alt='' onClick={selectTab} />
 				</Link>
 				<Name>WINNER</Name>
 			</LogoWrapper>
 			<Right>
 				<OptionWrapper>
 					<Menu>
-						<Link to='/' style={{ color: 'black' }} onClick={scrollToTop}>
+						<Link to='/' style={{ color: 'black' }} onClick={selectTab}>
 							<MenuItem>Home</MenuItem>
 						</Link>
 						{profile?.role >= 2 && (
-							<Link to='/manage' style={{ color: 'black' }}>
+							<Link to='/manage' style={{ color: 'black' }} onClick={selectTab}>
 								<MenuItem>Manage</MenuItem>
 							</Link>
 						)}
-						<Link to={urlProfile} style={{ color: 'black' }}>
+						<Link to={urlProfile} style={{ color: 'black' }} onClick={selectTab}> 
 							<MenuItem>Profile</MenuItem>
 						</Link>
-						<Link to='/nfts' style={{ color: 'black' }}>
+						<Link to='/nfts' style={{ color: 'black' }} onClick={selectTab}>
 							<MenuItem>NFTs</MenuItem>
 						</Link>
-						<Link to='/ranking' style={{ color: 'black' }}>
+						<Link to='/ranking' style={{ color: 'black' }} onClick={selectTab}>
 							<MenuItem>Ranking</MenuItem>
 						</Link>
 					</Menu>
@@ -130,9 +133,7 @@ function Navbar(props) {
 								<OptionItem onClick={onDisconnect}>
 									<WalletAddress>
 										{principal
-											? principal?.slice(0, 3) +
-											  '...' +
-											  principal?.slice(60, 63)
+											? principal?.slice(0, 3) + '...' + principal?.slice(60, 63)
 											: 'Connect'}
 									</WalletAddress>
 								</OptionItem>
