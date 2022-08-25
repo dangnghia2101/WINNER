@@ -258,6 +258,14 @@ shared(msg) actor class NFTSale(
     };
 
 
+      // update school 
+
+    public func updateSchool(id : Nat, name : Text, address: Text, schoolCode: Text, chairman: Text, logo: Text, image: Text, description: Text): async(){   
+        school.put(id, { name = name; address = address; schoolCode = schoolCode; chairman = chairman; logo = logo; image = image;description = description});
+    };
+
+
+
     // insert default school
     public func insertSchoolDefault(): async [SchoolList]{
          await insertSchool("FPT University","Lot E2a-7, Road D1 Hi-Tech Park, Long Thanh My Ward, City. Thu Duc, City. Ho Chi Minh","FU","Nguyen Khac Thanh","hinhanh.jpg","fpt.jpg","truong dai hoc");
