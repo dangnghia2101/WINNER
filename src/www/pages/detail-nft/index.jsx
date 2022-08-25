@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import './item.css';
-import creator from '../../assets/images/seller2.png';
-import Certificate from '../../assets/images/Certificate.png';
 import { customAxios } from '../../utils/custom-axios';
 import { useCanister, useConnect } from '@connect2ic/react';
 import { Principal } from '@dfinity/principal';
@@ -64,6 +62,7 @@ const Index = () => {
 	} = useConnect();
 	const [nft, setNft] = useState([]);
 	const [profile, setProfile] = useState();
+	const [isOwner, setIsOwner] = useState(false);
 	const [addressTransfer, setAddressTransfer] = useState();
 
 	const [superheroes, { loading, error }] = useCanister('superheroes');
@@ -82,8 +81,10 @@ const Index = () => {
 		const resu = await promise;
 
 		getMyInfor(detailNft.owner);
-
 		setNft(resu);
+		setIsOwner(
+			Principal.fromUint8Array(detailNft.owner._arr).toString() === principal
+		);
 	};
 
 	const getMyInfor = async (_id) => {
@@ -155,31 +156,34 @@ const Index = () => {
 						<div style={{ margin: 10 }}>TOP 25</div>
 					</div>
 				</div>
-				<div
-					className='item-content-detail'
-					style={{ flexDirection: 'row', display: 'flex' }}>
+
+				{isOwner === true ? (
 					<div
-						style={{
-							padding: 5,
-							backgroundColor: 'white',
-							borderRadius: 10,
-							width: 170,
-							alignSelf: 'center',
-							justifySelf: 'center',
-							paddingTop: 10,
-							paddingBottom: 10,
-						}}
-						onClick={transferToken}>
-						{' '}
-						Transfer nft
+						className='item-content-detail'
+						style={{ flexDirection: 'row', display: 'flex' }}>
+						<div
+							style={{
+								padding: 5,
+								backgroundColor: 'white',
+								borderRadius: 10,
+								width: 170,
+								alignSelf: 'center',
+								justifySelf: 'center',
+								paddingTop: 10,
+								paddingBottom: 10,
+							}}
+							onClick={transferToken}>
+							{' '}
+							Transfer nft
+						</div>
+						<input
+							type='text'
+							placeholder='Paste address you want tranfer this nft'
+							onChange={(e) => setAddressTransfer(e.target.value)}
+							value={addressTransfer}
+						/>
 					</div>
-					<input
-						type='text'
-						placeholder='Paste address you want tranfer this nft'
-						onChange={(e) => setAddressTransfer(e.target.value)}
-						value={addressTransfer}
-					/>
-				</div>
+				) : null}
 			</div>
 		</div>
 	);

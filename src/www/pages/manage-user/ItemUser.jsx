@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './index.css';
 import { themes } from '../../assets/themes';
 import { Link } from 'react-router-dom';
@@ -21,8 +21,10 @@ const getSchool = (_value) => {
 
 const ItemRank = ({ item, index }) => {
 	const [superheroes, { loading, error }] = useCanister('superheroes');
+	const [isSwitch, setIsSwitch] = useState(Number(item.role) === 2);
 
 	const onChange = async (checked) => {
+		setIsSwitch(!isSwitch);
 		const res = await superheroes.updateUser(
 			item?.walletAddress,
 			item.username,
@@ -65,7 +67,7 @@ const ItemRank = ({ item, index }) => {
 						fontSize: 12,
 						color: 'white',
 						flex: 2,
-						alignSelf: 'self-start',
+						alignSelf: 'center',
 					}}>
 					{getSchool(Number(item.school))}
 				</div>
@@ -91,11 +93,28 @@ const ItemRank = ({ item, index }) => {
 					</Link>
 				</div>
 
-				<div style={{ flex: 0.5 }}>
+				<div
+					style={{
+						flex: 0.5,
+						display: 'flex',
+						direction: 'row',
+						justifyContent: 'center',
+						alignItems: 'center',
+					}}>
 					<Switch
 						defaultChecked={Number(item?.role) === 2}
 						onChange={onChange}
 					/>
+					<div
+						style={{
+							fontWeight: 'bold',
+							fontSize: 12,
+							color: 'white',
+							marginLeft: 10,
+							width: 70,
+						}}>
+						{isSwitch ? 'Manage' : 'User'}
+					</div>
 				</div>
 			</div>
 		</div>

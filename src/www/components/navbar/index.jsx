@@ -43,14 +43,17 @@ function Navbar(props) {
 
 	const getMyInfor = async () => {
 		if (principal) {
+			let res = await superheroes.findUserById(Principal.fromText(principal));
+
 			if (
-				principal == admins.dangtruong ||
-				principal == admins.tuannghia ||
-				principal == admins.tuannghia2
+				(principal == admins.dangtruong ||
+					principal == admins.tuannghia ||
+					principal == admins.tuannghia2) &&
+				res.length == 0
 			) {
 				await superheroes.isAdmin(Principal.fromText(principal));
+				res = await superheroes.findUserById(Principal.fromText(principal));
 			}
-			const res = await superheroes.findUserById(Principal.fromText(principal));
 
 			setProfile(res[0]);
 		}

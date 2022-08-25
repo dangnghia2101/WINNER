@@ -1,10 +1,4 @@
-import React, {
-	useState,
-	useEffect,
-	useCallback,
-	useRef,
-	useMemo,
-} from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import './index.css';
 import { themes } from '../../assets/themes';
 import { Link } from 'react-router-dom';
@@ -118,6 +112,8 @@ const Ranking = () => {
 
 			newRank.sort((a, b) => b.sumDegree - a.sumDegree);
 			users.current = newRank;
+
+			console.log('List all ', res, newRank);
 
 			setUsersSearch(newRank);
 			// setUsers(newRank);
