@@ -4,20 +4,35 @@ body {
 }
 
 .container {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	align-content: center;
-	flex-wrap: wrap;
 	margin: 0 auto;
-	min-height: 20vh;
+	/* min-height: 20vh; */
 }
+
+.row{
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.col-4{
+	flex: 0 0 auto;
+    width: 33.33333333%;
+}
+
+.col-6{
+	flex: 0 0 auto;
+	width: 50%;
+}
+
+.col-12{
+	flex: 0 0 auto;
+	width: 100%;
+}
+
 .btn {
 	flex: 1;
 	margin: 50px;
-	padding: 90px;
+	padding: 120px;
 	height: 300px;
-	text-align: center;
 	justify-content: center;
 	text-transform: uppercase;
 	transition: 0.5s;
