@@ -25,24 +25,37 @@ const Index = () => {
 	return Number(profile.current?.role) === 1 ? (
 		NotPermistion()
 	) : (
-		<div className='container'>
+		<div className='row'>
 			<div className='container'>
-				<a href='/nft/create' className='btn btn-1'>
-					Create degree
-				</a>
-				<a href='/create-user' className='btn btn-2'>
-					Create account
-				</a>
+				<div className='row'>
+					<a href='/nft/create' className='btn btn-1 col-6'>
+						Create degree
+					</a>
+
+					<a href='/create-user' className='btn btn-2 col-6'>
+						Create account
+					</a>
+				</div>
 			</div>
 			<div className='container'>
-				<a href='/manage-degree' className='btn btn-3'>
-					Manage degrees
-				</a>
-				{Number(profile.current?.role) === 3 ? (
-					<a href='/manage-user' className='btn btn-4'>
-						Manage accounts
+				<div className='row'>
+					<a href='/create-school' className='btn btn-5 col-6'>
+						Create school
 					</a>
-				) : null}
+
+					<a href='/manage-degree' className='btn btn-3 col-6'>
+						Manage degrees
+					</a>
+				</div>
+			</div>
+			<div className='container'>
+				<div className='row'>
+					{Number(profile.current?.role) === 3 ? (
+						<a href='/manage-user' className='btn btn-4 col-6'>
+							Manage accounts
+						</a>
+					) : null}
+				</div>
 			</div>
 		</div>
 	);
