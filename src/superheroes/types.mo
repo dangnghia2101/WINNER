@@ -111,6 +111,9 @@ module {
     public type SchoolList ={
         id: Nat;
         Name: Text;
+        Address: Text;
+        SchoolCode: Text;
+        Chairman : Text;
     };
 
      public type SchoolId ={
