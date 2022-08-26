@@ -113,7 +113,7 @@ module {
         address: Text;
         schoolCode: Text;
         chairman: Text;
-        logo: Text;
+        //logo: Text;
         image: Text;
         description: Text;
     };
