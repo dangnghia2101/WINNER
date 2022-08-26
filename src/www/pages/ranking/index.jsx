@@ -4,8 +4,10 @@ import { themes } from '../../assets/themes';
 import { Link } from 'react-router-dom';
 import { useCanister, useConnect } from '@connect2ic/react';
 import { Principal } from '@dfinity/principal';
-import { MdDelete } from 'react-icons/md';
+import { Input } from 'antd';
 import { AiOutlineSearch } from 'react-icons/ai';
+
+const { Search } = Input;
 
 const formatDate = (_timestamp) => {
 	var date = new Date(_timestamp);
@@ -56,38 +58,35 @@ const Ranking = () => {
 	};
 
 	const findSearch = (e) => {
-		const keyword = e.target.value;
-		const test = usersSearch;
-		console.log('=====? ', users.current);
-		if (keyword.length > 0) {
+		// const keyword = e.target.value;
+		usersSearch;
+		console.log('===> search ', e.length);
+		if (e.length > 0) {
 			let listSearch = [];
-
 			// = test.filter((item) => {
 			// 	item.cccd == keyword;
 			// 	console.log('== cccds ', item.cccd == keyword, item.cccd, keyword);
 			// });
-			try {
-				if (listSearch.length === 0) {
-					listSearch = test.filter(
-						(item) =>
-							Principal.fromUint8Array(item.walletAddress._arr).toString() ==
-							keyword.toString()
-					);
-				}
-			} catch (e) {}
-
-			if (listSearch.length === 0)
-				listSearch = test.filter(
+			if (listSearch.length === 0) {
+				listSearch = users.current.filter(
 					(item) =>
-						item.username.includes(keyword) || item.cccd.includes(keyword)
+						Principal.fromUint8Array(item.walletAddress._arr).toString() ==
+						e.toString()
 				);
+			}
+			if (listSearch.length === 0)
+				listSearch = users.current.filter(
+					(item) => item.username.includes(e) || item.cccd.includes(e)
+				);
+
+			console.log('===> search ', listSearch);
 
 			setUsersSearch(listSearch);
 		} else {
 			console.log('VO ne vo ne ', users.current);
 			setUsersSearch(users.current);
 		}
-		setSearch(keyword);
+		setSearch(e);
 	};
 
 	useEffect(async () => {
@@ -184,6 +183,17 @@ const Ranking = () => {
 		);
 	};
 
+	const inputSearch = useCallback(() => {
+		return (
+			<input
+				type='text'
+				value={search}
+				onChange={findSearch}
+				placeholder='Search by address wallet, citizen identification'
+			/>
+		);
+	});
+
 	const renderHeaderListBottom = () => {
 		return (
 			<div style={containerBottomRank} key={Math.random()}>
@@ -197,18 +207,22 @@ const Ranking = () => {
 						justifyItems: 'center',
 						alignItems: 'center',
 					}}>
-					<div style={iconFind}>
+					{/* <div style={iconFind}>
 						<AiOutlineSearch size={20} color='white' />
-					</div>
-					<input
-						type='text'
-						value={search}
-						onChange={findSearch}
+					</div> */}
+
+					{/* {inputSearch()} */}
+					<Search
 						placeholder='Search by address wallet, citizen identification'
+						allowClear
+						enterButton='Search'
+						size='middle'
+						onSearch={findSearch}
+						style={{
+							width: 350,
+						}}
 					/>
-					<div style={iconClear} onClick={() => setSearch('')}>
-						<MdDelete size={20} color='white' />
-					</div>
+
 					<div
 						style={{
 							fontWeight: 'bold',

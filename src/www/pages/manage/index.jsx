@@ -39,17 +39,9 @@ const Index = () => {
 			</div>
 			<div className='container'>
 				<div className='row'>
-					<a href='/create-school' className='btn btn-5 col-6'>
-						Create school
-					</a>
-
 					<a href='/manage-degree' className='btn btn-3 col-6'>
 						Manage degrees
 					</a>
-				</div>
-			</div>
-			<div className='container'>
-				<div className='row'>
 					{Number(profile.current?.role) === 3 ? (
 						<a href='/manage-user' className='btn btn-4 col-6'>
 							Manage accounts
@@ -57,6 +49,18 @@ const Index = () => {
 					) : null}
 				</div>
 			</div>
+			{Number(profile.current?.role) === 3 ? (
+				<div className='container'>
+					<div className='row'>
+						<a href='/manage-user' className='btn btn-4 col-6'>
+							Manage school
+						</a>
+						<a href='/create-school' className='btn btn-5 col-6'>
+							Create school
+						</a>
+					</div>
+				</div>
+			) : null}
 		</div>
 	);
 };
