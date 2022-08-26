@@ -66,7 +66,6 @@ function Started() {
 				style={{
 					flexDirection: 'row',
 					alignItems: 'center',
-					width: '100%',
 					justifyItems: 'center',
 					display: 'flex',
 					margin: 24,

@@ -44,8 +44,8 @@ const ManageUser = () => {
 
 	useEffect(async () => {
 		if (superheroes) {
-			await getMyInfor();
-			await getUsers();
+			getMyInfor();
+			getUsers();
 		}
 	}, [superheroes]);
 
@@ -152,12 +152,12 @@ const ManageUser = () => {
 				{search.length > 0
 					? usersSearch.map((item, index) => {
 							return item.role !== 3 ? (
-								<ItemRank item={item} index={index} />
+								<ItemRank item={item} index={index} key={Math.random()} />
 							) : null;
 					  })
 					: users.map((item, index) => {
 							return item.role !== 3 ? (
-								<ItemRank item={item} index={index} />
+								<ItemRank item={item} index={index} key={Math.random()} />
 							) : null;
 					  })}
 			</div>

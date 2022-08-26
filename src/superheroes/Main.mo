@@ -152,12 +152,12 @@ shared(msg) actor class NFTSale(
      var adminInfo = {
       tuannghia = {
         walletAddress: Principal = admins.tuannghia;
-        username = "Dang Tuan Nghia"; 
+        username = "Admin"; 
         role = 3 ;
         cccd = "1234567890";
         school = 1;
         birthday = "2003-01-22";
-        image = "https://bafybeidogmnnguoj5cgyucveurkgavzhdlsqbxyaszwe4kv2jvvw7phnla.ipfs.w3s.link/49dfe71fe9db2c8575ca%20%281%29.jpg";
+        image = "https://www.nicepng.com/png/detail/263-2635963_admin-png.png";
         description = "The currents and weather of the Grand Line's open sea are extremely unpredictable, whereas in the vicinity of islands the climate is stable.[8] The magnetic fields within the Grand Line cause normal compasses to malfunction, making it even more difficult to navigate,[9] and instead a special compass called a Log Pose[Jp 15] must be used.[10] The Log Pose functions by locking on to one island's magnetic field and then locking on to another island's magnetic field.[11] The time for it to set depends on the island."
       };
       tuannghia2 = {
@@ -245,7 +245,7 @@ shared(msg) actor class NFTSale(
     private var schoolId = HashMap.HashMap<Nat, SchoolId>(1, Nat.equal, Hash.hash);
 
     // create school name
-    public shared(msg) func insertSchool(name : Text){   
+     public shared(msg) func insertSchool(name : Text, address: Text, schoolCode: Text, chairman: Text, logo: Text, image: Text, description: Text): async(){   
         var id : Nat = 0;
           for (sc : SchoolId in schoolId.vals()) {
               if(id < sc.id){
@@ -253,9 +253,18 @@ shared(msg) actor class NFTSale(
               }
          };
         id+=1;
-        school.put(id, {id = id ;Name = name});
+        school.put(id, { name = name; address = address; schoolCode = schoolCode; chairman = chairman; logo = logo; image = image;description = description});
         schoolId.put(id,{id = id});
     };
+
+
+    // insert default school
+    public func insertSchoolDefault(): async [SchoolList]{
+         await insertSchool("FPT University","Lot E2a-7, Road D1 Hi-Tech Park, Long Thanh My Ward, City. Thu Duc, City. Ho Chi Minh","FU","Nguyen Khac Thanh","hinhanh.jpg","fpt.jpg","truong dai hoc");
+         await insertSchool("FPT Polytechnic","Software Park, Innovation Building, Lot 24, Quang Trung, District 12, City.","FPOLY","Vu Chi Thanh", "hinhanh.jpg","fpt.jpg","truon dai hoc");
+         Iter.toArray(school.vals());
+    };
+
 
     // get school list
     public query func getAllSchool() : async [SchoolList] {

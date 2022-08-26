@@ -6,7 +6,7 @@ import ItemBid from './ItemBid';
 
 const Bids = ({ title, data }) => {
 	return (
-		<div className='bids section__padding'>
+		<div className='bids'>
 			<div className='bids-container'>
 				<div className='bids-container-text'>
 					<h2>{title}</h2>

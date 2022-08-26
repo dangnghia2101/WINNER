@@ -19,23 +19,7 @@ h1 {
 }
 
 button {
-	border: 5px solid;
-	border-image-slice: 1;
-	border-width: 2px;
-
-	background: none;
-	text-decoration: inherit;
-	font-family: system-ui;
-	font-size: 1rem;
-	padding: 1rem 2rem;
-
-	border-image-source: linear-gradient(to left, #743ad5, #d53a9d);
-
-	border-radius: 10px !important;
-	color: white;
-	margin: auto;
-
-	background-clip: padding-box;
+	background: #24252d;
 }
 
 .row1 {
@@ -77,7 +61,7 @@ button {
 	border-radius: 5px;
 }
 
-.boxTopBottom input {
+/* .boxTopBottom input {
 	background: #1b1a21;
 	border-radius: 10px;
 	border: none;
@@ -87,7 +71,7 @@ button {
 	display: flex;
 	margin-right: 1rem;
 	width: 380px;
-}
+} */
 
 @media screen and (max-width: 1050px) {
 	.profile-pic img {

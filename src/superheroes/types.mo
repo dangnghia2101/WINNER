@@ -109,8 +109,13 @@ module {
 
     // Khai báo trường School
     public type SchoolList ={
-        id: Nat;
-        Name: Text;
+        name: Text;
+        address: Text;
+        schoolCode: Text;
+        chairman: Text;
+        logo: Text;
+        image: Text;
+        description: Text;
     };
 
      public type SchoolId ={
