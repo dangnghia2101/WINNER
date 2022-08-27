@@ -244,8 +244,9 @@ shared(msg) actor class NFTSale(
     private var school = HashMap.HashMap<Nat, SchoolList>(1, Nat.equal, Hash.hash);
     private var schoolId = HashMap.HashMap<Nat, SchoolId>(1, Nat.equal, Hash.hash);
 
-    // create school name
-     public shared(msg) func insertSchool(name : Text, address: Text, schoolCode: Text, chairman: Text, image: Text, description: Text): async(){   
+
+    // Thêm trường học
+    public shared(msg) func insertSchool(name : Text, address: Text, schoolCode: Text, chairman: Text, logo: Text, image: Text, description: Text): async(){   
         var id : Nat = 0;
           for (sc : SchoolId in schoolId.vals()) {
               if(id < sc.id){
@@ -253,7 +254,7 @@ shared(msg) actor class NFTSale(
               }
          };
         id+=1;
-        school.put(id, { name = name; address = address; schoolCode = schoolCode; chairman = chairman; image = image;description = description});
+        school.put(id, { name = name; address = address; schoolCode = schoolCode; chairman = chairman; logo = logo; image = image;description = description});
         schoolId.put(id,{id = id});
     };
 
