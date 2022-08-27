@@ -52,7 +52,7 @@ const Index = () => {
 			{Number(profile.current?.role) === 3 ? (
 				<div className='container'>
 					<div className='row'>
-						<a href='/manage-user' className='btn btn-4 col-6'>
+						<a href='/manage-school' className='btn btn-4 col-6'>
 							Manage school
 						</a>
 						<a href='/create-school' className='btn btn-5 col-6'>
