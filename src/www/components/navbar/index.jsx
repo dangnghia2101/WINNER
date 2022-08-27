@@ -115,6 +115,10 @@ function Navbar(props) {
 										<MenuItem>Create degree</MenuItem>
 									</a>
 
+									<a href='/nft/create-excel' onClick={selectTab}>
+										<MenuItem>Create degree excel</MenuItem>
+									</a>
+
 									<a href='/create-user'>
 										<MenuItem>Create account</MenuItem>
 									</a>
