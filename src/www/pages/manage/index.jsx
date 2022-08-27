@@ -29,38 +29,42 @@ const Index = () => {
 			<div className='container'>
 				<div className='row'>
 					<a href='/nft/create' className='btn btn-1 col-6'>
-						Create degree
+						<p>Create degree</p>
 					</a>
 
 					<a href='/create-user' className='btn btn-2 col-6'>
-						Create account
+						<p>Create account</p>
 					</a>
 				</div>
 			</div>
+
 			<div className='container'>
 				<div className='row'>
 					<a href='/manage-degree' className='btn btn-3 col-6'>
-						Manage degrees
+						<p>Manage degrees</p>
 					</a>
-					{Number(profile.current?.role) === 3 ? (
+					{/* {Number(profile.current?.role) === 3 ? ( */}
 						<a href='/manage-user' className='btn btn-4 col-6'>
-							Manage accounts
+							<p>Manage accounts</p>
+						</a>
+					{/* ) : null} */}
+				</div>
+			</div>
+			
+			<div className='container'>
+				<div className='row'>
+					{Number(profile.current?.role) === 3 ? (
+						<a href='/manage-school' className='btn btn-4 col-6'>
+							Manage school
+						</a>
+					) : null}
+					{Number(profile.current?.role) === 3 ? (
+						<a href='/create-school' className='btn btn-5 col-6'>
+							Create school
 						</a>
 					) : null}
 				</div>
 			</div>
-			{Number(profile.current?.role) === 3 ? (
-				<div className='container'>
-					<div className='row'>
-						<a href='/manage-school' className='btn btn-4 col-6'>
-							Manage school
-						</a>
-						<a href='/create-school' className='btn btn-5 col-6'>
-							Create school
-						</a>
-					</div>
-				</div>
-			) : null}
 		</div>
 	);
 };
