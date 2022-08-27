@@ -30,6 +30,7 @@ function CreateNft(props) {
 	const { principal } = useConnect();
 	const [fileImg, setFileImg] = useState('');
 	const profile = useRef({ role: 1 });
+	const allSchool = useRef([]);
 	const [superheroes, { loading, error }] = useCanister('superheroes');
 
 	// upload image
@@ -53,6 +54,9 @@ function CreateNft(props) {
 
 	const getMyInfor = async () => {
 		const res = await superheroes.findUserById(Principal.fromText(principal));
+		const schools = await superheroes.getAllSchool();
+		allSchool.current = schools;
+		console.log('====> ', allSchool);
 		profile.current = res[0];
 	};
 
@@ -93,7 +97,6 @@ function CreateNft(props) {
 			{ type: 'text/plain' }
 		);
 		const metadataCID = await client.put([nFile]);
-		console.log('===> metadataCID ', metadataCID);
 
 		const res = await superheroes.mint(Principal.fromText(values?.address), [
 			{ tokenUri: `${IPFS_LINK}${metadataCID}/${values?.name}.json` },
@@ -393,6 +396,10 @@ function CreateNft(props) {
 											<Option value='2'>FPT University</Option>
 
 											<Option value='3'>Uni of Greenwich</Option>
+
+											{/* {allSchool.current?.map((item) => {
+												<Option value={item?.name}>FPT Polytechnic</Option>;
+											})} */}
 										</Select>
 									</Form.Item>
 								</div>
