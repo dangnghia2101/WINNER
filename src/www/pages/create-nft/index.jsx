@@ -53,6 +53,8 @@ function CreateNft(props) {
 
 	const getMyInfor = async () => {
 		const res = await superheroes.findUserById(Principal.fromText(principal));
+		const schools = await superheroes.getAllSchool();
+		console.log('=====> getAllSchool  ', schools);
 		profile.current = res[0];
 	};
 

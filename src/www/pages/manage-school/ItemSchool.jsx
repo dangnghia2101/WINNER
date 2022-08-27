@@ -8,57 +8,69 @@ import { useCanister } from '@connect2ic/react';
 import { Link } from 'react-router-dom';
 
 const ItemSchool = ({ item, index }) => {
-
 	return (
 		<div style={containerBottomRank}>
 			<Link
 				to={`/manage-school/${index}`}
 				params={item}
 				style={{ justifiContent: 'center', alignItems: 'center' }}>
-			<div className='boxTopBottom' style={boxTopBottom}>
-				<div style={row}>
-					<div
-						style={{
-							fontWeight: 'bold',
-							fontSize: 12,
-							color: 'white',
-							marginRight: 30,
-						}}>
-						{index + 1}
-					</div>
-					<img src={item.image} />
+				<div className='boxTopBottom' style={boxTopBottom}>
+					<div style={row}>
+						<div
+							style={{
+								fontWeight: 'bold',
+								fontSize: 12,
+								color: 'white',
+								marginRight: 30,
+							}}>
+							{index + 1}
+						</div>
+						<img src={item.image} />
 
+						<div
+							style={{
+								fontWeight: 'bold',
+								fontSize: 12,
+								color: 'white',
+								marginLeft: 120,
+							}}>
+							{item.name}
+						</div>
+					</div>
 					<div
 						style={{
 							fontWeight: 'bold',
 							fontSize: 12,
 							color: 'white',
-							marginLeft: 100,
+							flex: 2,
+							marginLeft: 180,
+							alignSelf: 'center',
 						}}>
-						{item.name}
+						{item.address}
+					</div>
+					<div
+						style={{
+							fontWeight: 'bold',
+							fontSize: 12,
+							color: 'white',
+							flex: 2,
+							marginLeft: 200,
+							alignSelf: 'center',
+						}}>
+						{item.schoolCode}
+					</div>
+					<div
+						style={{
+							fontWeight: 'bold',
+							fontSize: 12,
+							color: 'white',
+							flex: 3,
+							marginLeft: 140,
+							alignSelf: 'center',
+						}}>
+						{item.chairman}
 					</div>
 				</div>
-				<div
-					style={{
-						fontWeight: 'bold',
-						fontSize: 12,
-						color: 'white',
-						flex: 2,
-						alignSelf: 'center',
-					}}>
-					{item.schoolCode}
-				</div>
-				<div
-					style={{
-						fontWeight: 'bold',
-						fontSize: 12,
-						color: 'white',
-						flex: 3,
-						alignSelf: 'center',
-					}}>
-					{item.chairman}
-				</div>
-			</div>
 			</Link>
 		</div>
 	);
