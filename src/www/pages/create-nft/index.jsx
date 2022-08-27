@@ -100,7 +100,7 @@ function CreateNft(props) {
 		]);
 		console.log('==== mint ', res);
 		toast('Minted NFT success!!!');
-		getLIst();
+		window.location.reload();
 	};
 
 	const onFinishFailed = (errorInfo) => {
