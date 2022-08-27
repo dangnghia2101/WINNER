@@ -6,6 +6,7 @@ import { useCanister, useConnect } from '@connect2ic/react';
 import './index.css';
 import Bids from '../../components/bids/Bids';
 import { Principal } from '@dfinity/principal';
+import { toast } from 'react-toastify';
 
 const formatDate = (_timestamp) => {
 	var date = new Date(_timestamp);
@@ -75,17 +76,21 @@ function ListNft() {
 
 	const getListAll = async () => {
 		const res = await superheroes.getAllTokens();
-
+		console.log('====> getListAll nft ', res);
 		const promise4all = Promise.all(
 			res.map(function (el) {
 				try {
-					return customAxios(el.metadata[0]?.tokenUri);
+					return [
+						...customAxios(el.metadata[0]?.tokenUri),
+						{ schoolCode: el.schoolCode },
+					];
 				} catch (e) {
 					return null;
 				}
 			})
 		);
 		const resu = await promise4all;
+
 		const newlist = res.map((el, index) => {
 			try {
 				return { ...el, ...resu[index] };
