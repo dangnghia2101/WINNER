@@ -259,12 +259,23 @@ shared(msg) actor class NFTSale(
     };
 
 
-    // // insert default school
-    // public func insertSchoolDefault(): async [SchoolList]{
-    //      await insertSchool("FPT University","Lot E2a-7, Road D1 Hi-Tech Park, Long Thanh My Ward, City. Thu Duc, City. Ho Chi Minh","FU","Nguyen Khac Thanh","hinhanh.jpg","fpt.jpg","truong dai hoc");
-    //      await insertSchool("FPT Polytechnic","Software Park, Innovation Building, Lot 24, Quang Trung, District 12, City.","FPOLY","Vu Chi Thanh", "hinhanh.jpg","fpt.jpg","truon dai hoc");
-    //      Iter.toArray(school.vals());
-    // };
+      // update school 
+
+    public func updateSchool(id : Nat, name : Text, address: Text, schoolCode: Text, chairman: Text, logo: Text, image: Text, description: Text): async(){   
+        school.put(id, { name = name; address = address; schoolCode = schoolCode; chairman = chairman; logo = logo; image = image;description = description});
+    };
+
+
+
+    // insert default school
+    public func insertSchoolDefault(): async [SchoolList]{
+         if(school.size() == 0){
+            await insertSchool("FPT University","Lot E2a-7, Road D1 Hi-Tech Park, Long Thanh My Ward, City. Thu Duc, City. Ho Chi Minh","FU","Nguyen Khac Thanh","hinhanh.jpg","fpt.jpg","truong dai hoc");
+            await insertSchool("FPT Polytechnic","Software Park, Innovation Building, Lot 24, Quang Trung, District 12, City.","FPOLY","Vu Chi Thanh", "hinhanh.jpg","fpt.jpg","truon dai hoc");
+        }; 
+        Iter.toArray(school.vals());
+    };
+
 
 
     // get school list
