@@ -246,6 +246,7 @@ shared(msg) actor class NFTSale(
         info.get(cccd);
     };
 
+    // lay thong tin
     public query func getValInfo() : async [Info] {
         Iter.toArray(info.vals());
     };
