@@ -202,7 +202,7 @@ function CreateUserExcel(props) {
 						Step 1
 					</div>
 					<div style={{ color: 'white' }}>
-						Upload image: Here is a photo of an NFT certified person.
+						Upload excel: This is an excel file uploaded from the computer.
 					</div>
 				</div>
 
@@ -241,20 +241,20 @@ function CreateUserExcel(props) {
 						<FormWrapper>
 							<FormItem>
 								<Form.Item >
-									<div class="file-input" onChange={onChange}>
+									<div className="file-input" onChange={onChange}>
 										<input
 										type="file"
 										name="file-input"
 										id="file-input"
-										class="file-input__input"
+										className="file-input__input"
 										/>
-										<label class="file-input__label" for="file-input">
+										<label className="file-input__label" for="file-input">
 										<svg
 											aria-hidden="true"
 											focusable="false"
 											data-prefix="fas"
 											data-icon="upload"
-											class="svg-inline--fa fa-upload fa-w-16"
+											className="svg-inline--fa fa-upload fa-w-16"
 											role="img"
 											xmlns="http://www.w3.org/2000/svg"
 											viewBox="0 0 512 512">
@@ -262,7 +262,6 @@ function CreateUserExcel(props) {
 										</svg>
 										<span>Upload file</span></label>
 									</div>
-									{/* <input type="file" onChange={onChange} /> */}
 								</Form.Item>
 							</FormItem>
 
