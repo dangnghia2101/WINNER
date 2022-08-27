@@ -76,7 +76,6 @@ function ListNft() {
 
 	const getListAll = async () => {
 		const res = await superheroes.getAllTokens();
-		console.log('====> ', res);
 		const promise4all = Promise.all(
 			res.map(async (el) => {
 				try {
@@ -89,7 +88,7 @@ function ListNft() {
 		);
 		const resu = await promise4all;
 		// const resu = [await customAxios(res[].metadata[0]?.tokenUri)];
-
+		console.log('====> ', resu);
 
 		const newlist = res.map((el, index) => {
 			try {
