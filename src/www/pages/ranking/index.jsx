@@ -60,8 +60,8 @@ const Ranking = () => {
 	const findSearch = (e) => {
 		// const keyword = e.target.value;
 		usersSearch;
-		console.log('===> search ', e.length);
-		if (e.length > 0) {
+		console.log('===> search ', e.target.value);
+		if (e.target.value.length > 0) {
 			let listSearch = [];
 			// = test.filter((item) => {
 			// 	item.cccd == keyword;
@@ -71,12 +71,12 @@ const Ranking = () => {
 				listSearch = users.current.filter(
 					(item) =>
 						Principal.fromUint8Array(item.walletAddress._arr).toString() ==
-						e.toString()
+						e.target.value.toString()
 				);
 			}
 			if (listSearch.length === 0)
 				listSearch = users.current.filter(
-					(item) => item.username.includes(e) || item.cccd.includes(e)
+					(item) => item.username.includes(e.target.value) || item.cccd.includes(e.target.value)
 				);
 
 			console.log('===> search ', listSearch);
@@ -86,7 +86,8 @@ const Ranking = () => {
 			console.log('VO ne vo ne ', users.current);
 			setUsersSearch(users.current);
 		}
-		setSearch(e);
+
+		setSearch(e.target.value);
 	};
 
 	useEffect(async () => {
@@ -212,15 +213,19 @@ const Ranking = () => {
 					</div> */}
 
 					{/* {inputSearch()} */}
-					<Search
+					{/* <Search
 						placeholder='Search by address wallet, citizen identification'
 						allowClear
 						enterButton='Search'
 						size='middle'
 						onSearch={findSearch}
-						style={{
-							width: 350,
-						}}
+					/> */}
+
+					<input
+						onChange={findSearch}
+						value={search.current}
+						type='text'
+						placeholder='Search by address wallet, citizen identification'
 					/>
 
 					<div

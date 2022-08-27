@@ -14,7 +14,7 @@
 		"Canister"
 	],
 	"scripts": {
-		"build": "yarn run dfxstart && yarn run deploy",
+		"build": "webpack",
 		"buildjs": "react-scripts build",
 		"prebuild": "npm run copy:types",
 		"start": "webpack serve --mode development --env development",
@@ -23,7 +23,7 @@
 		"copy:types": "rsync -avr .dfx/$(echo ${DFX_NETWORK:-'**'})/canisters/superheroes/** --exclude='assets/' --exclude='idl/' --exclude='*.wasm' --delete src/declarations/",
 		"predeploy": "yarn start",
 		"dfxstart": "dfx start",
-		"deploy": "dfx canister create --all && yarn &&  dfx build superheroes && dfx canister install superheroes --argument='(principal `$(dfx identity get-principal)`)' &&  yarn run start:dev"
+		"deploy1": "dfx canister create --all && yarn &&  dfx build superheroes && dfx canister install superheroes --argument='(principal `$(dfx identity get-principal)`)' &&  yarn run start:dev"
 	},
 	"devDependencies": {
 		"@dfinity/agent": "0.10.2",
@@ -74,6 +74,7 @@
 		"react-copy-to-clipboard": "^5.1.0",
 		"react-countdown": "^2.3.2",
 		"react-dom": "^17.0.2",
+		"react-horizontal-scrolling-menu": "^3.2.0",
 		"react-icons": "^4.4.0",
 		"react-loading": "^2.0.3",
 		"react-redux": "^8.0.2",
