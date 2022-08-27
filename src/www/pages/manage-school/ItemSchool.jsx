@@ -5,39 +5,16 @@ import { Link } from 'react-router-dom';
 import { Principal } from '@dfinity/principal';
 import { Switch } from 'antd';
 import { useCanister } from '@connect2ic/react';
-
-const getSchool = (_value) => {
-	switch (_value) {
-		case 1:
-			return 'FPT POLYTECHNIC';
-		case 2:
-			return 'FPT UNIVERSITY';
-		case 3:
-			return 'UNI OF GREENWICH';
-		default:
-			return 'FPT POLYTECHNIC';
-	}
-};
+import { Link } from 'react-router-dom';
 
 const ItemSchool = ({ item, index }) => {
-	const [superheroes, { loading, error }] = useCanister('superheroes');
-	const [isSwitch, setIsSwitch] = useState(Number(item.role) === 2);
 
-	const onChange = async (checked) => {
-		setIsSwitch(!isSwitch);
-		const res = await superheroes.updateUser(
-			item?.walletAddress,
-			item.username,
-			item.cccd,
-			Number(item.school),
-			item.birthday,
-			item.image,
-			item.description,
-			checked === true ? 2 : 1
-		);
-	};
 	return (
 		<div style={containerBottomRank}>
+			<Link
+				to={`/manage-school/${index}`}
+				params={item}
+				style={{ justifiContent: 'center', alignItems: 'center' }}>
 			<div className='boxTopBottom' style={boxTopBottom}>
 				<div style={row}>
 					<div
@@ -82,6 +59,7 @@ const ItemSchool = ({ item, index }) => {
 					{item.chairman}
 				</div>
 			</div>
+			</Link>
 		</div>
 	);
 };
