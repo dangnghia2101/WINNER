@@ -56,7 +56,11 @@ const Profile = () => {
 		// console.log(await superheroes.getPrint());
 		const promise4all = Promise.all(
 			res.map(function (el) {
-				return customAxios(el.metadata[0]?.tokenUri);
+				try {
+					return customAxios(el.metadata[0]?.tokenUri);
+				} catch (e) {
+					return null;
+				}
 			})
 		);
 		const resu = await promise4all;

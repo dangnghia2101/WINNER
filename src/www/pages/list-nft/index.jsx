@@ -87,7 +87,11 @@ function ListNft() {
 		);
 		const resu = await promise4all;
 		const newlist = res.map((el, index) => {
-			return { ...el, ...resu[index] };
+			try {
+				return { ...el, ...resu[index] };
+			} catch (e) {
+				return null;
+			}
 		});
 
 		listAll.current = newlist;
