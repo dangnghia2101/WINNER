@@ -5,7 +5,7 @@ import { useCanister, useConnect } from '@connect2ic/react';
 import { Principal } from '@dfinity/principal';
 import NotPermistion from '../../components/not-permistion';
 
-import ItemRank from './ItemUser';
+import ItemSchool from './ItemSchool';
 
 const formatDate = (_timestamp) => {
 	var date = new Date(_timestamp);
@@ -45,7 +45,7 @@ const ManageUser = () => {
 	useEffect(async () => {
 		if (superheroes) {
 			getMyInfor();
-			getUsers();
+			getSchool();
 		}
 	}, [superheroes]);
 
@@ -54,14 +54,14 @@ const ManageUser = () => {
 		profile.current = res[0];
 	};
 
-	const getUsers = async () => {
+	const getSchool = async () => {
 		try {
-			const res = await superheroes.getAllUser();
+			const res = await superheroes.getAllSchool();
 			const filterUser = res.filter((item) => Number(item.role) != 3);
-			//console.log(res);
+			console.log(res);
 			setUsers(filterUser);
 		} catch (error) {
-			console.log('[getUsers] error', error);
+			console.log('[GetSchool] error', error);
 		}
 	};
 
@@ -97,7 +97,7 @@ const ManageUser = () => {
 	const renderMain = () => {
 		return (
 			<div className='profile section__padding'>
-				<div style={textTitle}>Manage all users</div>
+				<div style={textTitle}>Manage all schools</div>
 				<div style={textDay}>{formatDate(new Date())}</div>
 
 				<div style={containerBottomRank}>
@@ -123,27 +123,27 @@ const ManageUser = () => {
 								paddingLeft: 100,
 							}}>
 							{' '}
-							School
+							Address School
 						</div>
 						<div
 							style={{
 								fontWeight: 'bold',
 								fontSize: 12,
 								color: 'white',
-								paddingLeft: 400,
+								paddingLeft: 200,
 							}}>
 							{' '}
-							Information
+							School Code
 						</div>
 						<div
 							style={{
 								fontWeight: 'bold',
 								fontSize: 12,
 								color: 'white',
-								paddingLeft: 150,
+								paddingLeft: 250,
 							}}>
 							{' '}
-							Manager
+							Chairman
 						</div>
 					</div>
 				</div>
@@ -151,12 +151,12 @@ const ManageUser = () => {
 				{search.length > 0
 					? usersSearch.map((item, index) => {
 							return item.role !== 3 ? (
-								<ItemRank item={item} index={index} key={Math.random()} />
+								<ItemSchool item={item} index={index} key={Math.random()} />
 							) : null;
 					  })
 					: users.map((item, index) => {
 							return item.role !== 3 ? (
-								<ItemRank item={item} index={index} key={Math.random()} />
+								<ItemSchool item={item} index={index} key={Math.random()} />
 							) : null;
 					  })}
 			</div>

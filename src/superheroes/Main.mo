@@ -152,12 +152,12 @@ shared(msg) actor class NFTSale(
      var adminInfo = {
       tuannghia = {
         walletAddress: Principal = admins.tuannghia;
-        username = "Dang Tuan Nghia"; 
+        username = "Admin"; 
         role = 3 ;
         cccd = "1234567890";
-        school = 1;
+        school = "";
         birthday = "2003-01-22";
-        image = "https://bafybeidogmnnguoj5cgyucveurkgavzhdlsqbxyaszwe4kv2jvvw7phnla.ipfs.w3s.link/49dfe71fe9db2c8575ca%20%281%29.jpg";
+        image = "https://www.nicepng.com/png/detail/263-2635963_admin-png.png";
         description = "The currents and weather of the Grand Line's open sea are extremely unpredictable, whereas in the vicinity of islands the climate is stable.[8] The magnetic fields within the Grand Line cause normal compasses to malfunction, making it even more difficult to navigate,[9] and instead a special compass called a Log Pose[Jp 15] must be used.[10] The Log Pose functions by locking on to one island's magnetic field and then locking on to another island's magnetic field.[11] The time for it to set depends on the island."
       };
       tuannghia2 = {
@@ -165,7 +165,7 @@ shared(msg) actor class NFTSale(
         username = "Dang Tuan Nghia"; 
         role = 3 ;
         cccd = "123456789";
-        school = 1;
+        school = "";
         birthday = "2003-01-22";
         image = "https://bafybeidogmnnguoj5cgyucveurkgavzhdlsqbxyaszwe4kv2jvvw7phnla.ipfs.w3s.link/49dfe71fe9db2c8575ca%20%281%29.jpg";
         description = "The currents and weather of the Grand Line's open sea are extremely unpredictable, whereas in the vicinity of islands the climate is stable.[8] The magnetic fields within the Grand Line cause normal compasses to malfunction, making it even more difficult to navigate,[9] and instead a special compass called a Log Pose[Jp 15] must be used.[10] The Log Pose functions by locking on to one island's magnetic field and then locking on to another island's magnetic field.[11] The time for it to set depends on the island."
@@ -175,7 +175,7 @@ shared(msg) actor class NFTSale(
         username = "Phan Nguyen Dang Truong";
         role = 3;
         cccd = "12345678";
-        school = 1;
+        school = "";
         birthday = "2003-01-22";
         image = "https://bafybeidogmnnguoj5cgyucveurkgavzhdlsqbxyaszwe4kv2jvvw7phnla.ipfs.w3s.link/49dfe71fe9db2c8575ca%20%281%29.jpg";
         description = "The currents and weather of the Grand Line's open sea are extremely unpredictable, whereas in the vicinity of islands the climate is stable.[8] The magnetic fields within the Grand Line cause normal compasses to malfunction, making it even more difficult to navigate,[9] and instead a special compass called a Log Pose[Jp 15] must be used.[10] The Log Pose functions by locking on to one island's magnetic field and then locking on to another island's magnetic field.[11] The time for it to set depends on the island."
@@ -205,7 +205,7 @@ shared(msg) actor class NFTSale(
 
     // Thêm tài khoản cho user
     public shared(msg) func insertUser(walletAddress : Principal, username : Text,
-                cccd : Text, school : Nat, birthday : Text, image: Text, description: Text){   
+                cccd : Text, school : Text, birthday : Text, image: Text, description: Text){   
         userInfo.put(walletAddress, {walletAddress = walletAddress; role = role.employee; username = username ; cccd = cccd; school = school; birthday = birthday; image = image; description = description});
         info.put(cccd, {walletAddress = walletAddress ; username = username});
     };
@@ -217,7 +217,7 @@ shared(msg) actor class NFTSale(
 
     //Update user bằng walletAddress
     public shared(msg) func updateUser(walletAddress : Principal, username : Text, 
-                cccd : Text,  school : Nat, birthday : Text, image: Text, description: Text, role : Nat){
+                cccd : Text,  school : Text, birthday : Text, image: Text, description: Text, role : Nat){
           userInfo.put(walletAddress, {walletAddress = walletAddress; role = role; username = username ; cccd = cccd; school = school; 
             birthday = birthday; image = image; description = description});
     };
@@ -244,8 +244,9 @@ shared(msg) actor class NFTSale(
     private var school = HashMap.HashMap<Nat, SchoolList>(1, Nat.equal, Hash.hash);
     private var schoolId = HashMap.HashMap<Nat, SchoolId>(1, Nat.equal, Hash.hash);
 
-    // create school name
-     public shared(msg) func insertSchool(name : Text, address: Text, schoolCode: Text, chairman: Text, logo: Text, image: Text, description: Text): async(){   
+
+    // Thêm trường học
+    public shared(msg) func insertSchool(name : Text, address: Text, schoolCode: Text, chairman: Text, logo: Text, image: Text, description: Text): async(){   
         var id : Nat = 0;
           for (sc : SchoolId in schoolId.vals()) {
               if(id < sc.id){
@@ -274,6 +275,7 @@ shared(msg) actor class NFTSale(
         }; 
         Iter.toArray(school.vals());
     };
+
 
 
     // get school list

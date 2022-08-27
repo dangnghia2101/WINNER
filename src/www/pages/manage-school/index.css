@@ -19,7 +19,23 @@ h1 {
 }
 
 button {
-	background: #24252d;
+	border: 5px solid;
+	border-image-slice: 1;
+	border-width: 2px;
+
+	background: none;
+	text-decoration: inherit;
+	font-family: system-ui;
+	font-size: 1rem;
+	padding: 1rem 2rem;
+
+	border-image-source: linear-gradient(to left, #743ad5, #d53a9d);
+
+	border-radius: 10px !important;
+	color: white;
+	margin: auto;
+
+	background-clip: padding-box;
 }
 
 .row1 {
@@ -65,7 +81,8 @@ button {
 	background: #1b1a21;
 	border-radius: 10px;
 	border: none;
-	padding: 10px 19px 10px 40px;
+	padding: 7px 19px 7px 15px;
+	font-family: var(--font-family);
 	outline: none;
 	color: whitesmoke;
 	display: flex;

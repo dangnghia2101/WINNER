@@ -4,26 +4,40 @@ body {
 }
 
 .container {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	align-content: center;
-	flex-wrap: wrap;
 	margin: 0 auto;
-	min-height: 20vh;
+	/* min-height: 20vh; */
 }
+
+.row{
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.col-4{
+	flex: 0 0 auto;
+    width: 33.33333333% !important;
+}
+
+.col-6{
+	flex: 0 0 auto;
+	width: 50% !important;
+}
+
+.col-12{
+	flex: 0 0 auto;
+	width: 100% !important;
+}
+
 .btn {
 	flex: 1;
 	margin: 50px;
-	padding: 90px;
-	height: 300px;
-	text-align: center;
+	padding: 120px;
+	height: 300px !important;
 	justify-content: center;
 	text-transform: uppercase;
 	transition: 0.5s;
 	background-size: 200% auto;
 	color: white;
-	/* text-shadow: 0px 0px 10px rgba(0,0,0,0.2);*/
 	box-shadow: 0 0 40px rgb(66, 67, 82);
 	border-radius: 20px;
 	font-size: 30px;

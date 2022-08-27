@@ -19,7 +19,7 @@ const getSchool = (_value) => {
 	}
 };
 
-const ItemRank = ({ item, index }) => {
+const ItemSchool = ({ item, index }) => {
 	const [superheroes, { loading, error }] = useCanister('superheroes');
 	const [isSwitch, setIsSwitch] = useState(Number(item.role) === 2);
 
@@ -56,9 +56,9 @@ const ItemRank = ({ item, index }) => {
 							fontWeight: 'bold',
 							fontSize: 12,
 							color: 'white',
-							marginLeft: 10,
+							marginLeft: 100,
 						}}>
-						{item.username}
+						{item.name}
 					</div>
 				</div>
 				<div
@@ -69,52 +69,17 @@ const ItemRank = ({ item, index }) => {
 						flex: 2,
 						alignSelf: 'center',
 					}}>
-					{getSchool(Number(item.school))}
+					{item.schoolCode}
 				</div>
-
-				<div style={{ flex: 1 }}>
-					<Link to={`/profile/${item.walletAddress}`}>
-						<div
-							style={{
-								fontSize: 12,
-								color: 'black',
-								backgroundColor: 'white',
-								borderRadius: 10,
-								paddingLeft: 10,
-								paddingRight: 10,
-								paddingTop: 5,
-								paddingBottom: 5,
-								width: 100,
-								alignSelf: 'center',
-								justifySelf: 'center',
-							}}>
-							More
-						</div>
-					</Link>
-				</div>
-
 				<div
 					style={{
-						flex: 0.5,
-						display: 'flex',
-						direction: 'row',
-						justifyContent: 'center',
-						alignItems: 'center',
+						fontWeight: 'bold',
+						fontSize: 12,
+						color: 'white',
+						flex: 3,
+						alignSelf: 'center',
 					}}>
-					<Switch
-						defaultChecked={Number(item?.role) === 2}
-						onChange={onChange}
-					/>
-					<div
-						style={{
-							fontWeight: 'bold',
-							fontSize: 12,
-							color: 'white',
-							marginLeft: 10,
-							width: 70,
-						}}>
-						{isSwitch ? 'Manage' : 'User'}
-					</div>
+					{item.chairman}
 				</div>
 			</div>
 		</div>
@@ -180,4 +145,4 @@ const row = {
 	justifyContent: 'flex-start',
 	flex: 2,
 };
-export default ItemRank;
+export default ItemSchool;

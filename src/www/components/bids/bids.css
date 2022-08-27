@@ -1,3 +1,6 @@
+.bids {
+	width: 100%;
+}
 .bids-container {
 	display: flex;
 	flex-direction: column;
@@ -23,7 +26,6 @@
 .bids-container-card {
 	margin: 0 -5px;
 	width: 80%;
-	overflow-x: 'scroll';
 }
 .bids-container-card:after {
 	content: '';
@@ -118,9 +120,6 @@
 	}
 }
 @media screen and (max-width: 550px) {
-	.section__padding {
-		padding: 2rem 14px !important;
-	}
 	.bids-card {
 		margin-bottom: 10px;
 		margin-inline: 5px;
