@@ -8,6 +8,7 @@ import { ScrollMenu, VisibilityContext } from 'react-horizontal-scrolling-menu';
 const Bids = ({ title, data }) => {
 	return (
 		// <ScrollMenu className='bids'>
+		// <ScrollMenu className='bids'>
 		<div className='bids'>
 			<div className='bids-container'>
 				<div className='bids-container-text'>
