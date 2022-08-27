@@ -110,43 +110,40 @@ const ManageUser = () => {
 			const wb = XLSX.read(bstr, { type: "binary" });
 			const wsname = wb.SheetNames[0];
 			const ws = wb.Sheets[wsname];
-			const data = XLSX.utils.sheet_to_csv(ws, { header: 1 });
-			console.log(ws);
-			console.log("data: ", data);
-			setExcel(data);
+			const data = XLSX.utils.sheet_to_html(ws, { header: 1 });
+			let csv = data.replace(/<[^>]*>?/gm, ',');
+			setExcel(csv);
 		};
 		reader.readAsBinaryString(file);
   	};
 
 	const createUserExcel = async () => {
 			toast('Waiting...!!!');
+			let data = excel.replace(/"/g, '');
 			const arr = excel.split(',');
 			
-			// for(let i = 0; i < arr.length; i++){
-			// 	if(i == 0 || i == 7 || i == 14 || i == 21 || i == 28 || i == 35){
-			// 		const walletAddress = arr[i];
-			// 		const username = arr[i + 1];
-			// 		const cccd = arr[i + 2];
-			// 		const school = arr[i + 3];
-			// 		const birthday = arr[i + 4];
-			// 		const image = arr[i + 5];
-			// 		const description = arr[i + 6];
-			// 		const res =  await superheroes.insertUser(
-			// 			Principal.from(walletAddress),
-			// 			username,
-			// 			cccd,
-			// 			school,
-			// 			birthday,
-			// 			image,
-			// 			description
-			// 		);
-			// 		toast(`Insert user ` + i + ` success!!!`);
-
-			// 	}
-			// }
-			console.log(arr);
-			console.log(excel);
-			toast('Insert user success!!!');
+			for(let i = 3; i < arr.length; i++){
+				if(i == 3 || i == 19 || i == 35 || i == 51 || i == 67 || i == 83 || i == 99 || i == 115){
+					const walletAddress = arr[i];
+					const username = arr[i + 2];
+					const cccd = arr[i + 4];
+					const school = arr[i + 6];
+					const birthday = arr[i + 8];
+					const image = arr[i + 10];
+					const description = arr[i + 12];
+					const res =  await superheroes.insertUser(
+						Principal.from(walletAddress),
+						username,
+						cccd,
+						school,
+						birthday,
+						image,
+						description
+					);
+					console.log(walletAddress, username, cccd, school, birthday, image, description);
+					toast(`Insert user ` + i + ` success!!!`);
+				}
+			}
 			//window.location.reload();
 		}
 
