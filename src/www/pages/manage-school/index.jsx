@@ -120,10 +120,30 @@ const ManageUser = () => {
 								fontWeight: 'bold',
 								fontSize: 12,
 								color: 'white',
-								marginTop: '10%'
+								paddingLeft: 100,
 							}}>
 							{' '}
-							Name school
+							Address School
+						</div>
+						<div
+							style={{
+								fontWeight: 'bold',
+								fontSize: 12,
+								color: 'white',
+								paddingLeft: 200,
+							}}>
+							{' '}
+							School Code
+						</div>
+						<div
+							style={{
+								fontWeight: 'bold',
+								fontSize: 12,
+								color: 'white',
+								paddingLeft: 250,
+							}}>
+							{' '}
+							Chairman
 						</div>
 					</div>
 				</div>
