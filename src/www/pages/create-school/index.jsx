@@ -33,9 +33,13 @@ function CreateSchool(props) {
 	const [superheroes, { loading, error }] = useCanister('superheroes');
 	const { isConnected, principal } = useConnect();
 	const [fileList, setFileList] = useState([]);
+	const [logoList, setLogoList] = useState([]);
 	const [previewVisible, setPreviewVisible] = useState(false);
+	const [previewVisibleLogo, setPreviewVisibleLogo] = useState(false);
 	const [previewImage, setPreviewImage] = useState('');
+	const [previewImageLogo, setPreviewImageLogo] = useState('');
 	const [previewTitle, setPreviewTitle] = useState('');
+	const [previewTitleLogo, setPreviewTitleLogo] = useState('');
 	const profile = useRef({ role: 1 });
 
 	useEffect(async () => {
@@ -51,6 +55,8 @@ function CreateSchool(props) {
 
 	const handleCancel = () => setPreviewVisible(false);
 
+	const handleCancelLogo = () => setPreviewVisibleLogo(false);
+
 	const getBase64 = (file) =>
 		new Promise((resolve, reject) => {
 			const reader = new FileReader();
@@ -65,14 +71,15 @@ function CreateSchool(props) {
 		toast('Waiting...!!!');
 
 		const cid = await client.put([fileList[0].originFileObj]);
-
+		const cidlogo = await client.put([logoList[0].originFileObj]);
 		const image = `${IPFS_LINK}${cid}/${fileList[0].originFileObj.name}`;
-
+		const logo = `${IPFS_LINK}${cidlogo}/${logoList[0].originFileObj.name}`;
 		const res = await superheroes.insertSchool(
 			values?.name,
 			values?.address,
 			values?.schoolCode,
 			values?.chairman,
+			logo,
 			image,
 			values?.description
 		);
@@ -95,6 +102,20 @@ function CreateSchool(props) {
 		);
 	};
 
+	const handlePreviewLogo = async (file) => {
+		if (!file.url && !file.preview) {
+			file.preview = await getBase64(file.originFileObj);
+		}
+
+		console.log(file);
+
+		setPreviewImageLogo(file.url || file.preview);
+		setPreviewVisibleLogo(true);
+		setPreviewTitleLogo(
+			file.name || file.url.substring(file.url.lastIndexOf('/') + 1)
+		);
+	};
+
 	const onFinishFailed = (errorInfo) => {
 		console.log('Failed:', errorInfo);
 	};
@@ -111,8 +132,23 @@ function CreateSchool(props) {
 		</div>
 	);
 
-	const handleChange = ({ fileList: newFileList }) => setFileList(newFileList);
+	const uploadLogo = (
+		<div>
+			<PlusOutlined />
+			<div
+				style={{
+					marginTop: 8,
+				}}>
+				Upload logo
+			</div>
+		</div>
+	);
 
+	const handleChange = ({ fileList: newFileList }) => setFileList(newFileList);
+	const handleChangeLogo = ({ fileList : newLogoList }) => {
+		console.log(newLogoList);
+		setLogoList(newLogoList);
+	}
 	return Number(profile.current?.role) === 1 ? (
 		<NotPermistion />
 	) : (
@@ -250,6 +286,38 @@ function CreateSchool(props) {
 												height: '100%',
 											}}
 											src={previewImage}
+										/>
+									</Modal>
+								</Form.Item>
+							</FormItem>
+							<FormItem>
+								<Form.Item name='logo'>
+									<Upload
+										// action='https://www.mocky.io/v2/5cc8019d300000980a055e76'
+										listType='picture-card'
+										fileList={logoList}
+										onPreview={handlePreviewLogo}
+										onChange={handleChangeLogo}
+										style={{
+											flexDirection: 'row',
+											justifyItems: 'center',
+											display: 'flex',
+										}}>
+										{logoList?.length >= 8 ? null : uploadLogo}
+									</Upload>
+									<Modal
+										visible={previewVisibleLogo}
+										title={previewTitleLogo}
+										footer={null}
+										onCancel={handleCancelLogo}
+										style={{ width: 700, height: 400 }}>
+										<img
+											alt='example'
+											style={{
+												width: '100%',
+												height: '100%',
+											}}
+											src={previewImageLogo}
 										/>
 									</Modal>
 								</Form.Item>
