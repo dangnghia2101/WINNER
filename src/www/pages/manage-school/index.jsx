@@ -141,7 +141,7 @@ const ManageUser = () => {
 								fontWeight: 'bold',
 								fontSize: 12,
 								color: 'white',
-								paddingLeft: 250,
+								paddingLeft: 220,
 							}}>
 							{' '}
 							Chairman
