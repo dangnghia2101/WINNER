@@ -16,6 +16,7 @@ module {
         desc: Text;
         totalSupply: Nat;
         owner: Principal;
+        isBlocked: Bool;
         cycles: Nat;
     };
 
@@ -38,6 +39,7 @@ module {
         var owner: Principal;
         var metadata: ?TokenMetadata;
         var operator: ?Principal;
+        var isBlocked: Bool;
         timestamp: Time.Time;
     };
 
@@ -46,6 +48,7 @@ module {
         owner: Principal;
         metadata: ?TokenMetadata;
         operator: ?Principal;
+        isBlocked: Bool;
         timestamp: Time.Time;
     };
     
