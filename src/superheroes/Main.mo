@@ -203,6 +203,24 @@ shared(msg) actor class NFTSale(
     };
 
 
+    // confirm degree is true
+    public shared(msg) func updateIsBlocked(id : Nat)  {       
+       for(sc : TokenInfo in tokens.vals()){
+          if(sc.index == id){
+            let token: TokenInfo = {
+            index = sc.index;
+            var owner = sc.owner;
+            var metadata = sc.metadata;
+            var operator = sc.operator;
+            var isBlocked = true;
+            timestamp = sc.timestamp;
+          };
+          tokens.put(id, token);
+        } ;
+       };
+    };
+
+
     // Thêm tài khoản cho user
     public shared(msg) func insertUser(walletAddress : Principal, username : Text,
                 cccd : Text, school : Text, birthday : Text, image: Text, description: Text){   
