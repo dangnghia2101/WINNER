@@ -54,7 +54,7 @@ module {
         username : Text;
         role : Nat;
         cccd : Text;
-        school: Nat;
+        school: Text;
         birthday: Text;
         image: Text;
         description: Text;
