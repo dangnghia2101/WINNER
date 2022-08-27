@@ -72,6 +72,38 @@ const Index = () => {
 		}
 	}, [superheroes]);
 
+
+	const getSchool = (_value) => {
+		// switch (_value) {
+		// 	case 1:
+		// 		return 'FPT POLYTECHNIC';
+		// 	case 2:
+		// 		return 'FPT UNIVERSITY';
+		// 	case 3:
+		// 		return 'UNI OF GREENWICH';
+		// 	default:
+		// 		return 'FPT POLYTECHNIC';
+		// }
+
+		if (_value) {
+			const nameSchool = allSchool.filter(
+				(_item) => _item.schoolCode == _value
+			)[0];
+
+			return nameSchool?.name;
+		} else return 'Loading...';
+	};
+
+	const getLogoSchool = (_value) => {
+		if (_value) {
+			const nameSchool = allSchool.filter(
+				(_item) => _item.schoolCode == _value
+			)[0];
+
+			return nameSchool?.logo;
+		} else return 'Loading...';
+	};
+
 	const desc = location.pathname.split('/')[2];
 
 	const getListAll = async () => {

@@ -77,12 +77,12 @@ function CreateNftExcel(props) {
 			await getMyInfor();
 		}
 	}, [principal, superheroes]);
-
+	
 	const onFinish = async (values) => {
 		toast('Minting NFT!!!');
 
-		if(fileList[0]){
-			const cid = await client.put([fileList[0].originFileObj]);
+		if(values?.address == undefined){
+		}else{
 			const nFile = new File(
 				[
 					JSON.stringify({
@@ -92,44 +92,29 @@ function CreateNftExcel(props) {
 						school: values?.school,
 						rating: values?.rating,
 						chairman: values?.chairman,
-						image: `${IPFS_LINK}${cid}/${fileList[0].originFileObj.name}`,
+						image: values?.image,
 						timeCreate: Date.now(),
 					}),
 				],
 				`${values?.name}.json`,
 				{ type: 'text/plain' }
 			);
+			const metadataCID = await client.put([nFile]);
+
+			const res = await superheroes.mint(Principal.fromText(values?.address), [
+				{ tokenUri: `${IPFS_LINK}${metadataCID}/${values?.name}.json` },
+			]);
+			console.log('==== mint ', res);
+			toast('Minted NFT success!!!');
 		}
-		const nFile = new File(
-			[
-				JSON.stringify({
-					description: values?.description,
-					name: values?.name,
-					category: values?.category,
-					school: values?.school,
-					rating: values?.rating,
-					chairman: values?.chairman,
-					image: values?.image,
-					timeCreate: Date.now(),
-				}),
-			],
-			`${values?.name}.json`,
-			{ type: 'text/plain' }
-		);
 
-		console.log("======>", nFile);
-
-		const metadataCID = await client.put([nFile]);
-
-		const res = await superheroes.mint(Principal.fromText(values?.address), [
-			{ tokenUri: `${IPFS_LINK}${metadataCID}/${values?.name}.json` },
-		]);
-		console.log('==== mint ', res);
-		toast('Minted NFT success!!!');
 		//window.location.reload();
 	};
 
 	const onChange = (e) => {
+		var fileName = e.target.files[0].name;
+		document.getElementById('fileName').innerHTML = fileName;
+
 		const [file] = e.target.files;
 		const reader = new FileReader();
 
@@ -172,8 +157,14 @@ function CreateNftExcel(props) {
 				}
 
 				//console.log("==== values ", address, name, category, school, rating, chairman, image, description);
-
-				await onFinish(values);
+				const get = allSchool.find(school => school.schoolCode === values.school);
+				console.log("==== get ", get?.schoolCode);
+				console.log("==== values ", values);
+				if(get?.schoolCode == values.school){	
+					await onFinish(values);
+				}else{
+					toast('School not found!!!');
+				}
 			}
 			// window.location.reload();
 		}
@@ -277,12 +268,12 @@ function CreateNftExcel(props) {
 								<FormWrapper>
 									<FormItem>
 										<Form.Item >
-											<div className="file-input" onChange={onChange}>
+											<div className="file-input">
 												<input
 												type="file"
 												name="file-input"
 												id="file-input"
-												className="file-input__input"
+												className="file-input__input" onChange={onChange}
 												/>
 												<label className="file-input__label" for="file-input">
 												<svg
@@ -296,7 +287,7 @@ function CreateNftExcel(props) {
 													viewBox="0 0 512 512">
 													<path fill="currentColor" d="M296 384h-80c-13.3 0-24-10.7-24-24V192h-87.7c-17.8 0-26.7-21.5-14.1-34.1L242.3 5.7c7.5-7.5 19.8-7.5 27.3 0l152.2 152.2c12.6 12.6 3.7 34.1-14.1 34.1H320v168c0 13.3-10.7 24-24 24zm216-8v112c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V376c0-13.3 10.7-24 24-24h136v8c0 30.9 25.1 56 56 56h80c30.9 0 56-25.1 56-56v-8h136c13.3 0 24 10.7 24 24zm-124 88c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20zm64 0c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20z"></path>
 												</svg>
-												<span>Upload file</span></label>
+												<span id='fileName'>Upload file</span></label>
 											</div>
 										</Form.Item>
 									</FormItem>

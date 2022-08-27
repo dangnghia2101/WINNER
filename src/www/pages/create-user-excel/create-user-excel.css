@@ -16,10 +16,10 @@
     border-radius: 4px;
     font-size: 14px;
     font-weight: 600;
-    color: #4245A8;
+    color: #c3c4de;
     font-size: 14px;
     padding: 10px 12px;
-    border: 2px dotted #4245A8;
+    border: 2px dotted #c3c4de;
   }
   
   .file-input__label:hover {

@@ -47,6 +47,18 @@ const ItemBid = ({ item }) => {
 	const getMyInfor = async () => {
 		const res = await superheroes.findUserById(item.owner);
 		setProfile(res[0]);
+		const schools = await superheroes.getAllSchool();
+		setAllSchool(schools);
+	};
+
+	const getSchool = (_value) => {
+		if (_value) {
+			const nameSchool = allSchool.filter(
+				(_item) => _item.schoolCode == _value
+			)[0];
+
+			return nameSchool?.name;
+		} else return 'Loading...';
 	};
 
 	return (

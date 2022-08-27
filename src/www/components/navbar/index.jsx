@@ -46,7 +46,6 @@ function Navbar(props) {
 	const getMyInfor = async () => {
 		if (principal) {
 			let res = await superheroes.findUserById(Principal.fromText(principal));
-			superheroes.insertSchoolDefault();
 			if (
 				(principal == admins.dangtruong ||
 					principal == admins.tuannghia ||
@@ -130,6 +129,36 @@ function Navbar(props) {
 										<MenuItem>Create account excel</MenuItem>
 									</a>
                   
+									<div className='sub-dropdown'>
+										<button className='sub-dropbtn'>
+											<MenuItem>Create degree</MenuItem>
+										</button>
+										<div className='sub-dropdown-content'>
+											<a href='/nft/create' onClick={selectTab}>
+												<MenuItem>Create with form</MenuItem>
+											</a>
+
+											<a href='/nft/create-excel' onClick={selectTab}>
+												<MenuItem>Import by excel</MenuItem>
+											</a>
+										</div>
+									</div>
+
+									<div className='sub-dropdown'>
+										<button className='sub-dropbtn'>
+											<MenuItem>Create account</MenuItem>
+										</button>
+										<div className='sub-dropdown-content'>
+											<a href='/create-user'>
+												<MenuItem>Create with form</MenuItem>
+											</a>
+
+											<a href='/create-user-excel'>
+												<MenuItem>Import by excel</MenuItem>
+											</a>
+										</div>
+									</div>
+
 									{profile?.role == 2 ? (
 										<a href='/manage-degree' onClick={selectTab}>
 											<MenuItem>Manage degrees</MenuItem>

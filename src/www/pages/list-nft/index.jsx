@@ -87,6 +87,8 @@ function ListNft() {
 			})
 		);
 		const resu = await promise4all;
+		console.log('====> ', resu);
+
 		// const resu = [await customAxios(res[].metadata[0]?.tokenUri)];
 		console.log('====> ', resu);
 
