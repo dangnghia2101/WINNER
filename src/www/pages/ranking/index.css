@@ -61,7 +61,7 @@ button {
 	border-radius: 5px;
 }
 
-/* .boxTopBottom input {
+.boxTopBottom input {
 	background: #1b1a21;
 	border-radius: 10px;
 	border: none;
@@ -71,7 +71,7 @@ button {
 	display: flex;
 	margin-right: 1rem;
 	width: 380px;
-} */
+}
 
 @media screen and (max-width: 1050px) {
 	.profile-pic img {
