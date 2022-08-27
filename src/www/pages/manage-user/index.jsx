@@ -5,9 +5,6 @@ import { useCanister, useConnect } from '@connect2ic/react';
 import { Principal } from '@dfinity/principal';
 import { toast } from 'react-toastify';
 import NotPermistion from '../../components/not-permistion';
-import * as XLSX from "xlsx";
-import { Principal } from '@dfinity/principal';
-
 
 import ItemRank from './ItemUser';
 
@@ -35,7 +32,6 @@ const ManageUser = () => {
 	const [users, setUsers] = useState([]);
 	const [search, setSearch] = useState('');
 	const [usersSearch, setUsersSearch] = useState([]);
-	const [excel, setExcel] = useState([]);
 	const profile = useRef({ role: 1 });
 	const {
 		isConnected,
@@ -99,64 +95,11 @@ const ManageUser = () => {
 		setSearch(keyword);
 	};
 
-	
-
-	const onChange = (e) => {
-		const [file] = e.target.files;
-		const reader = new FileReader();
-
-		reader.onload = (evt) => {
-			const bstr = evt.target.result;
-			const wb = XLSX.read(bstr, { type: "binary" });
-			const wsname = wb.SheetNames[0];
-			const ws = wb.Sheets[wsname];
-			const data = XLSX.utils.sheet_to_html(ws, { header: 1 });
-			let csv = data.replace(/<[^>]*>?/gm, ',');
-			setExcel(csv);
-		};
-		reader.readAsBinaryString(file);
-  	};
-
-	const createUserExcel = async () => {
-			toast('Waiting...!!!');
-			let data = excel.replace(/"/g, '');
-			const arr = excel.split(',');
-			
-			for(let i = 3; i < arr.length; i++){
-				if(i == 3 || i == 19 || i == 35 || i == 51 || i == 67 || i == 83 || i == 99 || i == 115){
-					const walletAddress = arr[i];
-					const username = arr[i + 2];
-					const cccd = arr[i + 4];
-					const school = arr[i + 6];
-					const birthday = arr[i + 8];
-					const image = arr[i + 10];
-					const description = arr[i + 12];
-					const res =  await superheroes.insertUser(
-						Principal.from(walletAddress),
-						username,
-						cccd,
-						school,
-						birthday,
-						image,
-						description
-					);
-					console.log(walletAddress, username, cccd, school, birthday, image, description);
-					toast(`Insert user ` + i + ` success!!!`);
-				}
-			}
-			//window.location.reload();
-		}
-
 	const renderMain = () => {
 		return (
 			<div className='profile section__padding'>
 				<div style={textTitle}>Manage all users</div>
 				<div style={textDay}>{formatDate(new Date())}</div>
-				<div>
-     				<input type="file" onChange={onChange} />
-					<button onClick={createUserExcel}>Create</button>
-    			</div>
-
 				<div style={containerBottomRank}>
 					<div
 						className='boxTopBottom'
