@@ -245,7 +245,7 @@ shared(msg) actor class NFTSale(
     private var schoolId = HashMap.HashMap<Nat, SchoolId>(1, Nat.equal, Hash.hash);
 
     // create school name
-     public shared(msg) func insertSchool(name : Text, address: Text, schoolCode: Text, chairman: Text, logo: Text, image: Text, description: Text): async(){   
+     public shared(msg) func insertSchool(name : Text, address: Text, schoolCode: Text, chairman: Text, image: Text, description: Text): async(){   
         var id : Nat = 0;
           for (sc : SchoolId in schoolId.vals()) {
               if(id < sc.id){
@@ -253,17 +253,17 @@ shared(msg) actor class NFTSale(
               }
          };
         id+=1;
-        school.put(id, { name = name; address = address; schoolCode = schoolCode; chairman = chairman; logo = logo; image = image;description = description});
+        school.put(id, { name = name; address = address; schoolCode = schoolCode; chairman = chairman; image = image;description = description});
         schoolId.put(id,{id = id});
     };
 
 
-    // insert default school
-    public func insertSchoolDefault(): async [SchoolList]{
-         await insertSchool("FPT University","Lot E2a-7, Road D1 Hi-Tech Park, Long Thanh My Ward, City. Thu Duc, City. Ho Chi Minh","FU","Nguyen Khac Thanh","hinhanh.jpg","fpt.jpg","truong dai hoc");
-         await insertSchool("FPT Polytechnic","Software Park, Innovation Building, Lot 24, Quang Trung, District 12, City.","FPOLY","Vu Chi Thanh", "hinhanh.jpg","fpt.jpg","truon dai hoc");
-         Iter.toArray(school.vals());
-    };
+    // // insert default school
+    // public func insertSchoolDefault(): async [SchoolList]{
+    //      await insertSchool("FPT University","Lot E2a-7, Road D1 Hi-Tech Park, Long Thanh My Ward, City. Thu Duc, City. Ho Chi Minh","FU","Nguyen Khac Thanh","hinhanh.jpg","fpt.jpg","truong dai hoc");
+    //      await insertSchool("FPT Polytechnic","Software Park, Innovation Building, Lot 24, Quang Trung, District 12, City.","FPOLY","Vu Chi Thanh", "hinhanh.jpg","fpt.jpg","truon dai hoc");
+    //      Iter.toArray(school.vals());
+    // };
 
 
     // get school list

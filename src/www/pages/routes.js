@@ -16,6 +16,7 @@ const ManageUser = lazy(() => import("./manage-user"))
 const ManageDegree = lazy(() => import("./manage-degree"))
 const Manage = lazy(() => import("./manage"))
 const CreateSchool = lazy(() => import("./create-school"))
+const ManageSchool = lazy(() => import("./manage-school"))
 
 const routes = [
     {
@@ -102,6 +103,13 @@ const routes = [
         component: Manage,
         layout: MarketLayout
     },
+    {
+        path: "manage-school",
+        exact: true,
+        public: true,
+        component: ManageSchool,
+        layout: MarketLayout
+    }
 ]
 
 export default routes
