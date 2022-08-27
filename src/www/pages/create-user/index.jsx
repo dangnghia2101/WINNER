@@ -337,10 +337,6 @@ function CreateUser(props) {
 					padding: 20,
 					marginBottom: 50,
 				}}>
-				<div>
-					<input type="file" onChange={onChange} />
-		   			<button onClick={createUserExcel}>Create</button>
-	   			</div>
 				<Title style={{ color: 'white' }}>Create Account</Title>
 				<Required style={{ color: 'white' }}>
 					<RedIcon style={{ color: 'white' }}>*</RedIcon> Required fields
