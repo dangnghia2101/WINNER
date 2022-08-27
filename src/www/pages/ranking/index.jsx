@@ -76,7 +76,9 @@ const Ranking = () => {
 			}
 			if (listSearch.length === 0)
 				listSearch = users.current.filter(
-					(item) => item.username.includes(e.target.value) || item.cccd.includes(e.target.value)
+					(item) =>
+						item.username.includes(e.target.value) ||
+						item.cccd.includes(e.target.value)
 				);
 
 			console.log('===> search ', listSearch);
@@ -99,8 +101,12 @@ const Ranking = () => {
 	const EvaluateRank = (user) => {
 		return Promise.all(
 			user.map(async (item) => {
-				const res = await superheroes.getUserTokens(item.walletAddress);
-				return { ...item, sumDegree: res.length };
+				try {
+					const res = await superheroes.getUserTokens(item.walletAddress);
+					return { ...item, sumDegree: res.length };
+				} catch (e) {
+					return null;
+				}
 			})
 		);
 	};

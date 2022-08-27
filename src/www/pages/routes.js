@@ -17,7 +17,7 @@ const ManageDegree = lazy(() => import("./manage-degree"))
 const Manage = lazy(() => import("./manage"))
 const CreateSchool = lazy(() => import("./create-school"))
 const ManageSchool = lazy(() => import("./manage-school"))
-
+const DetaiSchool = lazy(() => import("./detail-school"))
 const routes = [
     {
         path: "/",
@@ -108,6 +108,13 @@ const routes = [
         exact: true,
         public: true,
         component: ManageSchool,
+        layout: MarketLayout
+    },
+    {
+        path: "manage-school/:id",
+        exact: true,
+        public: true,
+        component: DetaiSchool,
         layout: MarketLayout
     }
 ]

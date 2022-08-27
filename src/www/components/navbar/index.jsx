@@ -46,7 +46,7 @@ function Navbar(props) {
 	const getMyInfor = async () => {
 		if (principal) {
 			let res = await superheroes.findUserById(Principal.fromText(principal));
-
+			superheroes.insertSchoolDefault();
 			if (
 				(principal == admins.dangtruong ||
 					principal == admins.tuannghia ||
@@ -86,14 +86,13 @@ function Navbar(props) {
 	const urlProfile = `/profile/${principal}`;
 
 	return (
-		<Container style={
-			 {
+		<Container
+			style={{
 				position: '-webkit-sticky',
 				position: 'sticky',
 				top: 0,
-				zIndex: 999
-			}
-		}>
+				zIndex: 999,
+			}}>
 			<LogoWrapper>
 				<Link to='/' style={{ color: 'black' }}>
 					<Logo src={images.olive} alt='' onClick={selectTab} />
@@ -107,9 +106,11 @@ function Navbar(props) {
 							<MenuItem>Home</MenuItem>
 						</Link>
 						{profile?.role >= 2 && (
-							<div className="dropdown">
-								<button className="dropbtn"><MenuItem>Manage</MenuItem></button>
-								<div className="dropdown-content">
+							<div className='dropdown'>
+								<button className='dropbtn'>
+									<MenuItem>Manage</MenuItem>
+								</button>
+								<div className='dropdown-content'>
 									<a href='/nft/create' onClick={selectTab}>
 										<MenuItem>Create degree</MenuItem>
 									</a>
@@ -139,11 +140,13 @@ function Navbar(props) {
 											<MenuItem>Create school</MenuItem>
 										</a>
 									) : null}
-
 								</div>
 							</div>
 						)}
-						<Link to={urlProfile} style={{ color: 'black' }} onClick={selectTab}> 
+						<Link
+							to={urlProfile}
+							style={{ color: 'black' }}
+							onClick={selectTab}>
 							<MenuItem>Profile</MenuItem>
 						</Link>
 						<Link to='/nfts' style={{ color: 'black' }} onClick={selectTab}>
@@ -170,7 +173,9 @@ function Navbar(props) {
 								<OptionItem onClick={onDisconnect}>
 									<WalletAddress>
 										{principal
-											? principal?.slice(0, 3) + '...' + principal?.slice(60, 63)
+											? principal?.slice(0, 3) +
+											  '...' +
+											  principal?.slice(60, 63)
 											: 'Connect'}
 									</WalletAddress>
 								</OptionItem>

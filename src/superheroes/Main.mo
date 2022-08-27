@@ -290,8 +290,9 @@ shared(msg) actor class NFTSale(
          if(school.size() == 0){
             await insertSchool("FPT University","Lot E2a-7, Road D1 Hi-Tech Park, Long Thanh My Ward, City. Thu Duc, City. Ho Chi Minh","FU","Nguyen Khac Thanh","hinhanh.jpg","fpt.jpg","truong dai hoc");
             await insertSchool("FPT Polytechnic","Software Park, Innovation Building, Lot 24, Quang Trung, District 12, City.","FPOLY","Vu Chi Thanh", "hinhanh.jpg","fpt.jpg","truon dai hoc");
-        }; 
+        };
         Iter.toArray(school.vals());
+        
     };
 
 

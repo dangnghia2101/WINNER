@@ -5,83 +5,73 @@ import { Link } from 'react-router-dom';
 import { Principal } from '@dfinity/principal';
 import { Switch } from 'antd';
 import { useCanister } from '@connect2ic/react';
-
-const getSchool = (_value) => {
-	switch (_value) {
-		case 1:
-			return 'FPT POLYTECHNIC';
-		case 2:
-			return 'FPT UNIVERSITY';
-		case 3:
-			return 'UNI OF GREENWICH';
-		default:
-			return 'FPT POLYTECHNIC';
-	}
-};
+import { Link } from 'react-router-dom';
 
 const ItemSchool = ({ item, index }) => {
-	const [superheroes, { loading, error }] = useCanister('superheroes');
-	const [isSwitch, setIsSwitch] = useState(Number(item.role) === 2);
-
-	const onChange = async (checked) => {
-		setIsSwitch(!isSwitch);
-		const res = await superheroes.updateUser(
-			item?.walletAddress,
-			item.username,
-			item.cccd,
-			Number(item.school),
-			item.birthday,
-			item.image,
-			item.description,
-			checked === true ? 2 : 1
-		);
-	};
 	return (
 		<div style={containerBottomRank}>
-			<div className='boxTopBottom' style={boxTopBottom}>
-				<div style={row}>
-					<div
-						style={{
-							fontWeight: 'bold',
-							fontSize: 12,
-							color: 'white',
-							marginRight: 30,
-						}}>
-						{index + 1}
-					</div>
-					<img src={item.image} />
+			<Link
+				to={`/manage-school/${index}`}
+				params={item}
+				style={{ justifiContent: 'center', alignItems: 'center' }}>
+				<div className='boxTopBottom' style={boxTopBottom}>
+					<div style={row}>
+						<div
+							style={{
+								fontWeight: 'bold',
+								fontSize: 12,
+								color: 'white',
+								marginRight: 30,
+							}}>
+							{index + 1}
+						</div>
+						<img src={item.image} />
 
+						<div
+							style={{
+								fontWeight: 'bold',
+								fontSize: 12,
+								color: 'white',
+								marginLeft: 120,
+							}}>
+							{item.name}
+						</div>
+					</div>
 					<div
 						style={{
 							fontWeight: 'bold',
 							fontSize: 12,
 							color: 'white',
-							marginLeft: 100,
+							flex: 2,
+							marginLeft: 180,
+							alignSelf: 'center',
 						}}>
-						{item.name}
+						{item.address}
+					</div>
+					<div
+						style={{
+							fontWeight: 'bold',
+							fontSize: 12,
+							color: 'white',
+							flex: 2,
+							marginLeft: 200,
+							alignSelf: 'center',
+						}}>
+						{item.schoolCode}
+					</div>
+					<div
+						style={{
+							fontWeight: 'bold',
+							fontSize: 12,
+							color: 'white',
+							flex: 3,
+							marginLeft: 140,
+							alignSelf: 'center',
+						}}>
+						{item.chairman}
 					</div>
 				</div>
-				<div
-					style={{
-						fontWeight: 'bold',
-						fontSize: 12,
-						color: 'white',
-						flex: 2,
-						alignSelf: 'center',
-					}}>
-					{item.schoolCode}
-				</div>
-				<div
-					style={{
-						fontWeight: 'bold',
-						fontSize: 12,
-						color: 'white',
-						flex: 3,
-						alignSelf: 'center',
-					}}>
-					{item.chairman}
-				</div>
-			</div>
+			</Link>
 		</div>
 	);
 };
