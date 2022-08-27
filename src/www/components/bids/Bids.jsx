@@ -3,9 +3,11 @@ import './bids.css';
 
 import { ArrowBack, ArrowForward } from '@mui/icons-material';
 import ItemBid from './ItemBid';
+import { ScrollMenu, VisibilityContext } from 'react-horizontal-scrolling-menu';
 
 const Bids = ({ title, data }) => {
 	return (
+		// <ScrollMenu className='bids'>
 		<div className='bids'>
 			<div className='bids-container'>
 				<div className='bids-container-text'>
@@ -45,6 +47,7 @@ const Bids = ({ title, data }) => {
 				</div>
 			</div>
 		</div>
+		// </ScrollMenu>
 	);
 };
 

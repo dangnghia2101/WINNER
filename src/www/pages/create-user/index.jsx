@@ -99,6 +99,8 @@ function CreateUser(props) {
 			image,
 			values?.description
 		);
+
+		console.log(res);
 		toast('Insert user success!!!');
 		window.location.reload();
 	};

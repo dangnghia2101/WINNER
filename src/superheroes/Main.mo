@@ -244,8 +244,9 @@ shared(msg) actor class NFTSale(
     private var school = HashMap.HashMap<Nat, SchoolList>(1, Nat.equal, Hash.hash);
     private var schoolId = HashMap.HashMap<Nat, SchoolId>(1, Nat.equal, Hash.hash);
 
-    // create school name
-     public shared(msg) func insertSchool(name : Text, address: Text, schoolCode: Text, chairman: Text, logo: Text, image: Text, description: Text): async(){   
+
+    // Thêm trường học
+    public shared(msg) func insertSchool(name : Text, address: Text, schoolCode: Text, chairman: Text, logo: Text, image: Text, description: Text): async(){   
         var id : Nat = 0;
           for (sc : SchoolId in schoolId.vals()) {
               if(id < sc.id){
@@ -258,12 +259,12 @@ shared(msg) actor class NFTSale(
     };
 
 
-    // insert default school
-    public func insertSchoolDefault(): async [SchoolList]{
-         await insertSchool("FPT University","Lot E2a-7, Road D1 Hi-Tech Park, Long Thanh My Ward, City. Thu Duc, City. Ho Chi Minh","FU","Nguyen Khac Thanh","hinhanh.jpg","fpt.jpg","truong dai hoc");
-         await insertSchool("FPT Polytechnic","Software Park, Innovation Building, Lot 24, Quang Trung, District 12, City.","FPOLY","Vu Chi Thanh", "hinhanh.jpg","fpt.jpg","truon dai hoc");
-         Iter.toArray(school.vals());
-    };
+    // // insert default school
+    // public func insertSchoolDefault(): async [SchoolList]{
+    //      await insertSchool("FPT University","Lot E2a-7, Road D1 Hi-Tech Park, Long Thanh My Ward, City. Thu Duc, City. Ho Chi Minh","FU","Nguyen Khac Thanh","hinhanh.jpg","fpt.jpg","truong dai hoc");
+    //      await insertSchool("FPT Polytechnic","Software Park, Innovation Building, Lot 24, Quang Trung, District 12, City.","FPOLY","Vu Chi Thanh", "hinhanh.jpg","fpt.jpg","truon dai hoc");
+    //      Iter.toArray(school.vals());
+    // };
 
 
     // get school list
