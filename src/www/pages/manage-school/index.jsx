@@ -58,9 +58,10 @@ const ManageUser = () => {
 	const getSchool = async () => {
 		try {
 			const res = await superheroes.getAllSchool();
-			const filterSchool = res.filter((item) => Number(item.role) != 3);
-			console.log(res);
-			setSchools(filterSchool);
+			// const filterSchool = res.filter((item) => Number(item.role) != 3);
+
+			console.log('===> ', res);
+			setSchools(res);
 		} catch (error) {
 			console.log('[GetSchool] error', error);
 		}

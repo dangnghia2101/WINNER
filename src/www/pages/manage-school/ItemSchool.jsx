@@ -25,7 +25,7 @@ const ItemSchool = ({ item, index }) => {
 							}}>
 							{index + 1}
 						</div>
-						<img src={item.image} />
+						<img src={item.logo} />
 
 						<div
 							style={{

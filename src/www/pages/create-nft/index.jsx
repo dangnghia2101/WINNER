@@ -14,13 +14,11 @@ import { PlusOutlined } from '@ant-design/icons';
 import React, { useState, useEffect, useRef } from 'react';
 import { client } from '../../utilities/ipfs';
 import { Principal } from '@dfinity/principal';
-import { customAxios } from '../../utils/custom-axios';
 import { toast } from 'react-toastify';
 import { withContext } from '../../hooks';
 import { themes } from '../../assets/themes';
 import { File } from 'nft.storage';
 import NotPermistion from '../../components/not-permistion';
-import * as XLSX from "xlsx";
 
 const { Option } = Select;
 import { useCanister, useConnect } from '@connect2ic/react';
@@ -77,15 +75,13 @@ function CreateNft(props) {
 		}
 	}, [principal, superheroes]);
 
-	const checkSchool = (school) => {
-
-	}
+	const checkSchool = (school) => {};
 
 	const onFinish = async (values) => {
 		toast('Minting NFT!!!');
 
 		const cid = await client.put([fileList[0].originFileObj]);
-		
+
 		const nFile = new File(
 			[
 				JSON.stringify({
@@ -102,7 +98,7 @@ function CreateNft(props) {
 			`${values?.name}.json`,
 			{ type: 'text/plain' }
 		);
-	
+
 		const metadataCID = await client.put([nFile]);
 
 		const res = await superheroes.mint(Principal.fromText(values?.address), [
@@ -419,6 +415,12 @@ function CreateNft(props) {
 								<Form.Item name='chairman'>
 									<Input size='large' placeholder='Name of chairman' />
 								</Form.Item>
+
+								<DatePicker
+									style={{ width: '100%' }}
+									onChange={onChangeDate}
+									placeholder='Please picke birthday'
+								/>
 
 								<FormItem>
 									<Form.Item>
