@@ -8,10 +8,12 @@ import createUser from './create-user'
 const ListNft = lazy(() => import("./list-nft"))
 const DetailNft = lazy(() => import("./detail-nft"))
 const CreateNft = lazy(() => import("./create-nft"))
+const CreateNftExcel = lazy(() => import("./create-nft-excel"))
 const Started = lazy(() => import("./started"))
 const Profile = lazy(() => import("./profile"))
 const Ranking = lazy(() => import("./ranking"))
 const CreateUser = lazy(() => import("./create-user"))
+const CreateUserExcel = lazy(() => import("./create-user-excel"))
 const ManageUser = lazy(() => import("./manage-user"))
 const ManageDegree = lazy(() => import("./manage-degree"))
 const Manage = lazy(() => import("./manage"))
@@ -38,6 +40,13 @@ const routes = [
         exact: true,
         public: true,
         component: CreateNft,
+        layout: MarketLayout
+    },
+    {
+        path: "/nft/create-excel",
+        exact: true,
+        public: true,
+        component: CreateNftExcel,
         layout: MarketLayout
     },
     {
@@ -73,6 +82,13 @@ const routes = [
         exact: true,
         public: true,
         component: CreateUser,
+        layout: MarketLayout
+    },
+    {
+        path: "create-user-excel",
+        exact: true,
+        public: true,
+        component: CreateUserExcel,
         layout: MarketLayout
     },
     {
