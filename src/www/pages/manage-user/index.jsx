@@ -70,9 +70,6 @@ const ManageUser = () => {
 		}
 	};
 
-	console.log(">>>>> 73", users);
-	console.log("role: ", profile.current?.role);
-
 	const findSearch = (e) => {
 		const keyword = e.target.value;
 		const test = users;
@@ -102,6 +99,8 @@ const ManageUser = () => {
 		setSearch(keyword);
 	};
 
+	
+
 	const onChange = (e) => {
 		const [file] = e.target.files;
 		const reader = new FileReader();
@@ -112,7 +111,8 @@ const ManageUser = () => {
 			const wsname = wb.SheetNames[0];
 			const ws = wb.Sheets[wsname];
 			const data = XLSX.utils.sheet_to_csv(ws, { header: 1 });
-			console.log(data);
+			console.log(ws);
+			console.log("data: ", data);
 			setExcel(data);
 		};
 		reader.readAsBinaryString(file);
@@ -121,40 +121,33 @@ const ManageUser = () => {
 	const createUserExcel = async () => {
 			toast('Waiting...!!!');
 			const arr = excel.split(',');
-			const walletAddress = arr[0];
-			const username = arr[1];
-			const role = arr[2];
-			const cccd = arr[3];
-			const school = arr[4];
-			const birthday = arr[5];
-			const image = arr[6];
-			const description = arr[7];
+			
+			// for(let i = 0; i < arr.length; i++){
+			// 	if(i == 0 || i == 7 || i == 14 || i == 21 || i == 28 || i == 35){
+			// 		const walletAddress = arr[i];
+			// 		const username = arr[i + 1];
+			// 		const cccd = arr[i + 2];
+			// 		const school = arr[i + 3];
+			// 		const birthday = arr[i + 4];
+			// 		const image = arr[i + 5];
+			// 		const description = arr[i + 6];
+			// 		const res =  await superheroes.insertUser(
+			// 			Principal.from(walletAddress),
+			// 			username,
+			// 			cccd,
+			// 			school,
+			// 			birthday,
+			// 			image,
+			// 			description
+			// 		);
+			// 		toast(`Insert user ` + i + ` success!!!`);
 
-			const obj = {
-				walletAddress: Principal.fromText(walletAddress),
-				username,
-				role: parseInt(role),
-				cccd,
-				school,
-				birthday,
-				image,
-				description
-			};
-
-			console.log(obj);
-
-			const res =  await superheroes.insertUser(
-				Principal.from(walletAddress),
-				username,
-				cccd,
-				school,
-				birthday,
-				image,
-				description
-			);
-
+			// 	}
+			// }
+			console.log(arr);
+			console.log(excel);
 			toast('Insert user success!!!');
-			window.location.reload();
+			//window.location.reload();
 		}
 
 	const renderMain = () => {
