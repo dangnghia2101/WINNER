@@ -29,6 +29,7 @@ const formatDate = (_timestamp) => {
 const ManageUser = () => {
 	const [superheroes, { loading, error }] = useCanister('superheroes');
 	const [users, setUsers] = useState([]);
+	const [schools, setSchools] = useState([]);
 	const [search, setSearch] = useState('');
 	const [usersSearch, setUsersSearch] = useState([]);
 	const profile = useRef({ role: 1 });
@@ -57,9 +58,9 @@ const ManageUser = () => {
 	const getSchool = async () => {
 		try {
 			const res = await superheroes.getAllSchool();
-			const filterUser = res.filter((item) => Number(item.role) != 3);
+			const filterSchool = res.filter((item) => Number(item.role) != 3);
 			console.log(res);
-			setUsers(filterUser);
+			setSchools(filterSchool);
 		} catch (error) {
 			console.log('[GetSchool] error', error);
 		}
@@ -134,7 +135,7 @@ const ManageUser = () => {
 								<ItemSchool item={item} index={index} key={Math.random()} />
 							) : null;
 					  })
-					: users.map((item, index) => {
+					: schools.map((item, index) => {
 							return item.role !== 3 ? (
 								<ItemSchool item={item} index={index} key={Math.random()} />
 							) : null;
