@@ -109,12 +109,10 @@ function ListNft() {
 		// const resu = [await customAxios(res[].metadata[0]?.tokenUri)];
 
 		const newlist = res.map((el, index) => {
-			console.log(
-				'======> ',
-				index,
-				resu[index].expirationDate < formatDateExpiration(Date.now())
-			);
-			if (resu[index].expirationDate < formatDateExpiration(Date.now()))
+			if (
+				resu[index].expirationDate < formatDateExpiration(Date.now()) &&
+				resu[index].expirationDate != ''
+			)
 				return null;
 			try {
 				return { ...el, ...resu[index] };
@@ -124,9 +122,9 @@ function ListNft() {
 		});
 
 		listAll.current = newlist;
-		setListDiploma(newlist.filter((el) => el.category === '1'));
-		setListCertificate(newlist.filter((el) => el.category === '2'));
-		setListOther(newlist.filter((el) => el.category === '3'));
+		setListDiploma(newlist.filter((el) => el?.category === '1'));
+		setListCertificate(newlist.filter((el) => el?.category === '2'));
+		setListOther(newlist.filter((el) => el?.category === '3'));
 	};
 
 	const renderList = (list, title) => {
