@@ -250,7 +250,7 @@ function CreateUserExcel(props) {
 										id="file-input"
 										className="file-input__input" onChange={onChange}
 										/>
-										<label className="file-input__label" for="file-input">
+										<label className="file-input__label" htmlFor="file-input">
 										<svg
 											aria-hidden="true"
 											focusable="false"
