@@ -159,15 +159,32 @@ function CreateUserExcel(props) {
 				const birthday = arr[i + 8];
 				const image = arr[i + 10];
 				const description = arr[i + 12];
-				const res =  await superheroes.insertUser(
-					Principal.from(walletAddress),
+
+				const values = {
+					walletAddress,
 					username,
 					cccd,
 					school,
 					birthday,
 					image,
 					description
-				);
+				};
+
+				const get = allSchool.find(schooll => schooll.schoolCode === school);
+				if(get?.schoolCode == school){	
+					const res =  await superheroes.insertUser(
+						Principal.from(walletAddress),
+						username,
+						cccd,
+						school,
+						birthday,
+						image,
+						description
+					);
+
+					console.log(walletAddress, username, cccd, school, birthday, image, description);
+					toast(`Insert user success!!!`);
+				}
 				//console.log("res: " + i + " ", walletAddress, username, cccd, school, birthday, image, description);
 				toast(`Insert user success!!!`);
 			}
@@ -237,7 +254,6 @@ function CreateUserExcel(props) {
 				<BodyWrapper>
 					<Form
 						name='basic'
-						onFinish={onFinish}
 						onFinishFailed={onFinishFailed}
 						autoComplete='off'>
 						<FormWrapper>
