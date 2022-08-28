@@ -122,7 +122,7 @@ const ManageUser = () => {
 								fontWeight: 'bold',
 								fontSize: 12,
 								color: 'white',
-								paddingLeft: 100,
+								paddingLeft: 150,
 							}}>
 							{' '}
 							Address School
@@ -132,7 +132,7 @@ const ManageUser = () => {
 								fontWeight: 'bold',
 								fontSize: 12,
 								color: 'white',
-								paddingLeft: 200,
+								paddingLeft: 150,
 							}}>
 							{' '}
 							School Code
