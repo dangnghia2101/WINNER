@@ -122,7 +122,7 @@ const ManageUser = () => {
 								fontWeight: 'bold',
 								fontSize: 12,
 								color: 'white',
-								paddingLeft: 150,
+								paddingLeft: 120,
 							}}>
 							{' '}
 							Address School
@@ -142,7 +142,7 @@ const ManageUser = () => {
 								fontWeight: 'bold',
 								fontSize: 12,
 								color: 'white',
-								paddingLeft: 220,
+								paddingLeft: 195,
 							}}>
 							{' '}
 							Chairman

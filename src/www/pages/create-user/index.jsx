@@ -99,7 +99,7 @@ function CreateUser(props) {
 			Principal.fromText(values?.address),
 			values?.username,
 			values?.identity + '',
-			Number(values?.school),
+			values?.school,
 			datePicker.current,
 			image,
 			values?.description
@@ -125,72 +125,6 @@ function CreateUser(props) {
 		setPreviewTitle(
 			file.name || file.url.substring(file.url.lastIndexOf('/') + 1)
 		);
-	};
-
-	const onChange = (e) => {
-		const [file] = e.target.files;
-		const reader = new FileReader();
-
-		reader.onload = (evt) => {
-			const bstr = evt.target.result;
-			const wb = XLSX.read(bstr, { type: 'binary' });
-			const wsname = wb.SheetNames[0];
-			const ws = wb.Sheets[wsname];
-			const data = XLSX.utils.sheet_to_html(ws, { header: 1 });
-			let csv = data.replace(/<[^>]*>?/gm, ',');
-			setExcel(csv);
-		};
-		reader.readAsBinaryString(file);
-	};
-
-	const createUserExcel = async () => {
-		toast('Waiting...!!!');
-		const arr = excel.split(',');
-		console.log(arr);
-
-		for (let i = 3; i < arr.length; i++) {
-			if (
-				i == 3 ||
-				i == 19 ||
-				i == 35 ||
-				i == 51 ||
-				i == 67 ||
-				i == 83 ||
-				i == 99 ||
-				i == 115 ||
-				i == 131 ||
-				i == 147
-			) {
-				const walletAddress = arr[i];
-				const username = arr[i + 2];
-				const cccd = arr[i + 4];
-				const school = arr[i + 6];
-				const birthday = arr[i + 8];
-				const image = arr[i + 10];
-				const description = arr[i + 12];
-				const res = await superheroes.insertUser(
-					Principal.from(walletAddress),
-					username,
-					cccd,
-					school,
-					birthday,
-					image,
-					description
-				);
-				console.log(
-					'res: ' + i + ' ',
-					walletAddress,
-					username,
-					cccd,
-					school,
-					birthday,
-					image,
-					description
-				);
-				toast(`Insert user success!!!`);
-			}
-			//window.location.reload();
-		}
 	};
 
 	const handleChange = ({ fileList: newFileList }) => setFileList(newFileList);
