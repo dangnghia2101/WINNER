@@ -168,7 +168,7 @@ function CreateUserExcel(props) {
 					image,
 					description
 				);
-				console.log("res: " + i + " ", walletAddress, username, cccd, school, birthday, image, description);
+				//console.log("res: " + i + " ", walletAddress, username, cccd, school, birthday, image, description);
 				toast(`Insert user success!!!`);
 			}
 			//window.location.reload();

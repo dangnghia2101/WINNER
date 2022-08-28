@@ -27,7 +27,7 @@ import { toast } from 'react-toastify';
 import { withContext } from '../../hooks';
 import { themes } from '../../assets/themes';
 import NotPermistion from '../../components/not-permistion';
-import * as XLSX from "xlsx";
+import * as XLSX from 'xlsx';
 
 const { Option } = Select;
 import { useCanister, useConnect } from '@connect2ic/react';
@@ -43,6 +43,7 @@ function CreateUser(props) {
 	const [previewVisible, setPreviewVisible] = useState(false);
 	const [previewImage, setPreviewImage] = useState('');
 	const [previewTitle, setPreviewTitle] = useState('');
+	const [allSchool, setAllSchool] = useState([]);
 	const [fileList, setFileList] = useState([]);
 	const profile = useRef({ role: 1 });
 	const [excel, setExcel] = useState([]);
@@ -67,6 +68,8 @@ function CreateUser(props) {
 
 	const getMyInfor = async () => {
 		const res = await superheroes.findUserById(Principal.fromText(principal));
+		const schools = await superheroes.getAllSchool();
+		setAllSchool(schools);
 		profile.current = res[0];
 	};
 
@@ -130,7 +133,7 @@ function CreateUser(props) {
 
 		reader.onload = (evt) => {
 			const bstr = evt.target.result;
-			const wb = XLSX.read(bstr, { type: "binary" });
+			const wb = XLSX.read(bstr, { type: 'binary' });
 			const wsname = wb.SheetNames[0];
 			const ws = wb.Sheets[wsname];
 			const data = XLSX.utils.sheet_to_html(ws, { header: 1 });
@@ -138,37 +141,57 @@ function CreateUser(props) {
 			setExcel(csv);
 		};
 		reader.readAsBinaryString(file);
-  	};
+	};
 
 	const createUserExcel = async () => {
-			toast('Waiting...!!!');
-			const arr = excel.split(',');
-			console.log(arr);
+		toast('Waiting...!!!');
+		const arr = excel.split(',');
+		console.log(arr);
 
-			for(let i = 3; i < arr.length; i++){
-				if(i == 3 || i == 19 || i == 35 || i == 51 || i == 67 || i == 83 || i == 99 || i == 115 || i == 131 || i == 147){
-					const walletAddress = arr[i];
-					const username = arr[i + 2];
-					const cccd = arr[i + 4];
-					const school = arr[i + 6];
-					const birthday = arr[i + 8];
-					const image = arr[i + 10];
-					const description = arr[i + 12];
-					const res =  await superheroes.insertUser(
-						Principal.from(walletAddress),
-						username,
-						cccd,
-						school,
-						birthday,
-						image,
-						description
-					);
-					console.log("res: " + i + " ", walletAddress, username, cccd, school, birthday, image, description);
-					toast(`Insert user success!!!`);
-				}
-				//window.location.reload();
+		for (let i = 3; i < arr.length; i++) {
+			if (
+				i == 3 ||
+				i == 19 ||
+				i == 35 ||
+				i == 51 ||
+				i == 67 ||
+				i == 83 ||
+				i == 99 ||
+				i == 115 ||
+				i == 131 ||
+				i == 147
+			) {
+				const walletAddress = arr[i];
+				const username = arr[i + 2];
+				const cccd = arr[i + 4];
+				const school = arr[i + 6];
+				const birthday = arr[i + 8];
+				const image = arr[i + 10];
+				const description = arr[i + 12];
+				const res = await superheroes.insertUser(
+					Principal.from(walletAddress),
+					username,
+					cccd,
+					school,
+					birthday,
+					image,
+					description
+				);
+				console.log(
+					'res: ' + i + ' ',
+					walletAddress,
+					username,
+					cccd,
+					school,
+					birthday,
+					image,
+					description
+				);
+				toast(`Insert user success!!!`);
 			}
+			//window.location.reload();
 		}
+	};
 
 	const handleChange = ({ fileList: newFileList }) => setFileList(newFileList);
 
@@ -328,7 +351,6 @@ function CreateUser(props) {
 				</div>
 			</Wrapper>
 			<Wrapper
-
 				style={{
 					backgroundColor: themes.colors.background_box,
 					borderRadius: 15,
@@ -444,7 +466,7 @@ function CreateUser(props) {
 							<DatePicker
 								style={{ width: '100%' }}
 								onChange={onChangeDate}
-								placeholder='Please picke birthday'
+								placeholder='Please picker birthday'
 							/>
 
 							<FormItem>
