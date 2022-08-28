@@ -99,7 +99,7 @@ function CreateUser(props) {
 			Principal.fromText(values?.address),
 			values?.username,
 			values?.identity + '',
-			Number(values?.school),
+			values?.school,
 			datePicker.current,
 			image,
 			values?.description
