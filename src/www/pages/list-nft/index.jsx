@@ -27,6 +27,24 @@ const formatDate = (_timestamp) => {
 	return str;
 };
 
+const formatDateExpiration = (_timestamp) => {
+	var date = new Date(_timestamp);
+
+	var month = date.getMonth() + 1;
+	var day = date.getDate();
+	var hour = date.getHours();
+	var min = date.getMinutes();
+
+	month = (month < 10 ? '0' : '') + month;
+	day = (day < 10 ? '0' : '') + day;
+	hour = (hour < 10 ? '0' : '') + hour;
+	min = (min < 10 ? '0' : '') + min;
+
+	var str = date.getFullYear() + '-' + month + '-' + day;
+
+	return str;
+};
+
 function ListNft() {
 	const {
 		isConnected,
@@ -87,12 +105,17 @@ function ListNft() {
 			})
 		);
 		const resu = await promise4all;
-		console.log('====> ', resu);
 
 		// const resu = [await customAxios(res[].metadata[0]?.tokenUri)];
 
-
 		const newlist = res.map((el, index) => {
+			console.log(
+				'======> ',
+				index,
+				resu[index].expirationDate < formatDateExpiration(Date.now())
+			);
+			if (resu[index].expirationDate < formatDateExpiration(Date.now()))
+				return null;
 			try {
 				return { ...el, ...resu[index] };
 			} catch (e) {
