@@ -162,6 +162,7 @@ const Ranking = () => {
 						<div style={row}>
 							<div
 								style={{
+									width: '5%',
 									fontWeight: 'bold',
 									fontSize: 12,
 									color: 'white',
@@ -169,25 +170,54 @@ const Ranking = () => {
 								}}>
 								{index + 4}
 							</div>
-							<img src={item.image} />
+							<div style={{ 
+									width: '10%', 
+									flex:1,
+									alignSelf: 'center',
+								}}>
+								<img style={{objectFit: 'cover'}} src={item.image} />
+							</div>
 
 							<div
 								style={{
+									width: '20%',
 									fontWeight: 'bold',
 									fontSize: 12,
 									color: 'white',
-									marginLeft: 10,
+									flex:1,
+									alignSelf: 'center',
 								}}>
 								{item.username}
 							</div>
 						</div>
-						<div style={{ fontWeight: 'bold', fontSize: 12, color: 'white' }}>
+						<div style={{ 
+								width: '20%',
+								fontWeight: 'bold', 
+								fontSize: 12, 
+								color: 'white' ,
+								flex:1,
+								alignSelf: 'center',
+							}}>
 							{getSchool(item.school)}
 						</div>
-						<div style={{ fontWeight: 'bold', fontSize: 12, color: 'white' }}>
+						<div style={{ 
+								width: '15%',
+								fontWeight: 'bold', 
+								fontSize: 12, 
+								color: 'white' ,
+								flex:1,
+								alignSelf: 'center',
+							}}>
 							{item.sumDegree}
 						</div>
-						<div style={{ fontWeight: 'bold', fontSize: 12, color: 'white' }}>
+						<div style={{ 
+								width: '30%',
+								fontWeight: 'bold', 
+								fontSize: 12, 
+								color: 'white' ,
+								flex:1,
+								alignSelf: 'center',
+							}}>
 							{address.slice(0, 20) +
 								'...' +
 								address.slice(address.length - 20, address.length - 1)}
