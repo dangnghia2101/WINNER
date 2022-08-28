@@ -43,6 +43,7 @@ function CreateUser(props) {
 	const [previewVisible, setPreviewVisible] = useState(false);
 	const [previewImage, setPreviewImage] = useState('');
 	const [previewTitle, setPreviewTitle] = useState('');
+	const [allSchool, setAllSchool] = useState([]);
 	const [fileList, setFileList] = useState([]);
 	const profile = useRef({ role: 1 });
 	const [excel, setExcel] = useState([]);
@@ -67,6 +68,8 @@ function CreateUser(props) {
 
 	const getMyInfor = async () => {
 		const res = await superheroes.findUserById(Principal.fromText(principal));
+		const schools = await superheroes.getAllSchool();
+		setAllSchool(schools);
 		profile.current = res[0];
 	};
 
@@ -163,7 +166,6 @@ function CreateUser(props) {
 						image,
 						description
 					);
-					console.log("res: " + i + " ", walletAddress, username, cccd, school, birthday, image, description);
 					toast(`Insert user success!!!`);
 				}
 				//window.location.reload();
