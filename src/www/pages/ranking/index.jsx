@@ -165,7 +165,7 @@ const Ranking = () => {
 									fontWeight: 'bold',
 									fontSize: 12,
 									color: 'white',
-									marginRight: 30,
+									marginRight: 10,
 								}}>
 								{index + 4}
 							</div>
@@ -180,7 +180,7 @@ const Ranking = () => {
 
 							<div
 								style={{
-									width: '20%',
+									width: 320,
 									fontWeight: 'bold',
 									fontSize: 12,
 									color: 'white',
@@ -192,12 +192,13 @@ const Ranking = () => {
 						</div>
 						<div
 							style={{
-								width: '20%',
+								width: 120,
 								fontWeight: 'bold',
 								fontSize: 12,
 								color: 'white',
 								flex: 1,
 								alignSelf: 'center',
+								marginLeft: 40,
 							}}>
 							{getSchool(item.school)}
 						</div>
@@ -209,6 +210,7 @@ const Ranking = () => {
 								color: 'white',
 								flex: 1,
 								alignSelf: 'center',
+								marginLeft: 130,
 							}}>
 							{item.sumDegree}
 						</div>
