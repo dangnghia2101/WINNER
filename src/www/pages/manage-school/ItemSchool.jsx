@@ -28,7 +28,6 @@ const ItemSchool = ({ item, index }) => {
 						</div>
 						<div style={{ 
 								width: '10%', 
-								height: 30, 
 								flex:1,
 								alignSelf: 'center',
 							}}>
