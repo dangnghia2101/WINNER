@@ -134,7 +134,7 @@ function CreateNftExcel(props) {
 		console.log(arr);
 
 		for(let i = 3; i < arr.length; i++){
-			if(i == 3 || i == 23 || i == 43 || i == 63 || i == 83 || i == 103 || i == 123 || i == 143 || i == 163){
+			if(i == 3 || i == 25 || i == 47 || i == 69 || i == 91 || i == 113 || i == 135 || i == 157 || i == 179){
 				const address = arr[i];
 				const name = arr[i + 2];
 				const category = arr[i + 4];
@@ -143,6 +143,7 @@ function CreateNftExcel(props) {
 				const chairman = arr[i + 10];
 				const image = arr[i + 13];
 				const description = arr[i + 16];
+				const expirationDate = arr[i + 18];
 
 				const values = {
 					address,
@@ -153,9 +154,10 @@ function CreateNftExcel(props) {
 					rating,
 					chairman,
 					image,
+					expirationDate
 				}
 
-				//console.log("==== values ", address, name, category, school, rating, chairman, image, description);
+				console.log("==== values ", address, name, category, school, rating, chairman, image, description, expirationDate);
 				const get = allSchool.find(school => school.schoolCode === values?.school);
 				if(get?.schoolCode == values?.school){	
 					await onFinish(values);
