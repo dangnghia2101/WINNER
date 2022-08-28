@@ -120,7 +120,7 @@ const ManageUser = () => {
 								fontWeight: 'bold',
 								fontSize: 12,
 								color: 'white',
-								paddingLeft: 150,
+								paddingLeft: 120,
 							}}>
 							{' '}
 							School
@@ -130,7 +130,7 @@ const ManageUser = () => {
 								fontWeight: 'bold',
 								fontSize: 12,
 								color: 'white',
-								paddingLeft: 410,
+								paddingLeft: 390,
 							}}>
 							{' '}
 							Information
